@@ -11,6 +11,8 @@ I've actually built a tool to extract and transform the CSV data directly from t
 All 3D sprites obtained from https://www.pkparaiso.com/
 I've reorganized and rehosted them here: <WIP>
 
+This project is a new version of an older tool I've made: https://github.com/phcs93/pokefy/
+
 # DEMO
 
 https://phcs93.github.io/prodex/
