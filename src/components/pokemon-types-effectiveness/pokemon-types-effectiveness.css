@@ -1,0 +1,62 @@
+div.pokemon-types-effectiveness {
+
+    display: grid;
+    grid-template-columns: repeat(9, minmax(0, 1fr));
+    grid-gap: 2px;
+
+    font-weight: bold;
+    text-shadow: 1px 1px 2px black;
+    font-size: 12px;
+    text-align: center;    
+        
+    & > div {
+
+        aspect-ratio: 1;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        border-radius: 3px;
+        text-shadow: 1px 1px 2px black;
+        
+        &[data-type-id] {
+            font-family: 'Candara';
+            color: white;
+        }            
+
+        &[data-effectiveness] {
+            font-family: 'Segoe UI';
+            color: #ffdd57;             
+        }
+
+        &[data-type-id="1"] { background-color: #A8A878; &::before { content: "NOR"; } }
+        &[data-type-id="2"] { background-color: #C03028; &::before { content: "FIG"; } }
+        &[data-type-id="3"] { background-color: #A890F0; &::before { content: "FLY"; } }
+        &[data-type-id="4"] { background-color: #A040A0; &::before { content: "POI"; } }
+        &[data-type-id="5"] { background-color: #E0C068; &::before { content: "GRO"; } }
+        &[data-type-id="6"] { background-color: #B8A038; &::before { content: "ROC"; } }
+        &[data-type-id="7"] { background-color: #A8B820; &::before { content: "BUG"; } }
+        &[data-type-id="8"] { background-color: #705898; &::before { content: "GHO"; } }
+        &[data-type-id="9"] { background-color: #B8B8D0; &::before { content: "STE"; } }
+        &[data-type-id="10"] { background-color: #F08030; &::before { content: "FIR"; } }
+        &[data-type-id="11"] { background-color: #6890F0; &::before { content: "WAT"; } }
+        &[data-type-id="12"] { background-color: #78C850; &::before { content: "GRA"; } }
+        &[data-type-id="13"] { background-color: #F8D030; &::before { content: "ELE"; } }
+        &[data-type-id="14"] { background-color: #F85888; &::before { content: "PSY"; } }
+        &[data-type-id="15"] { background-color: #98D8D8; &::before { content: "ICE"; } }
+        &[data-type-id="16"] { background-color: #7038F8; &::before { content: "DRA"; } }
+        &[data-type-id="17"] { background-color: #705848; &::before { content: "DAR"; } }
+        &[data-type-id="18"] { background-color: #EE99AC; &::before { content: "FAI"; } }
+        &[data-type-id="10001"] { background-color: #68A090; &::before { content: "UNK"; } }
+        &[data-type-id="10002"] { background-color: #000000; &::before { content: "SHA"; } }
+
+        &[data-effectiveness="0"] { background-color: black; &::before { content: "0"; } }
+        &[data-effectiveness="0.25"] { background-color: #7C0000; &::before { content: "¼"; } }
+        &[data-effectiveness="0.5"] { background-color: #A40000; &::before { content: "½"; } }
+        &[data-effectiveness="2"] { background-color: #4E9A06; &::before { content: "2"; } }
+        &[data-effectiveness="4"] { background-color: #73D216; &::before { content: "4"; } }
+
+    }
+    
+}

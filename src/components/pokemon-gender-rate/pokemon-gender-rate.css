@@ -1,0 +1,42 @@
+table.pokemon-gender-rate {
+    width: 100%;
+}
+
+table.pokemon-gender-rate th {
+    width: 10%;
+    font-size: 12px;
+}
+
+table.pokemon-gender-rate th:nth-child(2),
+table.pokemon-gender-rate th:nth-child(4) {
+    width: 20%;
+    font-size: 12px;
+}
+
+span.pokemon-gender-rate {
+    display: inline-block;
+    height: 8px;
+    border-radius: 5px;
+}
+
+span.male-rate {
+    background-color: #3355FF;
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+}
+
+span.female-rate {
+    background-color: #FA92B2;
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+}
+
+span.male-rate[data-rate="100"] {
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+span.female-rate[data-rate="100"] {
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+}

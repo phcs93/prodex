@@ -1,0 +1,153 @@
+/* globals */
+* {
+    /* font-family: "Candara"; */
+    font-family: "Segoe UI";
+    color: lightgray;
+    text-shadow: 0 1px 1px #000, 0 -1px 1px #000, 1px 0 1px #000, -1px 0 1px #000;
+}
+
+body {
+    background-color: #060606;
+    margin: 0px;
+    padding: 0px;
+}
+
+img {
+    filter: drop-shadow(2px 2px 2px rgba(0,0,0,.4));
+}
+
+/* structure */
+div.box {    
+    
+    /* 6 of these at 1920 width viewport + scrollbar */
+    min-width: 298px; 
+    /* 6 of these at 3440/2 width viewport + scrollbar */
+    /* min-width: 263px;  */
+
+    background-color: #181818;
+    border-radius: 10px;
+    box-sizing: border-box;
+    padding: 16px;
+    box-shadow: 2px 2px 5px 2px #0003;
+    @media (pointer:none), (pointer:coarse) {
+        flex-grow: 1; /* 100% width on mobile */
+    }
+}
+
+div.flex-columns {
+    display: flex;
+    flex-direction: row;
+}
+
+div.flex-rows {
+    display: flex;
+    flex-direction: column;
+}
+
+div.gap {
+    gap: 16px;
+}
+
+div.center {
+    justify-content: center;
+}
+
+div.wrap {
+    flex-wrap: wrap;
+}
+
+div.grow {
+    flex-grow: 1;
+}
+
+div.margin {
+    margin: 16px;
+}
+
+div.padding {
+    padding: 16px;
+}
+
+/* inputs */
+label {
+    font-family: "Candara";
+    font-size: 14px;
+    font-weight: bold;
+    height: 32px;
+    line-height: 32px;
+}
+
+input {
+    font-family: "Segoe UI";
+    font-size: 14px;
+    font-weight: bold;
+    height: 32px;
+    line-height: 32px;
+    background-color: #0E0E0E;
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 0px 8px;
+}
+
+select {
+    font-family: "Segoe UI";
+    font-size: 14px;
+    font-weight: bold;
+    height: 32px;
+    line-height: 32px;
+    background-color: #0E0E0E;
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 0px 8px;
+}
+
+button {
+    font-family: "Candara";
+    font-weight: bold;
+    font-size: 14px;
+    height: 32px;
+    line-height: 32px;
+    padding: 0px 8px;
+    background-color: #0E0E0E;
+    border: 1px solid black;
+    border-radius: 5px;
+    cursor: pointer;
+    &:hover {
+        background-color: #1E1E1E;
+    }
+}
+
+/* game version */
+select#version {
+    min-width: 298px;
+}
+
+/* team */
+button.add-pokemon {
+    height: 128px;
+    &::before {
+        content: '+';
+        font-size: 32px;
+        display: block;
+        border: 1px dashed gray;
+        border-radius: 90px;
+        width: 32px;
+        height: 32px;
+        color: gray;
+        font-weight: normal;
+        left: calc(50% - 16px);
+        position: relative;
+        line-height: 25px;
+    }
+}
+
+/* metrics (placeholder) */
+div.metric {
+    display: flex;
+    justify-content: center;
+}
+
+div.metric > img {
+    width: 250px;
+    object-fit: scale-down;
+}

@@ -1,0 +1,17 @@
+div.pokemon-header {
+
+    & > img {
+        /* border: 1px solid green; */
+        width: 64px;
+        height: 64px;
+        background-repeat: no-repeat;
+        object-fit: scale-down;
+    }
+
+    & > div.pokemon-id-name-types {
+        border-left: 1px solid #2E2E2E;
+        margin-left: 8px;
+        padding-left: 16px;
+    }
+
+}

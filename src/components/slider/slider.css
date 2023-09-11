@@ -1,0 +1,76 @@
+/* mobile */
+@media (pointer:none), (pointer:coarse) {
+
+    /* maybe just use a modified scrollbar */
+
+    div.slider {
+        /* border: 1px solid red; */
+        position: relative;
+        margin: 32px 0px;
+        width: 100vw;
+        margin-inline-start: 50%;
+        transform: translateX(-50%);
+        & > div {
+            /* border: 1px solid green; */
+            counter-reset: slides;
+            overflow-x: scroll;
+            -webkit-overflow-scrolling: touch;
+            scroll-snap-type: x mandatory;
+            scroll-behavior: smooth;
+            /* overwrite */
+            justify-content: left !important;
+            flex-wrap: nowrap !important;
+            padding: 0 16px;
+            & > div {
+                /* border: 1px solid blue; */
+                counter-increment: slides;
+                flex-basis: 100%;
+                flex-shrink: 0;
+                scroll-snap-align: center;
+                scroll-snap-stop: always;
+                --opacity: 0.1;
+                &::before, &::after {
+                    position: absolute;
+                    /* content: counter(slides); */
+                    content: "•";                    
+                    font-size: 32px;
+                    opacity: var(--opacity);
+                }
+                &::before {
+                    top: -42px;
+                }
+                &::after {
+                    bottom: -42px;
+                }
+            }
+            -ms-overflow-style: none;  /* Internet Explorer 10+ */
+            scrollbar-width: none;  /* Firefox */
+            &::-webkit-scrollbar {
+                display: none;  /* Safari and Chrome */
+            }
+        }
+    }
+
+    /* workaround for css calc(counter) limitations */
+    div.slider > div:has(>:nth-child(6)) > div {
+        &:nth-child(1) { &::before, &::after { left: calc(50% - 50px); } }
+        &:nth-child(2) { &::before, &::after { left: calc(50% - 30px); } }
+        &:nth-child(3) { &::before, &::after { left: calc(50% - 10px); } }
+        &:nth-child(4) { &::before, &::after { left: calc(50% + 10px); } }
+        &:nth-child(5) { &::before, &::after { left: calc(50% + 30px); } }
+        &:nth-child(6) { &::before, &::after { left: calc(50% + 50px); } }
+    }
+
+    /* workaround for css calc(counter) limitations */
+    div.slider > div:has(>:nth-child(8)) > div {    
+        &:nth-child(1) { &::before, &::after { left: calc(50% - 70px); } }
+        &:nth-child(2) { &::before, &::after { left: calc(50% - 50px); } }
+        &:nth-child(3) { &::before, &::after { left: calc(50% - 30px); } }
+        &:nth-child(4) { &::before, &::after { left: calc(50% - 10px); } }
+        &:nth-child(5) { &::before, &::after { left: calc(50% + 10px); } }
+        &:nth-child(6) { &::before, &::after { left: calc(50% + 30px); } }
+        &:nth-child(7) { &::before, &::after { left: calc(50% + 50px); } }
+        &:nth-child(8) { &::before, &::after { left: calc(50% + 70px); } }
+    }
+
+}

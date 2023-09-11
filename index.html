@@ -1,0 +1,138 @@
+<html>
+
+<head>
+
+    <title>prodex</title>
+
+    <!-- metas -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- lib -->
+    <script src="lib/pako/pako.js"></script>
+    <script src="lib/swal/swal.js"></script>
+    <link rel="stylesheet" href="lib/swal/swal.css">
+
+    <!-- res -->
+    <link rel="stylesheet" href="res/pokemon-spritesheet.css">
+
+    <!-- prototypes -->
+    <script src="src/prototypes/Array.js"></script>
+
+    <!-- components -->
+    <link rel="stylesheet" href="src/components/slider/slider.css">
+    <script src="src/components/slider/slider.js"></script>
+
+    <link rel="stylesheet" href="src/components/pokemon/pokemon.css">
+    <script src="src/components/pokemon/pokemon.js"></script>
+    <link rel="stylesheet" href="src/components/pokemon-header/pokemon-header.css">
+    <script src="src/components/pokemon-header/pokemon-header.js"></script>
+    <link rel="stylesheet" href="src/components/pokemon-details/pokemon-details.css">
+    <script src="src/components/pokemon-details/pokemon-details.js"></script>
+    <link rel="stylesheet" href="src/components/pokemon-gender-rate/pokemon-gender-rate.css">
+    <script src="src/components/pokemon-gender-rate/pokemon-gender-rate.js"></script>    
+    <link rel="stylesheet" href="src/components/pokemon-stats/pokemon-stats.css">
+    <script src="src/components/pokemon-stats/pokemon-stats.js"></script>
+    <link rel="stylesheet" href="src/components/pokemon-types-effectiveness/pokemon-types-effectiveness.css">
+    <script src="src/components/pokemon-types-effectiveness/pokemon-types-effectiveness.js"></script>
+    
+    <link rel="stylesheet" href="src/components/type/type.css">
+    <script src="src/components/type/type.js"></script>
+
+    <!-- index -->
+    <link rel="stylesheet" href="index.css">
+    <script src="index.js"></script>
+
+</head>
+
+    <body>
+
+        <div class="flex-rows padding gap">
+
+            <div id="game-version" class="flex-columns gap center wrap grow box">
+
+                <div class="flex-rows">
+                    <label for="version">GAME VERSION</label>
+                    <select name="version" id="version"></select>
+                </div>
+
+            </div>
+
+            <div class="slider">
+
+                <div id="team" class="flex-columns gap center wrap grow" >
+
+                    <div id="team-slot-1" class="box flex-rows">
+
+                    </div>
+
+                    <div id="team-slot-2" class="box flex-rows">
+
+                    </div>
+
+                    <div id="team-slot-3" class="box flex-rows">
+
+                    </div>
+
+                    <div id="team-slot-4" class="box flex-rows">
+
+                    </div>
+
+                    <div id="team-slot-5" class="box flex-rows">
+
+                    </div>
+
+                    <div id="team-slot-6" class="box flex-rows">
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- <div class="slider"> -->
+
+                <div id="metrics" class="flex-columns gap center wrap grow">
+
+                    <div id="metric-1" class="metric box">
+                        <img src="res/placeholders/1.png">
+                    </div>
+
+                    <div id="metric-2" class="metric box">
+                        <img src="res/placeholders/2.png">
+                    </div>
+
+                    <div id="metric-3" class="metric box">
+                        <img src="res/placeholders/3.png">
+                    </div>
+
+                    <div id="metric-4" class="metric box">
+                        <img src="res/placeholders/4.png">
+                    </div>
+
+                    <div id="metric-5" class="metric box">
+                        <img src="res/placeholders/5.png">
+                    </div>
+
+                    <div id="metric-6" class="metric box">
+                        <img src="res/placeholders/6.png">
+                    </div>
+
+                    <div id="metric-7" class="metric box">
+                        <img src="res/placeholders/7.png">
+                    </div>
+
+                    <div id="metric-8" class="metric box">
+                        <img src="res/placeholders/8.png">
+                    </div>
+
+                </div>
+
+            <!-- </div> -->
+
+        </div>
+
+    </body>
+
+</html>

@@ -1,0 +1,36 @@
+div.type {
+	display: inline-block;
+	line-height: 20px;
+	height: 20px;
+	padding: 0px;
+	color: white;
+	font-weight: bold;
+	font-family: monospace;
+	text-shadow: 1px 1px 2px black;
+	border-radius: 3px;
+	width: 74px;
+	text-align: center;
+    &[data-type-id="1"] { background-color: #A8A878; &::before { content: "NORMAL"; } }
+    &[data-type-id="2"] { background-color: #C03028; &::before { content: "FIGHTING"; } }
+    &[data-type-id="3"] { background-color: #A890F0; &::before { content: "FLYING"; } }
+    &[data-type-id="4"] { background-color: #A040A0; &::before { content: "POISON"; } }
+    &[data-type-id="5"] { background-color: #E0C068; &::before { content: "GROUND"; } }
+    &[data-type-id="6"] { background-color: #B8A038; &::before { content: "ROCK"; } }
+    &[data-type-id="7"] { background-color: #A8B820; &::before { content: "BUG"; } }
+    &[data-type-id="8"] { background-color: #705898; &::before { content: "GHOST"; } }
+    &[data-type-id="9"] { background-color: #B8B8D0; &::before { content: "STEEL"; } }
+    &[data-type-id="10"] { background-color: #F08030; &::before { content: "FIRE"; } }
+    &[data-type-id="11"] { background-color: #6890F0; &::before { content: "WATER"; } }
+    &[data-type-id="12"] { background-color: #78C850; &::before { content: "GRASS"; } }
+    &[data-type-id="13"] { background-color: #F8D030; &::before { content: "ELECTRIC"; } }
+    &[data-type-id="14"] { background-color: #F85888; &::before { content: "PSYCHIC"; } }
+    &[data-type-id="15"] { background-color: #98D8D8; &::before { content: "ICE"; } }
+    &[data-type-id="16"] { background-color: #7038F8; &::before { content: "DRAGON"; } }
+    &[data-type-id="17"] { background-color: #705848; &::before { content: "DARK"; } }
+    &[data-type-id="18"] { background-color: #EE99AC; &::before { content: "FAIRY"; } }
+    &[data-type-id="10001"] { background-color: #68A090; &::before { content: "UNKNOWN"; } }
+    &[data-type-id="10002"] { background-color: #000000; &::before { content: "SHADOW"; } }
+    & + div.type {
+        margin-left: 4px;
+    }
+}
