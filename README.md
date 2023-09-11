@@ -4,14 +4,15 @@ A tool for building the perfect Pokémon team.
 
 It features a wide variety of filters and charts to help you find the best match for your team.
 
-All data was obtained from https://pokeapi.co/
-I've actually built a tool to extract and transform the CSV data directly from their repository.
-(https://github.com/phcs93/poke-api-etl)
+All data was obtained from `PokeAPI` (https://pokeapi.co/).
 
-All 3D sprites obtained from https://www.pkparaiso.com/
-I've reorganized and rehosted them here: <WIP>
+I've actually built a tool to extract and transform the CSV data directly from their repository (https://github.com/phcs93/poke-api-etl).
 
-This project is a new version of an older tool I've made: https://github.com/phcs93/pokefy/
+All 3D sprites were obtained from https://www.pkparaiso.com/
+
+I've reorganized and rehosted them here: WIP
+
+This project is a new version of an older project I've made: https://github.com/phcs93/pokefy/
 
 # DEMO
 
