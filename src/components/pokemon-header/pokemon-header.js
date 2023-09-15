@@ -18,7 +18,7 @@ function renderPokemonHeader(pokemon, userSettings) {
     return `
         <div class="pokemon-header flex-columns">
 
-            <img src="https://projectpokemon.org/images/${type}-sprite/${name}.gif" alt="">
+            <img src="https://raw.githubusercontent.com/phcs93/poke-3d-sprites/main/${pokemon.id}.gif" alt="">
 
             <div class="pokemon-id-name-types flex-rows space-between">
                 <small>#${("0000"+pokemon.pokedexId).slice(-4)}</small>
