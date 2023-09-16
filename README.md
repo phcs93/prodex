@@ -22,6 +22,13 @@ https://phcs93.github.io/prodex/
 
   - buy me a coffee link
 
+## database
+
+  - create an secondary database with "cleaned" data, for example:
+    - basculegion shouldn't have "hasGenderDifferences" set to true since there are different internal ids for each form
+    - alolan rattata/raticate also shouldn't have "hasGenderDifferences" set to true since regional forms doesn't seem to have any differences (in form)
+    - same for totem and gmax variants (I guess)
+
 ## filter window
 
   - show pokemon info base on filtered field in the list
