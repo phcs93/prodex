@@ -61,6 +61,9 @@ https://phcs93.github.io/prodex/
   - select shiny
   - hear cry
   - show location with both list and map image (like in the game)
+  - show sprite based on selected generation
+    - one spritesheet per generation?
+    - one gif collection per generation?
 
 ## charts
 
