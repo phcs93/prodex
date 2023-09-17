@@ -27,8 +27,8 @@ https://phcs93.github.io/prodex/
   - create an secondary database with "cleaned" data, for example:
     - basculegion shouldn't have "hasGenderDifferences" set to true since there are different internal ids for each form
     - meowstic male and female too
-    - alolan rattata/raticate also shouldn't have "hasGenderDifferences" set to true since regional forms doesn't seem to have any differences (in form)
-    - same for totem and gmax variants (I guess)
+    - alolan rattata/raticate also shouldn't have "hasGenderDifferences" set to true since its regional forms doesn't have any differences
+    - same for totem and gmax variants -> venusaur / butterfree / pikachu
 
 ## filter window
 
