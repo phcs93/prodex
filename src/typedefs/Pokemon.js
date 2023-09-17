@@ -31,6 +31,7 @@
  *     isRegional: boolean,
  *     isGmax: boolean,
  *     isTotem: boolean,
+ *     isBattleOnly: boolean,
  *     hasGenderDifferences: boolean,
  *     formsSwitchable: boolean
  *   },
