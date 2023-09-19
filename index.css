@@ -1,4 +1,7 @@
+/* ================================================================================ */
 /* globals */
+/* ================================================================================ */
+
 * {
     /* font-family: "Candara"; */
     font-family: "Segoe UI";
@@ -16,19 +19,23 @@ img {
     filter: drop-shadow(2px 2px 2px rgba(0,0,0,.4));
 }
 
-/* structure */
-div.box {    
-    
+/* ================================================================================ */
+/* layout */
+/* ================================================================================ */
+
+div.fixed-width {
     /* 6 of these at 1920 width viewport + scrollbar */
     min-width: 298px; 
     /* 6 of these at 3440/2 width viewport + scrollbar */
     /* min-width: 263px;  */
+}
 
+div.box {
     background-color: #181818;
     border-radius: 10px;
     box-sizing: border-box;
     padding: 16px;
-    box-shadow: 2px 2px 5px 2px #0003;
+    box-shadow: 0px 0px 2px 2px #000A;
     @media (pointer:none), (pointer:coarse) {
         flex-grow: 1; /* 100% width on mobile */
     }
@@ -68,7 +75,17 @@ div.padding {
     padding: 16px;
 }
 
+div.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(298px, 1fr));
+    grid-gap: 16px;
+    padding: 2px; /* just so the shadow from the children shows properly */
+}
+
+/* ================================================================================ */
 /* inputs */
+/* ================================================================================ */
+
 label {
     font-family: "Candara";
     font-size: 14px;
@@ -117,12 +134,18 @@ button {
     }
 }
 
+/* ================================================================================ */
 /* game version */
+/* ================================================================================ */
+
 select#version {
     min-width: 298px;
 }
 
+/* ================================================================================ */
 /* team */
+/* ================================================================================ */
+
 button.add-pokemon {
     height: 128px;
     &::before {
@@ -141,7 +164,10 @@ button.add-pokemon {
     }
 }
 
+/* ================================================================================ */
 /* metrics (placeholder) */
+/* ================================================================================ */
+
 div.metric {
     display: flex;
     justify-content: center;
@@ -150,4 +176,25 @@ div.metric {
 div.metric > img {
     width: 250px;
     object-fit: scale-down;
+}
+
+/* ================================================================================ */
+/* swal */
+/* ================================================================================ */
+
+/* .responsive-swal-container {
+
+} */
+
+.responsive-swal-popup {
+    padding: 0px;
+    width: 80% !important;
+    box-shadow: 0px 0px 2px 2px #000A;
+    @media (pointer:none), (pointer:coarse) {
+        width: 100% !important;
+    }
+}
+
+.responsive-swal-html {
+    margin: 16px !important;
 }

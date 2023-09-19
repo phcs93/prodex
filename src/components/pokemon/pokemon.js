@@ -9,7 +9,7 @@ function renderPokemon (pokemon, userSettings) {
             <hr>
             ${/*renderPokemonDetails(pokemon)*/""}
             <hr>
-            ${renderPokemonGenderRate(pokemon)}
+            ${/*renderPokemonGenderRate(pokemon)*/""}
             <hr>
             ${renderPokemonStats(pokemon)}
             <hr>

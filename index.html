@@ -11,8 +11,11 @@
 
     <!-- lib -->
     <script src="lib/pako/pako.js"></script>
+
     <script src="lib/swal/swal.js"></script>
     <link rel="stylesheet" href="lib/swal/swal.css">
+
+    <link rel="stylesheet" href="lib/animate/animate.css">
 
     <!-- res -->
     <link rel="stylesheet" href="res/pokemon-spritesheet.css">
@@ -52,9 +55,12 @@
 
             <div id="game-version" class="flex-columns gap center wrap grow box">
 
-                <div class="flex-rows">
-                    <label for="version">GAME VERSION</label>
-                    <select name="version" id="version"></select>
+                <div class="flex-rows gap">
+                    <div class="flex-rows">
+                        <label for="version">GAME VERSION</label>
+                        <select name="version" id="version"></select>
+                    </div>
+                    <button onclick="reset()">RESET TEAM</button>
                 </div>
 
             </div>
@@ -63,33 +69,35 @@
 
                 <div id="team" class="flex-columns gap center wrap grow" >
 
-                    <div id="team-slot-1" class="box flex-rows">
+                    <div id="team-slot-1" class="box fixed-width flex-rows">
 
                     </div>
 
-                    <div id="team-slot-2" class="box flex-rows">
+                    <div id="team-slot-2" class="box fixed-width flex-rows">
 
                     </div>
 
-                    <div id="team-slot-3" class="box flex-rows">
+                    <div id="team-slot-3" class="box fixed-width flex-rows">
 
                     </div>
 
-                    <div id="team-slot-4" class="box flex-rows">
+                    <div id="team-slot-4" class="box fixed-width flex-rows">
 
                     </div>
 
-                    <div id="team-slot-5" class="box flex-rows">
+                    <div id="team-slot-5" class="box fixed-width flex-rows">
 
                     </div>
 
-                    <div id="team-slot-6" class="box flex-rows">
+                    <div id="team-slot-6" class="box fixed-width flex-rows">
 
                     </div>
 
                 </div>
 
             </div>
+
+
 
             <!-- <div class="slider"> -->
 

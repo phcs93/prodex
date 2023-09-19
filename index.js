@@ -1,29 +1,42 @@
 Globals = function (database, parameters) {
 
-    this.Database = database;
+    const createProxy = p => new Proxy({
+        Version: p?.Version || 1,
+        Team: new Array(6).fill(null).map((_, i) => new Proxy({
+            id: p?.Team[i]?.id || null,
+            ability: p?.Team[i]?.ability || null,
+            nature: p?.Team[i]?.nature || null,
+            gender: p?.Team[i]?.gender || null,
+            shiny: p?.Team[i]?.shiny || null,
+            moves: new Proxy(new Array(4).fill(null).map((_, m) => p?.Team[i]?.moves[m] || null), proxyHandler)
+        }, proxyHandler))
+    }, proxyHandler);
 
-    this.ProxyHandler = {
+    const updateUrl = () => {
+        const url = new URL(window.location);
+        url.searchParams.set("parameters", JSON.stringify(this.Parameters));
+        window.history.pushState(null, "", url.toString());
+    };
+
+    const proxyHandler = {
         set: (target, param, value) => {
             console.log("[PROXY]", param, "=", value);
             target[param] = value;
-            const url = new URL(window.location);
-            url.searchParams.set("parameters", JSON.stringify(Globals.Parameters));
-            window.history.pushState(null, "", url.toString());
+            updateUrl();
             render();
         }
     };
 
-    this.Parameters = new Proxy({
-        Version: parameters?.Version || 1,
-        Team: new Array(6).fill(null).map((_, i) => new Proxy({
-            id: parameters?.Team[i]?.id || null,
-            ability: parameters?.Team[i]?.ability || null,
-            nature: parameters?.Team[i]?.nature || null,
-            gender: parameters?.Team[i]?.gender || null,
-            shiny: parameters?.Team[i]?.shiny || null,
-            moves: new Proxy(new Array(4).fill(null).map((_, m) => parameters?.Team[i]?.moves[m] || null), this.ProxyHandler)
-        }, this.ProxyHandler))
-    }, this.ProxyHandler);
+    this.Parameters = createProxy(parameters);
+
+    this.Database = database;
+
+    this.Reset = () => {        
+        this.Parameters = createProxy();
+        updateUrl();        
+        render();
+        
+    }
     
 };
 
@@ -43,13 +56,19 @@ document.addEventListener("DOMContentLoaded", async () => {
         if (Math.random() > 0.5) {
             Globals.Parameters.Team[i].id = null;
         } else {
-            Globals.Parameters.Team[i].id = Math.floor(Math.random() * 700);
+            Globals.Parameters.Team[i].id = Math.floor(Math.random() * 1000);
         }
     }
 
 });
 
-function render() {
+function reset () {
+    if (confirm("Are you sure you want to reset the team?")) {
+        Globals.Reset();
+    }
+}
+
+function render () {
 
     renderVersions();
 
@@ -77,17 +96,27 @@ function renderVersions () {
 
     element.innerHTML = optgroups.join("\r\n");
 
+    element.value = Globals.Parameters.Version;
+
     element.onchange = e => {
 
-        Globals.Parameters.Version = parseInt(e.target.value);
+        const version = parseInt(e.target.value);
+
+        if (Globals.Parameters.Team.some(p => p.id)) {
+            const choice = confirm("Changing the game version will reset your team. Are you sure you want to change the game version?");
+            if (choice) {
+                Globals.Reset();
+                Globals.Parameters.Version = version;
+            }
+        } else {
+            Globals.Parameters.Version = version;
+        }        
 
     };
 
-    element.value = Globals.Parameters.Version;
-
 }
 
-function renderTeam() {
+function renderTeam () {
 
     for (const i in Globals.Parameters.Team) {
 
@@ -110,7 +139,7 @@ function renderTeam() {
 
             // render button
             document.getElementById(`team-slot-${slot}`).innerHTML = `
-                <button class="add-pokemon">ADD POKEMON</button>
+                <button class="add-pokemon" onclick="showFilterSwal()">ADD POKEMON</button>
             `;
 
         }
@@ -119,16 +148,125 @@ function renderTeam() {
 
 }
 
-function showSwal (slot) {
+function showFilterSwal () {
 
-    const slotNumber = parseInt(e.target.closest("div.pokemon").id.split("-")[2]);
+    //const slotNumber = parseInt(e.target.closest("div.pokemon").id.split("-")[2]);
+
+    // Swal.fire({
+    //     confirmButtonText: "Close",
+    //     html: `
+    //         <div class="box">
+    //             TEAM WIDTH: ${document.getElementById("team").clientWidth}px
+    //             SCREEN: W:${window.innerWidth}px H:${window.innerHeight}px
+    //         </div>
+    //     `
+    // });
 
     Swal.fire({
-        confirmButtonText: "Close",
-        html: `
-            <div class="box">
-                TEAM WIDTH: ${document.getElementById("team").clientWidth}px
-                SCREEN: W:${window.innerWidth}px H:${window.innerHeight}px
+        showConfirmButton: false,
+        customClass: {
+            container: "responsive-swal-container",
+            popup: "responsive-swal-popup",
+            htmlContainer: "responsive-swal-html",
+        },
+        showClass: {
+            popup: "animate__animated animate__fadeIn animate__faster"
+        },
+        hideClass: {
+            popup: "animate__animated animate__fadeOut animate__faster"
+        },
+        html: `        
+            <div class="flex-rows">
+
+                <div class="flex-columns gap grow wrap">
+
+                    <div class="flex-rows fixed-width gap">
+                        <button>Filter</button>
+                        <button>Cancel</button>
+                    </div>
+
+                    <div class="grid grow">
+                        <div class="box">pokemon</div>
+                        <div class="box">pokemon</div>
+                        <div class="box">pokemon</div>
+                        <div class="box">pokemon</div>
+                        <div class="box">pokemon</div>
+                        <div class="box">pokemon</div>
+                        <div class="box">pokemon</div>
+                        <div class="box">pokemon</div>
+                        <div class="box">pokemon</div>
+                        <div class="box">pokemon</div>
+                        <div class="box">pokemon</div>
+                        <div class="box">pokemon</div>
+                        <div class="box">pokemon</div>
+                        <div class="box">pokemon</div>
+                        <div class="box">pokemon</div>
+                        <div class="box">pokemon</div>
+                        <div class="box">pokemon</div>
+                        <div class="box">pokemon</div>
+                        <div class="box">pokemon</div>
+                        <div class="box">pokemon</div>
+                        <div class="box">pokemon</div>
+                        <div class="box">pokemon</div>
+                        <div class="box">pokemon</div>
+                        <div class="box">pokemon</div>
+                        <div class="box">pokemon</div>
+                        <div class="box">pokemon</div>
+                        <div class="box">pokemon</div>
+                        <div class="box">pokemon</div>
+                        <div class="box">pokemon</div>
+                        <div class="box">pokemon</div>
+                        <div class="box">pokemon</div>
+                        <div class="box">pokemon</div>
+                        <div class="box">pokemon</div>
+                        <div class="box">pokemon</div>
+                        <div class="box">pokemon</div>
+                        <div class="box">pokemon</div>
+                        <div class="box">pokemon</div>
+                        <div class="box">pokemon</div>
+                        <div class="box">pokemon</div>
+                        <div class="box">pokemon</div>
+                        <div class="box">pokemon</div>
+                        <div class="box">pokemon</div>
+                        <div class="box">pokemon</div>
+                        <div class="box">pokemon</div>
+                        <div class="box">pokemon</div>
+                        <div class="box">pokemon</div>
+                        <div class="box">pokemon</div>
+                        <div class="box">pokemon</div>
+                        <div class="box">pokemon</div>
+                        <div class="box">pokemon</div>
+                        <div class="box">pokemon</div>
+                        <div class="box">pokemon</div>
+                        <div class="box">pokemon</div>
+                        <div class="box">pokemon</div>
+                        <div class="box">pokemon</div>
+                        <div class="box">pokemon</div>
+                        <div class="box">pokemon</div>
+                        <div class="box">pokemon</div>
+                        <div class="box">pokemon</div>
+                        <div class="box">pokemon</div>
+                        <div class="box">pokemon</div>
+                        <div class="box">pokemon</div>
+                        <div class="box">pokemon</div>
+                        <div class="box">pokemon</div>
+                        <div class="box">pokemon</div>
+                        <div class="box">pokemon</div>
+                        <div class="box">pokemon</div>
+                        <div class="box">pokemon</div>
+                        <div class="box">pokemon</div>
+                        <div class="box">pokemon</div>
+                        <div class="box">pokemon</div>
+                        <div class="box">pokemon</div>
+                        <div class="box">pokemon</div>
+                        <div class="box">pokemon</div>
+                        <div class="box">pokemon</div>
+                        <div class="box">pokemon</div>
+                        <div class="box">pokemon</div>
+                    </div>
+
+                </div>
+
             </div>
         `
     });
