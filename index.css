@@ -78,8 +78,9 @@ div.padding {
 div.grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(298px, 1fr));
+    grid-template-rows: min-content;
     grid-gap: 16px;
-    padding: 2px; /* just so the shadow from the children shows properly */
+    overflow: hidden;
 }
 
 /* ================================================================================ */
@@ -182,19 +183,44 @@ div.metric > img {
 /* swal */
 /* ================================================================================ */
 
-/* .responsive-swal-container {
+/* .custom-swal-container {
 
 } */
 
-.responsive-swal-popup {
+.custom-swal-popup {
+    background-color: #060606;    
     padding: 0px;
-    width: 80% !important;
     box-shadow: 0px 0px 2px 2px #000A;
+    /* overflow: hidden !important; */
     @media (pointer:none), (pointer:coarse) {
         width: 100% !important;
     }
 }
 
-.responsive-swal-html {
+.custom-swal-html {
     margin: 16px !important;
+    overflow: hidden !important;
+    padding: 2px !important;
+}
+
+div:where(.swal2-container) .swal2-html-container {
+    color: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+    line-height: inherit;
+    text-align: inherit;
+    word-wrap: inherit;
+    word-break: inherit;
+}
+
+.swal2-popup {
+    color: inherit;
+    font-family: inherit;
+    font-size: inherit;
+}
+
+div:where(.swal2-container) div:where(.swal2-popup) {
+    color: inherit;
+    font-family: inherit;
+    font-size: inherit;
 }

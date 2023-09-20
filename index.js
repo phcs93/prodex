@@ -137,7 +137,7 @@ function renderTeam () {
 
             // render details
             document.getElementById(`team-slot-${slot}`).innerHTML = `
-                ${renderPokemon(Globals.Database.Pokemons[pokemonId], Globals.Parameters.Team[i])}
+                ${renderPokemon(Globals.Database.Pokemons[pokemonId], Globals.Parameters.Team[i], i)}
             `;
 
         } else {
@@ -146,7 +146,7 @@ function renderTeam () {
 
             // render button
             document.getElementById(`team-slot-${slot}`).innerHTML = `
-                <button class="add-pokemon" onclick="showFilterSwal()">ADD POKEMON</button>
+                <button class="add-pokemon" onclick="showFilterSwal(${slot})">ADD POKEMON</button>
             `;
 
         }
@@ -155,26 +155,15 @@ function renderTeam () {
 
 }
 
-function showFilterSwal () {
-
-    //const slotNumber = parseInt(e.target.closest("div.pokemon").id.split("-")[2]);
-
-    // Swal.fire({
-    //     confirmButtonText: "Close",
-    //     html: `
-    //         <div class="box">
-    //             TEAM WIDTH: ${document.getElementById("team").clientWidth}px
-    //             SCREEN: W:${window.innerWidth}px H:${window.innerHeight}px
-    //         </div>
-    //     `
-    // });
+function showFilterSwal (slot) {
 
     Swal.fire({
+        width: "80%",
         showConfirmButton: false,
         customClass: {
-            container: "responsive-swal-container",
-            popup: "responsive-swal-popup",
-            htmlContainer: "responsive-swal-html",
+            container: "custom-swal-container",
+            popup: "custom-swal-popup",
+            htmlContainer: "custom-swal-html",
         },
         showClass: {
             popup: "animate__animated animate__fadeIn animate__faster"
@@ -182,100 +171,7 @@ function showFilterSwal () {
         hideClass: {
             popup: "animate__animated animate__fadeOut animate__faster"
         },
-        html: `        
-            <div class="flex-rows">
-
-                <div class="flex-columns gap grow wrap">
-
-                    <div class="flex-rows fixed-width gap">
-                        <button>Filter</button>
-                        <button>Cancel</button>
-                    </div>
-
-                    <div class="grid grow">
-                        <div class="box">pokemon</div>
-                        <div class="box">pokemon</div>
-                        <div class="box">pokemon</div>
-                        <div class="box">pokemon</div>
-                        <div class="box">pokemon</div>
-                        <div class="box">pokemon</div>
-                        <div class="box">pokemon</div>
-                        <div class="box">pokemon</div>
-                        <div class="box">pokemon</div>
-                        <div class="box">pokemon</div>
-                        <div class="box">pokemon</div>
-                        <div class="box">pokemon</div>
-                        <div class="box">pokemon</div>
-                        <div class="box">pokemon</div>
-                        <div class="box">pokemon</div>
-                        <div class="box">pokemon</div>
-                        <div class="box">pokemon</div>
-                        <div class="box">pokemon</div>
-                        <div class="box">pokemon</div>
-                        <div class="box">pokemon</div>
-                        <div class="box">pokemon</div>
-                        <div class="box">pokemon</div>
-                        <div class="box">pokemon</div>
-                        <div class="box">pokemon</div>
-                        <div class="box">pokemon</div>
-                        <div class="box">pokemon</div>
-                        <div class="box">pokemon</div>
-                        <div class="box">pokemon</div>
-                        <div class="box">pokemon</div>
-                        <div class="box">pokemon</div>
-                        <div class="box">pokemon</div>
-                        <div class="box">pokemon</div>
-                        <div class="box">pokemon</div>
-                        <div class="box">pokemon</div>
-                        <div class="box">pokemon</div>
-                        <div class="box">pokemon</div>
-                        <div class="box">pokemon</div>
-                        <div class="box">pokemon</div>
-                        <div class="box">pokemon</div>
-                        <div class="box">pokemon</div>
-                        <div class="box">pokemon</div>
-                        <div class="box">pokemon</div>
-                        <div class="box">pokemon</div>
-                        <div class="box">pokemon</div>
-                        <div class="box">pokemon</div>
-                        <div class="box">pokemon</div>
-                        <div class="box">pokemon</div>
-                        <div class="box">pokemon</div>
-                        <div class="box">pokemon</div>
-                        <div class="box">pokemon</div>
-                        <div class="box">pokemon</div>
-                        <div class="box">pokemon</div>
-                        <div class="box">pokemon</div>
-                        <div class="box">pokemon</div>
-                        <div class="box">pokemon</div>
-                        <div class="box">pokemon</div>
-                        <div class="box">pokemon</div>
-                        <div class="box">pokemon</div>
-                        <div class="box">pokemon</div>
-                        <div class="box">pokemon</div>
-                        <div class="box">pokemon</div>
-                        <div class="box">pokemon</div>
-                        <div class="box">pokemon</div>
-                        <div class="box">pokemon</div>
-                        <div class="box">pokemon</div>
-                        <div class="box">pokemon</div>
-                        <div class="box">pokemon</div>
-                        <div class="box">pokemon</div>
-                        <div class="box">pokemon</div>
-                        <div class="box">pokemon</div>
-                        <div class="box">pokemon</div>
-                        <div class="box">pokemon</div>
-                        <div class="box">pokemon</div>
-                        <div class="box">pokemon</div>
-                        <div class="box">pokemon</div>
-                        <div class="box">pokemon</div>
-                        <div class="box">pokemon</div>
-                    </div>
-
-                </div>
-
-            </div>
-        `
+        html: renderPokemonFilter(Globals.Parameters.Version, slot)
     });
 
 }

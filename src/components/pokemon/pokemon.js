@@ -1,11 +1,11 @@
 /**
  * @param {Pokemon} pokemon
- * @param {UserSettings} userSettings
+ * @param {PokemonSettings} pokemonSettings
  */
-function renderPokemon (pokemon, userSettings) {
+function renderPokemon (pokemon, pokemonSettings, slot) {
     return `
         <div class="pokemon flex-rows">
-            ${renderPokemonHeader(pokemon, userSettings)}
+            ${renderPokemonHeader(pokemon, pokemonSettings)}
             <hr>
             ${/*renderPokemonDetails(pokemon)*/""}
             <hr>
@@ -14,6 +14,12 @@ function renderPokemon (pokemon, userSettings) {
             ${renderPokemonStats(pokemon)}
             <hr>
             ${renderPokemonTypesEffectiveness(pokemon)}
+            <hr>
+            <button onclick="removePokemon(${slot})">REMOVE</button>
         </div>
     `;
+}
+
+function removePokemon (slot) {
+    Globals.Parameters.Team[slot].id = null;
 }

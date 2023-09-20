@@ -1,11 +1,11 @@
 /**
  * @param {Pokemon} pokemon
- * @param {UserSettings} userSettings
+ * @param {PokemonSettings} pokemonSettings
  */
-function renderPokemonHeader(pokemon, userSettings) {
+function renderPokemonHeader(pokemon, pokemonSettings) {
 
-    const female = pokemon.flags.hasGenderDifferences && userSettings.gender === "F" ? "-f" : "";
-    const shiny = userSettings.shiny ? "_s" : "";
+    const female = pokemon.flags.hasGenderDifferences && pokemonSettings?.gender === "F" ? "-f" : "";
+    const shiny = pokemonSettings?.shiny ? "_s" : "";
 
     return `
 
@@ -24,4 +24,5 @@ function renderPokemonHeader(pokemon, userSettings) {
         </div>
         
     `;
+    
 }
