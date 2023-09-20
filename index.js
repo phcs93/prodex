@@ -60,24 +60,12 @@ document.addEventListener("DOMContentLoaded", async () => {
         }
     }
 
-    // window.addEventListener("beforeunload", e => {
-    //     e.preventDefault();
-    //     console.log("User clicked back button");
-        
-    // });
-
-    window.onpopstate = function(e) {         
-        alert("eita");
-        e.preventDefault();
+    window.onpopstate = function(e) {
+        if (Swal.getPopup()) {
+            Swal.close();
+            e.preventDefault();
+        }
     };
-
-    // window.addEventListener("popstate", e => {
-    //     if (Swal.getPopup()) {
-    //         Swal.close();
-    //         e.preventDefault();
-    //         console.log("User clicked back button");
-    //     }
-    // });
 
 });
 
