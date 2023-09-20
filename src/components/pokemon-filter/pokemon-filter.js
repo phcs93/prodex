@@ -4,21 +4,27 @@ function renderPokemonFilter (version, slot) {
 
         <div class="flex-rows">
 
-            <div class="flex-columns gap grow wrap">
+            <div class="flex-columns grow wrap">
 
-                <div class="flex-rows fixed-width gap">
+                <div class="flex-rows gap padding box responsive-border-radius">
 
-                    <div class="flex-rows">
-                        <label for="name-filter">NAME</label>
-                        <input type="text" name="name-filter" id="name-filter" />
-                    </div>
+                    <form onsubmit="event.preventDefault(); filterPokemons(${version}, ${slot})">
 
-                    <button onclick="filterPokemons(${version}, ${slot})">Filter</button>
-                    <button>Cancel</button>
+                        <div class="flex-rows">
+                            <label for="name-filter">NAME</label>
+                            <input type="text" name="name-filter" id="name-filter" />
+                        </div>
+
+                    </form>
+
+                    <hr>
+
+                    <button onclick="event.preventDefault(); filterPokemons(${version}, ${slot})">Filter</button>
+                    <button onclick="Swal.close();">Cancel</button>
                     
                 </div>
 
-                <div id="pokemon-grid" class="grid grow">
+                <div id="pokemon-grid" class="grid grow padding">
 
                 </div>
 

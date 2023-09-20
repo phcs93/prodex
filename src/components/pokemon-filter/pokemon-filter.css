@@ -1,3 +1,16 @@
+div.responsive-border-radius {
+    border-top-left-radius: 10px !important;
+    border-top-right-radius: 0px !important;
+    border-bottom-left-radius: 10px !important;
+    border-bottom-right-radius: 0px !important;
+    @media (pointer:none), (pointer:coarse) {
+        border-top-left-radius: 10px !important;
+        border-top-right-radius: 10px !important;
+        border-bottom-left-radius: 0px !important;
+        border-bottom-right-radius: 0px !important;
+    }
+}
+
 div.filtered-pokemon:hover {
     background-color: #2E2E2E;
     cursor: pointer;
