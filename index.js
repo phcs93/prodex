@@ -66,13 +66,18 @@ document.addEventListener("DOMContentLoaded", async () => {
         
     // });
 
-    window.addEventListener("popstate", e => {
-        if (Swal.getPopup()) {
-            Swal.close();
-            e.preventDefault();
-            console.log("User clicked back button");
-        }
-    });
+    window.onpopstate = function(e) {         
+        alert("eita");
+        e.preventDefault();
+    };
+
+    // window.addEventListener("popstate", e => {
+    //     if (Swal.getPopup()) {
+    //         Swal.close();
+    //         e.preventDefault();
+    //         console.log("User clicked back button");
+    //     }
+    // });
 
 });
 
