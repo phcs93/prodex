@@ -13,11 +13,10 @@ div.responsive-border-radius {
 
 div.filtered-pokemon {
     position: relative;
-}
-
-div.filtered-pokemon:hover {
-    background-color: #2E2E2E;
-    cursor: pointer;
+    &:hover {
+        background-color: #2E2E2E;
+        cursor: pointer;
+    }
 }
 
 div.filter-matches {
@@ -34,4 +33,14 @@ div.filter-matches > label {
     height: 16px !important;
     line-height: 16px !important;
     /* color: #e2dd42; */
+}
+
+select.input-left-half {
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+}
+
+select.input-right-half {
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
 }

@@ -11,6 +11,8 @@
 
 body {
     background-color: #060606;
+    background-image: url("res/background.png");
+    background-size: 150px;
     margin: 0px;
     padding: 0px;
 }
@@ -181,9 +183,9 @@ details[open] {
 /* game version */
 /* ================================================================================ */
 
-select#version {
+/* select#version {
     min-width: 298px;
-}
+} */
 
 /* ================================================================================ */
 /* team */
@@ -270,7 +272,7 @@ div:where(.swal2-container) div:where(.swal2-popup) {
 }
 
 /* ================================================================================ */
-/* el-switch  */
+/* el-switch */
 /* ================================================================================ */
 
 label.el-switch  {
@@ -282,4 +284,35 @@ label.el-switch  {
 label.el-switch > label {
     line-height: 26px;
     height: 26px;
+}
+
+/* ================================================================================ */
+/* made by */
+/* ================================================================================ */
+
+div.made-by {
+    text-align: center;
+}
+
+/* ================================================================================ */
+/* buy me a coffee */
+/* ================================================================================ */
+
+div.buy-me-a-coffee {
+    height: 32px;
+    align-self: center;
+    & * {
+        font-family: "Cookie";
+        color: black;
+        text-shadow: none;
+    }
+    & a {
+        height: 32px;
+        background-color: #FCB52B !important;
+        font-size: 20px;
+        min-width: 0px;
+    }
+    & svg {
+        height: 20px !important;
+    }
 }

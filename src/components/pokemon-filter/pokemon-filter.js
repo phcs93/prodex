@@ -1,5 +1,7 @@
 function renderPokemonFilter (version, slot) {
 
+    const typeOptions = Object.keys(Globals.Database.Types).map(t => `<option value="${t}">${Globals.Database.Types[t]}</option>`).join("");
+
     return `
 
         <div class="flex-rows">
@@ -20,6 +22,23 @@ function renderPokemonFilter (version, slot) {
                             <div class="flex-rows">
                                 <label for="generation-filter">INTRODUCED IN GENERATION</label>
                                 <input type="text" name="generation-filter" id="generation-filter" />
+                            </div>
+
+                            <div class="flex-columns">
+                                <div class="flex-rows grow">
+                                    <label for="type1-filter">TYPE 1</label>
+                                    <select name="type1-filter" id="type1-filter" class="input-left-half">
+                                        <option value="">---</option>
+                                        ${typeOptions}
+                                    </select>
+                                </div>
+                                <div class="flex-rows grow">
+                                    <label for="type-filter">TYPE 2</label>
+                                    <select name="type-filter" id="type2-filter" class="input-right-half">
+                                        <option value="">---</option>
+                                        ${typeOptions}
+                                    </select>
+                                </div>
                             </div>
 
                             <div class="flex-rows">
@@ -87,7 +106,13 @@ function renderPokemonFilter (version, slot) {
                     
                 </div>
 
-                <div id="pokemon-grid" class="grid grow padding">
+                <div class="flex-rows grow padding gap">
+
+                    <label id="number-of-matches" style="text-align: center !important; font-size: 24px;"></label>
+
+                    <div id="pokemon-grid" class="grid">
+
+                    </div>
 
                 </div>
 
@@ -103,6 +128,8 @@ function filterPokemons (version, slot) {
 
     const name = document.getElementById("name-filter").value;
     const generation = parseInt(document.getElementById("generation-filter").value);
+    const type1 = parseInt(document.getElementById("type1-filter").value);
+    const type2 = parseInt(document.getElementById("type2-filter").value);
     const onlyObtainable = document.getElementById("only-obtainable-filter").checked;
 
     const pokemonsHTMLs = [];
@@ -114,7 +141,7 @@ function filterPokemons (version, slot) {
 
         if (name) {
             if (pokemon.name.toUpperCase().indexOf(name.toUpperCase()) > -1) {
-                matches.push(`NAME INCLUDES "${name}"`);
+                matches.push(`NAME INCLUDES "${name.toUpperCase()}"`);
             } else {
                 show = false;
             }
@@ -123,6 +150,22 @@ function filterPokemons (version, slot) {
         if (generation) {
             if (pokemon.introducedInGeneration === generation) {
                 matches.push(`INTRODUCED IN GENERATION "${generation}"`);
+            } else {
+                show = false;
+            }
+        }
+
+        if (type1) {
+            if (pokemon.types.includes(type1)) {
+                matches.push(`IS OF TYPE "${Globals.Database.Types[type1].toUpperCase()}"`);
+            } else {
+                show = false;
+            }
+        }
+
+        if (type2) {
+            if (pokemon.types.includes(type2)) {
+                matches.push(`IS OF TYPE "${Globals.Database.Types[type2].toUpperCase()}"`);
             } else {
                 show = false;
             }
@@ -147,10 +190,10 @@ function filterPokemons (version, slot) {
                     </div>
                 </div>
             `);
-        }
-        // ${matches.length > 0 ? "<hr>" : ""}
+        }        
     }
 
+    document.getElementById("number-of-matches").innerHTML = `FOUND ${pokemonsHTMLs.length} MATCHES`;
     document.getElementById("pokemon-grid").innerHTML = pokemonsHTMLs.join("");
 
 }

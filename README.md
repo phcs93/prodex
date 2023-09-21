@@ -2,6 +2,8 @@
 
 A tool for building the perfect Pokémon team.
 
+You can access the app here: https://phcs93.github.io/prodex/
+
 It features a wide variety of filters and charts to help you find the best match for your team.
 
 All data was obtained from `PokeAPI` (https://pokeapi.co/).
@@ -13,10 +15,6 @@ All 3D sprites were obtained from https://www.pkparaiso.com/
 I've reorganized and rehosted them here: WIP
 
 This project is a new version of an older project I've made: https://github.com/phcs93/pokefy/
-
-# DEMO
-
-https://phcs93.github.io/prodex/
 
 # TO-DO
 
