@@ -5,7 +5,7 @@
 function renderPokemon (pokemon, pokemonSettings, slot) {
     return `
         <div class="pokemon flex-rows gap">
-            ${renderPokemonHeader(pokemon, pokemonSettings)}
+            ${renderPokemonHeader(pokemon, pokemonSettings, true)}
             <hr>
             ${/*renderPokemonDetails(pokemon)*/""}
             <hr>

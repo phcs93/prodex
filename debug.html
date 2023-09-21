@@ -1,0 +1,131 @@
+<html>
+
+<head>
+
+    <script src="lib/pako/pako.js"></script>
+
+    <style>
+
+        img.pokemon-sprite {
+            background-repeat: no-repeat;
+            object-fit: scale-down;
+            width: 64px;
+            height: 64px;
+        }
+
+        * {
+            font-family: "Segoe UI";
+        }
+
+        body {
+            background-color: #1E1E1E;
+        }
+
+        div.grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(128px, 1fr));    
+        }
+
+        div[data-hasgenderdifferences="true"] * {
+            color: pink !important;
+        }
+
+    </style>
+
+    <script>
+
+        const failed = [];
+
+        function addFailed (gen, id, name, isFemale, isShiny) {
+            failed.push({gen, id, name, isFemale, isShiny});
+        }
+
+        function sleep(ms) {
+            return new Promise(resolve => setTimeout(resolve, ms));
+        }
+
+        document.addEventListener("DOMContentLoaded", async () => {
+
+            const response = await fetch("res/database.bin");
+            const output = await response.arrayBuffer();
+
+            const jsonString = pako.ungzip(output, { to: "string" });
+            const database = JSON.parse(jsonString);
+
+            const imgs = [];
+
+            
+
+            for (const pokemon of Object.values(database.Pokemons)) {
+
+                let name = pokemon.name.toLowerCase().replace(/ /g, "-");
+
+                // normal male
+                imgs.push(`
+                    <div style="border: 1px solid #2E2E2E; width: 128px; height: 128px;">
+                        <img class="pokemon-sprite" src="../poke-3d-sprites/gifs/${pokemon.id}.gif" onerror="addFailed(${pokemon.introducedInGeneration}, ${pokemon.id}, '${pokemon.name}', false, false)">
+                        <div style="color: white;">
+                            #${pokemon.id} | #${pokemon.pokedexId}<br />
+                            ${name} [${pokemon.introducedInGeneration}]
+                        </div>
+                    </div>
+                `);
+
+                // shiny male
+                imgs.push(`
+                    <div style="border: 1px solid #2E2E2E; width: 128px; height: 128px;">
+                        <img class="pokemon-sprite" src="../poke-3d-sprites/gifs/${pokemon.id}_s.gif" onerror="addFailed(${pokemon.introducedInGeneration}, ${pokemon.id}, '${pokemon.name}', false, true)">             
+                        <div style="color: white;">
+                            #${pokemon.id} | #${pokemon.pokedexId}<br />
+                            ${name}_s [${pokemon.introducedInGeneration}]
+                        </div>
+                    </div>
+                `);
+
+                if (pokemon.flags.hasGenderDifferences) {
+
+                    // normal female
+                    imgs.push(`
+                        <div style="border: 1px solid #2E2E2E; width: 128px; height: 128px;" data-hasgenderdifferences="true">
+                            <img class="pokemon-sprite" src="../poke-3d-sprites/gifs/${pokemon.id}-f.gif" onerror="addFailed(${pokemon.introducedInGeneration}, ${pokemon.id}, '${pokemon.name}', true, false)">          
+                            <div style="color: white;">
+                                #${pokemon.id} | #${pokemon.pokedexId}<br />
+                                ${name}-f [${pokemon.introducedInGeneration}]
+                            </div>
+                        </div>
+                    `);
+
+                    // shiny female
+                    imgs.push(`
+                        <div style="border: 1px solid #2E2E2E; width: 128px; height: 128px;" data-hasgenderdifferences="true">
+                            <img class="pokemon-sprite" src="../poke-3d-sprites/gifs/${pokemon.id}-f_s.gif" onerror="addFailed(${pokemon.introducedInGeneration}, ${pokemon.id}, '${pokemon.name}', true, true)">                
+                            <div style="color: white;">
+                                #${pokemon.id} | #${pokemon.pokedexId}<br />
+                                ${name}-f_s [${pokemon.introducedInGeneration}]
+                            </div>
+                        </div>
+                    `);
+
+                }
+
+            }
+
+            document.querySelector("body > div.grid").insertAdjacentHTML("beforeend", imgs.join(""));
+
+            await sleep(2000);
+
+            console.log(failed);
+
+        });
+
+    </script>
+
+</head>
+
+    <body>
+
+        <div class="grid"></div>
+
+    </body>
+
+</html>

@@ -15,3 +15,8 @@ div.filtered-pokemon:hover {
     background-color: #2E2E2E;
     cursor: pointer;
 }
+
+div.filtered-pokemon > label {
+    height: 16px !important;
+    line-height: 16px !important;
+}

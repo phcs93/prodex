@@ -82,7 +82,7 @@ div.padding {
 div.grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(298px, 1fr));
-    grid-template-rows: min-content;
+    grid-auto-rows: min-content;
     grid-gap: 16px;
     overflow: hidden;
 }
@@ -141,6 +141,40 @@ button {
     &:hover {
         background-color: #1E1E1E;
     }
+}
+
+/* ================================================================================ */
+/* summary + details */
+/* ================================================================================ */
+
+summary {
+    font-family: "Candara";
+    font-size: 14px;
+    font-weight: bold;
+    height: 32px;
+    line-height: 32px;
+    padding-left: 8px;
+    box-sizing: border-box;
+    border-radius: 5px;
+    border: 1px solid #2E2E2E;
+}
+
+summary:hover {
+    background-color: #2E2E2E;
+    cursor: pointer;
+}
+
+details > div:nth-of-type(1) {
+    margin-top: 16px;
+}
+
+details > div {
+    padding-left: 16px;
+}
+
+details[open] {
+    border-top-left-radius: 5px;
+    border-left: 1px solid #2E2E2E;
 }
 
 /* ================================================================================ */
@@ -207,6 +241,7 @@ div.metric > img {
 }
 
 .custom-swal-html {
+    border-radius: 10px;
     margin: 0px !important;
     padding: 0px !important;
     overflow: hidden !important;
@@ -232,4 +267,19 @@ div:where(.swal2-container) div:where(.swal2-popup) {
     color: inherit;
     font-family: inherit;
     font-size: inherit;
+}
+
+/* ================================================================================ */
+/* el-switch  */
+/* ================================================================================ */
+
+label.el-switch  {
+    display: flex;
+    flex-direction: row;
+    gap: 16px;
+}
+
+label.el-switch > label {
+    line-height: 26px;
+    height: 26px;
 }

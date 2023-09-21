@@ -174,4 +174,6 @@ function showFilterSwal (slot) {
         html: renderPokemonFilter(Globals.Parameters.Version, slot)
     });
 
+    filterPokemons(Globals.Parameters.Version, slot);
+
 }
