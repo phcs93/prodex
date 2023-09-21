@@ -11,12 +11,27 @@ div.responsive-border-radius {
     }
 }
 
+div.filtered-pokemon {
+    position: relative;
+}
+
 div.filtered-pokemon:hover {
     background-color: #2E2E2E;
     cursor: pointer;
 }
 
-div.filtered-pokemon > label {
+div.filter-matches {
+    /* background-color: #072602; */
+    background-color: #111111;
+    margin: 0px 16px;
+    padding: 8px 16px;
+    border-bottom-left-radius: 10px !important;
+    border-bottom-right-radius: 10px !important;
+}
+
+div.filter-matches > label {
+    font-size: 12px;
     height: 16px !important;
     line-height: 16px !important;
+    /* color: #e2dd42; */
 }

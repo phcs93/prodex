@@ -138,14 +138,17 @@ function filterPokemons (version, slot) {
 
         if (show) {
             pokemonsHTMLs.push(`
-                <div class="flex-rows gap box filtered-pokemon" onclick="selectPokemon(${pokemon.id}, ${slot})">
-                    ${renderPokemonHeader(pokemon, null, false)}
-                    ${matches.length > 0 ? "<hr>" : ""}
-                    ${matches.map(m => `<label>${m}</label>`).join("")}
+                <div>
+                    <div class="flex-rows gap box filtered-pokemon" onclick="selectPokemon(${pokemon.id}, ${slot})">
+                        ${renderPokemonHeader(pokemon, null, false)}
+                    </div>
+                    <div class="filter-matches flex-rows">
+                        ${matches.map(m => `<label>${m}</label>`).join("")}
+                    </div>
                 </div>
             `);
         }
-
+        // ${matches.length > 0 ? "<hr>" : ""}
     }
 
     document.getElementById("pokemon-grid").innerHTML = pokemonsHTMLs.join("");
