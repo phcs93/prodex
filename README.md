@@ -2,19 +2,27 @@
 
 A tool for building the perfect Pokémon team.
 
-You can access the app here: https://phcs93.github.io/prodex/
+You can access the app here:  
+https://phcs93.github.io/prodex/
 
 It features a wide variety of filters and charts to help you find the best match for your team.
 
-All data was obtained from `PokeAPI` (https://pokeapi.co/).
+This project is a new version of an older project I've made:  
+https://github.com/phcs93/pokefy/
 
-I've actually built a tool to extract and transform the CSV data directly from their repository (https://github.com/phcs93/poke-api-etl).
+# Credits
 
-All 3D sprites were obtained from https://www.pkparaiso.com/
+All data was obtained from `PokeAPI`:  
+https://pokeapi.co/
 
-I've reorganized and rehosted them here: WIP
+I've actually built a tool to extract and transform the CSV data directly from their repository:  
+https://github.com/phcs93/poke-api-etl
 
-This project is a new version of an older project I've made: https://github.com/phcs93/pokefy/
+All 3D sprites were obtained from:  
+https://www.pkparaiso.com/  
+
+I've reorganized and rehosted them here:  
+https://github.com/phcs93/poke-3d-sprites
 
 # TO-DO
 
