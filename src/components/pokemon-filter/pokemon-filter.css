@@ -11,6 +11,16 @@ div.responsive-border-radius {
     }
 }
 
+select.input-left-half {
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+}
+
+select.input-right-half {
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+}
+
 div.filtered-pokemon {
     position: relative;
     &:hover {
@@ -26,6 +36,9 @@ div.filter-matches {
     padding: 8px 16px;
     border-bottom-left-radius: 10px !important;
     border-bottom-right-radius: 10px !important;
+    &:empty {
+        display: none;
+    }
 }
 
 div.filter-matches > label {
@@ -35,12 +48,7 @@ div.filter-matches > label {
     /* color: #e2dd42; */
 }
 
-select.input-left-half {
-    border-top-right-radius: 0px;
-    border-bottom-right-radius: 0px;
+div.filter-matches > hr {
+    margin: 8px 0px !important;
 }
 
-select.input-right-half {
-    border-top-left-radius: 0px;
-    border-bottom-left-radius: 0px;
-}

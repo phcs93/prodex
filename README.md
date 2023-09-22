@@ -56,6 +56,9 @@ https://github.com/phcs93/poke-3d-sprites
   - determine move damage type by generation
   - encounters for regional forms should be the same as their base form (?)
   - remember to properly show corresponding versions on encounters, held items, etc
+  - detect if pokemon is obtainable in version X by evolution, trading or hatching egg
+    - detect if pokemon can be traded from other generations (omg)
+  
 
 ## add filters
 

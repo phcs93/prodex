@@ -30,64 +30,86 @@ function renderPokemonDetails (pokemon) {
     };
 
     return `
-        <div class="flex-rows">
-            
+        <div class="flex-rows pokemon-details">
+            <div class="flex-columns">
+                <label>Ability 1</label>
+                <label>${getAbilityName(pokemon.abilities[0])}</label>
+            </div>
+            <div class="flex-columns">
+                <label>Ability 2</label>
+                <label>${getAbilityName(pokemon.abilities[1])}</label>
+            </div>
+            <div class="flex-columns">
+                <label>Hidden Ability</label>
+                <label>${getAbilityName(pokemon.abilities[2])}</label>
+            </div>
+            <div class="flex-columns">
+                <label>Height</label>
+                <label>${renderHeight(pokemon.height)}</label>
+            </div>
+            <div class="flex-columns">
+                <label>Weight</label>
+                <label>${renderWeight(pokemon.weight)}</label>
+            </div>
+            <div class="flex-columns">
+                <label>Experience</label>
+                <label>${pokemon.baseExperience}</label>
+            </div>
+            <div class="flex-columns">
+                <label>Catch Rate (*)</label> <!-- (#% normal pokeball + full hp in gen X) -->
+                <label>${pokemon.captureRate} </label>
+            </div>
+            <div class="flex-columns">
+                <label>Happiness</label>
+                <label>${pokemon.baseHappiness} (normal?)</label>
+            </div>
+            <div class="flex-columns">
+                <label>Growth Rat</label>
+                <label>${getGrowthRateName(pokemon.growthRateId)}</label>
+            </div>
+            <div class="flex-columns">
+                <label>Egg Groups</label>
+                <label>${getEggGroupsNames(pokemon.eggGroups)}</label>
+            </div>
+            <div class="flex-columns">
+                <label>Shape</label>
+                <label>${getShapeName(pokemon.shapeId)} (footprint icon)</label>
+            </div>
+            <div class="flex-columns">
+                <label>Habitat</label>
+                <label>${getHabitatName(pokemon.habitatId)} (footprint?)</label>
+            </div>
+            <div class="flex-columns">
+                <label>Color</label>
+                <label>${getColorName(pokemon.colorId)} (show square color)</label>
+            </div>
+            <div class="flex-columns">
+                <label>Specie</label>
+                <label>${pokemon.specie}</label>
+            </div>
+            <div class="flex-columns">
+                <label>Hatch Counter</label>
+                <label>${pokemon.hatchCounter} cycles (# steps)</label> <!-- thousands -->
+            </div>
+            <div class="flex-columns">
+                <label>Generation</label>
+                <label>${pokemon.introducedInGeneration}</label>
+            </div>
+            <!-- <div class="flex-columns">
+                <label>Evolution Chain Id</label>
+                <label>${pokemon.evolutionChainId}</label>
+            </div> -->
         </div>
-        <table class="pokemon-details">
-            <tr>
-                <th>Ability 1</th>
-                <td>${getAbilityName(pokemon.abilities[0])}</td>
-                <th>Ability 2</th>
-                <td>${getAbilityName(pokemon.abilities[1])}</td>
-            </tr>
-            <tr>
-                <th>Hidden Ability</th>
-                <td>${getAbilityName(pokemon.abilities[2])}</td>
-                <th></th>
-                <td></td>
-            </tr>
-            <tr>
-                <th>Height</th>
-                <td>${pokemon.height} m (#'#")</td>
-                <th>Weight</th>
-                <td>${pokemon.weight} Kg (# lbs)</td>
-            </tr>
-            <tr>
-                <th>Experience</th>
-                <td>${pokemon.baseExperience}</td>
-                <th>Catch Rate</th>
-                <td>${pokemon.captureRate} (#% with normal pokeball and full hp in gen X)</td>
-            </tr>
-            <tr>
-                <th>Happiness</th>
-                <td>${pokemon.baseHappiness} (normal?)</td>
-                <th>Growth Rate</th>
-                <td>${getGrowthRateName(pokemon.growthRateId)}</td>
-            </tr>
-            <tr>
-                <th>Egg Groups</th>
-                <td>${getEggGroupsNames(pokemon.eggGroups)}</td>
-                <th>Shape (and footprint)</th>
-                <td>${getShapeName(pokemon.shapeId)} (and foorprint icons)</td>
-            </tr>
-            <tr>
-                <th>Habitat</th>
-                <td>${getHabitatName(pokemon.habitatId)} (footprint?)</td>
-                <th>Color</th>
-                <td>${getColorName(pokemon.colorId)} (show square color)</td>
-            </tr>
-            <tr>
-                <th>Specie</th>
-                <td>${pokemon.specie}</td>
-                <th>Hatch Counter</th>
-                <td>${pokemon.hatchCounter} cycles (# thousands of steps)</td>
-            </tr>
-            <tr>
-                <th>Generation</th>
-                <td>${pokemon.introducedInGeneration}</td>
-                <th>Evolution Chain Id</th>
-                <td>${pokemon.evolutionChainId}</td>
-            </tr>
-        </table>
     `;
 }
+
+function renderHeight (height) {
+    const feet = height * 3.28084;
+    const inches = (feet % 1) * 12;
+    return `${height} m (${parseInt(feet)}'${parseInt(inches)}")`;
+}
+
+function renderWeight (weight) {
+    return `${weight} kg (${(weight * 2.205).toFixed(2)} lbs)`;
+}
+

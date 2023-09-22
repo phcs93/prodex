@@ -20,7 +20,7 @@ Globals = function (database, parameters) {
 
     const proxyHandler = {
         set: (target, param, value) => {
-            console.log("[PROXY]", param, "=", value);
+            //console.log("[PROXY]", param, "=", value);
             target[param] = value;
             updateUrl();
             render();

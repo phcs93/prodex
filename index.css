@@ -145,6 +145,12 @@ button {
     }
 }
 
+button.primary {
+    background-color: #0078D4;
+    text-shadow: none;
+    color: white;
+}
+
 /* ================================================================================ */
 /* summary + details */
 /* ================================================================================ */
@@ -177,6 +183,26 @@ details > div {
 details[open] {
     border-top-left-radius: 5px;
     border-left: 1px solid #2E2E2E;
+}
+
+details > summary {
+    list-style: none;
+}
+
+summary::-webkit-details-marker {
+    display: none
+}
+
+summary::after {
+    float: right;
+    content: '►';
+    margin-right: 16px;
+}
+
+details[open] summary:after {
+    float: right;
+    content: "▼";
+    margin-right: 16px;
 }
 
 /* ================================================================================ */

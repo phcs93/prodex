@@ -1,0 +1,18 @@
+div.pokemon-details label {
+    height: 20px !important;
+    line-height: 20px !important;
+    display: inline-block;
+    text-align: right;
+    width: 40%;
+}
+
+div.pokemon-details label + label {
+    width: 60%;
+    text-align: left;
+    margin: 0px 16px;
+}
+
+div.pokemon-details hr {
+    margin: 10px;
+    border-top: 1px dashed #2E2E2E;
+}
