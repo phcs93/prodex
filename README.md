@@ -16,25 +16,29 @@ All data was obtained from `PokeAPI`:
 https://pokeapi.co/
 
 I've actually built a tool to extract and transform the CSV data directly from their repository:  
-https://github.com/phcs93/poke-api-etl
+https://github.com/phcs93/poke-api-etl/
 
-All 3D sprites were obtained from:  
-https://www.pkparaiso.com/  
+All 2D sprites also from `PokeAPI`:  
+https://github.com/PokeAPI/sprites/
 
-I've reorganized and rehosted them here:  
-https://github.com/phcs93/poke-3d-sprites
+Almost all 3D sprites were obtained from `PkParaíso`:  
+https://www.pkparaiso.com/
+
+I've reorganized and rehosted them here (more credits in the repo):  
+https://github.com/phcs93/poke-3d-sprites/
+
+Pokemon footprint images from KierranFalloon (veekun + pokecommunity):  
+https://github.com/KierranFalloon/FootprintAPI/
 
 # TO-DO
 
-  - buy me a coffee link
-
 ## database
 
-  - create an secondary database with "cleaned" data, for example:
-    - basculegion shouldn't have "hasGenderDifferences" set to true since there are different internal ids for each form
-    - meowstic male and female too
-    - alolan rattata/raticate also shouldn't have "hasGenderDifferences" set to true since its regional forms doesn't have any differences
-    - same for totem and gmax variants -> venusaur / butterfree / pikachu
+  - determine if pokemon is obtainable in version 
+    - by evolution
+    - by hatching egg
+    - by trading from sister version
+      - detect if pokemon can be traded from other generations
 
 ## filter window
 
@@ -56,9 +60,6 @@ https://github.com/phcs93/poke-3d-sprites
   - determine move damage type by generation
   - encounters for regional forms should be the same as their base form (?)
   - remember to properly show corresponding versions on encounters, held items, etc
-  - detect if pokemon is obtainable in version X by evolution, trading or hatching egg
-    - detect if pokemon can be traded from other generations (omg)
-  
 
 ## add filters
 

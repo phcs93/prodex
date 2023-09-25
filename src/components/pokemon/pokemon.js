@@ -7,9 +7,9 @@ function renderPokemon (pokemon, pokemonSettings, slot) {
         <div class="pokemon flex-rows gap">
             ${renderPokemonHeader(pokemon, pokemonSettings, true)}
             <hr>
-            ${/*renderPokemonDetails(pokemon)*/""}
+            ${renderPokemonDetails(pokemon)}
             <hr>
-            ${/*renderPokemonGenderRate(pokemon)*/""}
+            ${renderPokemonGenderRate(pokemon)}
             <hr>
             ${renderPokemonStats(pokemon)}
             <hr>
