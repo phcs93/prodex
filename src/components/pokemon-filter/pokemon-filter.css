@@ -11,12 +11,12 @@ div.responsive-border-radius {
     }
 }
 
-select.input-left-half {
+.input-left-half {
     border-top-right-radius: 0px;
     border-bottom-right-radius: 0px;
 }
 
-select.input-right-half {
+.input-right-half {
     border-top-left-radius: 0px;
     border-bottom-left-radius: 0px;
 }

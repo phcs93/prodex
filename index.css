@@ -177,12 +177,15 @@ details > div:nth-of-type(1) {
 }
 
 details > div {
-    padding-left: 16px;
+    /* padding-left: 16px; */
+    /* padding: 16px; */
 }
 
 details[open] {
-    border-top-left-radius: 5px;
-    border-left: 1px solid #2E2E2E;
+    /* border-top-left-radius: 5px; */
+    /* border-left: 1px solid #2E2E2E; */
+    border-radius: 5px;
+    /* border: 1px solid #2E2E2E; */
 }
 
 details > summary {

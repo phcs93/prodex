@@ -1,8 +1,32 @@
 function renderPokemonFilter (version, slot) {
 
     const typeOptions = Object.keys(Globals.Database.Types).map(t => `<option value="${t}">${Globals.Database.Types[t]}</option>`).join("");
+    
+    // characteristics
+    const abilitieOptions = Object.keys(Globals.Database.Abilities).orderBy(a => Globals.Database.Abilities[a]).map(a => `<option value="${a}">${Globals.Database.Abilities[a]}</option>`).join("");
+    const heldItemOptions = Object.keys(Globals.Database.Items).filter(i => Globals.Database.Items[i].type === 1).orderBy(i => Globals.Database.Items[i].name).map(i => `<option value="${i}">${Globals.Database.Items[i].name}</option>`).join("");
+    const habitatOptions = Object.keys(Globals.Database.Habitats).map(h => `<option value="${h}">${Globals.Database.Habitats[h]}</option>`).join("");
+    const shapeOptions = Object.keys(Globals.Database.Shapes).map(s => `<option value="${s}">${Globals.Database.Shapes[s]}</option>`).join("");
+    const colorOptions = Object.keys(Globals.Database.Colors).map(c => `<option value="${c}">${Globals.Database.Colors[c]}</option>`).join("");
+    const eggGroupsOptions = Object.keys(Globals.Database.EggGroups).map(e => `<option value="${e}">${Globals.Database.EggGroups[e]}</option>`).join("");
+
+    // moves
     const moveOptions = Object.values(Globals.Database.Moves).orderBy(m => m.name).map(m => `<option value="${m.id}">${m.name}</option>`).join("");
     const learnMethodOptions = Object.keys(Globals.Database.MoveLearnMethods).map(m => `<option value="${m}">${Globals.Database.MoveLearnMethods[m]}</option>`).join("");
+
+    // encounter
+    const encounterMethodOptions = Object.keys(Globals.Database.EncounterMethods).map(m => `<option value="${m}">${Globals.Database.EncounterMethods[m]}</option>`).join("");
+    const encounterConditionOptions = Object.keys(Globals.Database.EncounterConditions).map(c => `<option value="${c}">${Globals.Database.EncounterConditions[c]}</option>`).join("");
+
+    const locationsGroupedByRegion = Object.values(Globals.Database.Locations).groupBy(l => l.regionId);
+
+    const locationOptions = Object.keys(locationsGroupedByRegion).map(regionId => {        
+        return `
+            <optgroup label="${Globals.Database.Regions[regionId]}">
+                ${locationsGroupedByRegion[regionId].orderBy(l => l.name).map(l => `<option value="${l.id}">${l.name}</option>`).join("")}
+            </optgroup>
+        `;
+    });
 
     return `
 
@@ -23,7 +47,7 @@ function renderPokemonFilter (version, slot) {
 
                             <div class="flex-rows">
                                 <label for="generation-filter">INTRODUCED IN GENERATION</label>
-                                <input type="text" name="generation-filter" id="generation-filter" />
+                                <input type="number" name="generation-filter" id="generation-filter" />
                             </div>
 
                             <div class="flex-columns">
@@ -43,103 +67,180 @@ function renderPokemonFilter (version, slot) {
                                 </div>
                             </div>
 
-                            <div class="flex-rows">
+                            <details>
 
-                                <details>
+                                <summary>CHARACTERISTICS FILTERS</summary>
 
-                                    <summary>CHARACTERISTICS FILTERS</summary>
+                                <div class="flex-rows gap">
 
-                                    <div class="flex-rows gap">
-
+                                    <div class="flex-rows">
+                                        <label for="ability-filter">ABILITY</label>
+                                        <select name="ability-filter" id="ability-filter">
+                                            <option value="">---</option>
+                                            ${abilitieOptions}
+                                        </select>
+                                    </div>
+                                    
+                                    <div class="flex-rows">
+                                        <label for="held-item-filter">HELD ITEM</label>
+                                        <select name="held-item-filter" id="held-item-filter">
+                                            <option value="">---</option>
+                                            ${heldItemOptions}
+                                        </select>
                                     </div>
 
-                                </details>
-
-                            </div>
-
-                            <div class="flex-rows">
-
-                                <details>
-
-                                    <summary>MOVE FILTERS</summary>
-
-                                    <div class="flex-rows gap">
-
-                                        <div class="flex-rows">
-                                            <label for="move-filter">LEARNS MOVES</label>
-                                            <select name="move1-filter" id="move1-filter">
-                                                <option value="">---</option>
-                                                ${moveOptions}
-                                            </select>
-                                            <select name="move2-filter" id="move2-filter">
-                                                <option value="">---</option>
-                                                ${moveOptions}
-                                            </select>
-                                            <select name="move3-filter" id="move3-filter">
-                                                <option value="">---</option>
-                                                ${moveOptions}
-                                            </select>
-                                            <select name="move4-filter" id="move4-filter">
-                                                <option value="">---</option>
-                                                ${moveOptions}
-                                            </select>
-                                        </div>
-
-                                        <div class="flex-rows">
-                                            <label for="learn-method-filter">LEARN METHOD</label>
-                                            <select name="learn-method-filter" id="learn-method-filter">
-                                                <option value="">---</option>
-                                                ${learnMethodOptions}
-                                            </select>
-                                        </div>
-
-                                        <div class="flex-rows">
-                                            <label for="move-filter">LEARNS MOVES FROM TYPES</label>
-                                            <select name="move-from-type1-filter" id="move-from-type1-filter">
-                                                <option value="">---</option>
-                                                ${typeOptions}
-                                            </select>
-                                            <select name="move-from-type2-filter" id="move-from-type2-filter">
-                                                <option value="">---</option>
-                                                ${typeOptions}
-                                            </select>
-                                            <select name="move-from-type3-filter" id="move-from-type3-filter">
-                                                <option value="">---</option>
-                                                ${typeOptions}
-                                            </select>
-                                            <select name="move-from-type4-filter" id="move-from-type4-filter">
-                                                <option value="">---</option>
-                                                ${typeOptions}
-                                            </select>
-                                        </div>
-
-                                        <label class="el-switch">
-                                            <input type="checkbox" name="only-attacks-filter" id="only-attacks-filter" />
-                                            <span class="el-switch-style"></span>
-                                            <label for="only-attacks-filter">ONLY ATTACK MOVES</label>
-                                        </label>
-
+                                    <div class="flex-rows">
+                                        <label for="habitat-filter">HABITAT</label>
+                                        <select name="habitat-filter" id="habitat-filter">
+                                            <option value="">---</option>
+                                            ${habitatOptions}
+                                        </select>
                                     </div>
 
-                                </details>
-
-                            </div>
-
-                            <div class="flex-rows">
-
-                                <details>
-
-                                    <summary>ENCOUNTER FILTERS</summary>
-
-                                    <div class="flex-rows gap">
-
-                                       
-
+                                    <div class="flex-rows">
+                                        <label for="shape-filter">SHAPE</label>
+                                        <select name="shape-filter" id="shape-filter">
+                                            <option value="">---</option>
+                                            ${shapeOptions}
+                                        </select>
                                     </div>
 
-                                </details>
+                                    <div class="flex-rows">
+                                        <label for="color-filter">COLOR</label>
+                                        <select name="color-filter" id="color-filter">
+                                            <option value="">---</option>
+                                            ${colorOptions}
+                                        </select>
+                                    </div>
 
-                            </div>
+                                    <div class="flex-columns">
+                                        <div class="flex-rows grow">
+                                            <label for="egg-group1-filter">EGG GROUP 1</label>
+                                            <select name="egg-group1-filter" id="egg-group1-filter" class="input-left-half">
+                                                <option value="">---</option>
+                                                ${eggGroupsOptions}
+                                            </select>
+                                        </div>
+                                        <div class="flex-rows grow">
+                                            <label for="egg-group2-filter">EGG GROUP 2</label>
+                                            <select name="egg-group2-filter" id="egg-group2-filter" class="input-right-half">
+                                                <option value="">---</option>
+                                                ${eggGroupsOptions}
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="flex-rows">
+                                        <label for="evolutions-filter">NUMBER OF EVOLUTIONS (disabled)</label>
+                                        <input type="number" name="evolutions-filter" id="evolutions-filter" />
+                                    </div>
+
+                                </div>
+
+                            </details>
+
+                            <details>
+
+                                <summary>MOVE FILTERS</summary>
+
+                                <div class="flex-rows gap">
+
+                                    <div class="flex-rows">
+                                        <label for="move-filter">LEARNS MOVES</label>
+                                        <select name="move1-filter" id="move1-filter">
+                                            <option value="">---</option>
+                                            ${moveOptions}
+                                        </select>
+                                        <select name="move2-filter" id="move2-filter">
+                                            <option value="">---</option>
+                                            ${moveOptions}
+                                        </select>
+                                        <select name="move3-filter" id="move3-filter">
+                                            <option value="">---</option>
+                                            ${moveOptions}
+                                        </select>
+                                        <select name="move4-filter" id="move4-filter">
+                                            <option value="">---</option>
+                                            ${moveOptions}
+                                        </select>
+                                    </div>
+
+                                    <div class="flex-rows">
+                                        <label for="learn-method-filter">LEARN METHOD</label>
+                                        <select name="learn-method-filter" id="learn-method-filter">
+                                            <option value="">---</option>
+                                            ${learnMethodOptions}
+                                        </select>
+                                    </div>
+
+                                    <div class="flex-rows">
+                                        <label for="move-filter">LEARNS MOVES FROM TYPES</label>
+                                        <select name="move-from-type1-filter" id="move-from-type1-filter">
+                                            <option value="">---</option>
+                                            ${typeOptions}
+                                        </select>
+                                        <select name="move-from-type2-filter" id="move-from-type2-filter">
+                                            <option value="">---</option>
+                                            ${typeOptions}
+                                        </select>
+                                        <select name="move-from-type3-filter" id="move-from-type3-filter">
+                                            <option value="">---</option>
+                                            ${typeOptions}
+                                        </select>
+                                        <select name="move-from-type4-filter" id="move-from-type4-filter">
+                                            <option value="">---</option>
+                                            ${typeOptions}
+                                        </select>
+                                    </div>
+
+                                    <label class="el-switch">
+                                        <input type="checkbox" name="only-attacks-filter" id="only-attacks-filter" />
+                                        <span class="el-switch-style"></span>
+                                        <label for="only-attacks-filter">ONLY ATTACK MOVES</label>
+                                    </label>
+
+                                </div>
+
+                            </details>
+
+                            <details>
+
+                                <summary>ENCOUNTER FILTERS</summary>
+
+                                <div class="flex-rows gap">
+
+                                    <div class="flex-rows grow">
+                                        <label for="max-encounter-level-filter">MAXIMUM ENCOUNTER LEVEL</label>
+                                        <input type="number" name="max-encounter-level-filter" id="max-encounter-level-filter" min="0" max="100" step="1" />
+                                    </div>
+
+                                    <div class="flex-rows">
+                                        <label for="encounter-method-filter">ENCOUNTER METHOD</label>
+                                        <select name="encounter-method-filter" id="encounter-method-filter">
+                                            <option value="">---</option>
+                                            ${encounterMethodOptions}
+                                        </select>
+                                    </div>
+
+                                    <div class="flex-rows">
+                                        <label for="encounter-condition-filter">ENCOUNTER CONDITION</label>
+                                        <select name="encounter-condition-filter" id="encounter-condition-filter">
+                                            <option value="">---</option>
+                                            ${encounterConditionOptions}
+                                        </select>
+                                    </div>
+
+                                    <div class="flex-rows">
+                                        <label for="encounter-location-filter">ENCOUNTER LOCATION</label>
+                                        <select name="encounter-location-filter" id="encounter-location-filter">
+                                            <option value="">---</option>
+                                            ${locationOptions}
+                                        </select>
+                                    </div>
+
+                                </div>
+
+                            </details>
 
                             <label class="el-switch">
                                 <input type="checkbox" name="only-obtainable-filter" id="only-obtainable-filter" checked="true" />
@@ -148,7 +249,6 @@ function renderPokemonFilter (version, slot) {
                             </label>
 
                             <hr>
-
 
                             <div class="flex-columns">
                                 <div class="flex-rows" style="width: 50%;">
@@ -234,6 +334,10 @@ function filterPokemons (version, slot) {
     const type1 = parseInt(document.getElementById("type1-filter").value);
     const type2 = parseInt(document.getElementById("type2-filter").value);
 
+    // characteristics filters
+    const ability = parseInt(document.getElementById("ability-filter").value);
+    const heldItem = parseInt(document.getElementById("held-item-filter").value);
+
     // move filters
     const move1 = parseInt(document.getElementById("move1-filter").value);
     const move2 = parseInt(document.getElementById("move2-filter").value);
@@ -245,6 +349,12 @@ function filterPokemons (version, slot) {
     const movesFromType4 = parseInt(document.getElementById("move-from-type4-filter").value);
     const learnMethod = parseInt(document.getElementById("learn-method-filter").value);
     const onlyAttacks = document.getElementById("only-attacks-filter").checked;
+
+    // encounter filters
+    const maxEcounterLevel = parseInt(document.getElementById("max-encounter-level-filter").value);
+    const encounterMethod = parseInt(document.getElementById("encounter-method-filter").value);
+    const encounterCondition = parseInt(document.getElementById("encounter-condition-filter").value);
+    const encounterLocation = parseInt(document.getElementById("encounter-location-filter").value);
 
     // special filters
     const onlyObtainable = document.getElementById("only-obtainable-filter").checked;
@@ -260,6 +370,7 @@ function filterPokemons (version, slot) {
         let show = true;
         const matches = [];
 
+        // common filters
         if (name) {
             if (pokemon.name.toUpperCase().indexOf(name.toUpperCase()) > -1) {
                 matches.push(`NAME INCLUDES "${name.toUpperCase()}"`);
@@ -287,6 +398,29 @@ function filterPokemons (version, slot) {
         if (type2) {
             if (pokemon.types.includes(type2)) {
                 matches.push(`IS OF TYPE "${Globals.Database.Types[type2].toUpperCase()}"`);
+            } else {
+                show = false;
+            }
+        }
+
+        // characteristics filters
+        if (ability) {
+            if (pokemon.abilities.includes(ability)) {
+                const index = pokemon.abilities.indexOf(ability);
+                if (index < 2) {
+                    matches.push(`ABILITY ${index+1} IS "${Globals.Database.Abilities[ability].toUpperCase()}"`);
+                } else {
+                    matches.push(`HIDDEN ABILITY IS "${Globals.Database.Abilities[ability].toUpperCase()}"`);
+                }                
+            } else {
+                show = false;
+            }
+        }
+
+        if (heldItem) {
+            if (pokemon.items[version]?.some(i => i.id === heldItem)) {
+                const rarity = pokemon.items[version].filter(i => i.id === heldItem)[0].rarity;
+                matches.push(`${rarity}% CHANCE OF HOLDING "${Globals.Database.Items[heldItem].name.toUpperCase()}" IN "${Globals.Database.Versions[version].name.toUpperCase()}"`);
             } else {
                 show = false;
             }
@@ -359,6 +493,33 @@ function filterPokemons (version, slot) {
             }
         }
 
+        // encounter filters
+        if (maxEcounterLevel || encounterMethod || encounterCondition || encounterLocation) {
+
+            const canEncounter = pokemon.encounters[version]?.filter(e => (
+                (!maxEcounterLevel || e.minlvl <= maxEcounterLevel) &&
+                (!encounterMethod || e.method === encounterMethod) &&
+                (!encounterCondition || e.conditions.includes(encounterCondition)) &&
+                (!encounterLocation || e.location === encounterLocation)
+            ));
+            
+            const match = canEncounter?.reduce((acc, e) => {
+                const method = Globals.Database.EncounterMethods[e.method].toUpperCase();
+                const conditions = e.conditions.map(c => Globals.Database.EncounterConditions[c].toUpperCase());
+                acc.push(`FOUND IN "${Globals.Database.Locations[e.location].name.toUpperCase()}"`)
+                acc.push(`AT LEVEL "${e.minlvl}~${e.maxlvl}" VIA "${method}" ${conditions.length > 0 ? `(${conditions.join(", ")})` : ""} IN "${Globals.Database.Versions[version].name.toUpperCase()}"`)
+                acc.push("---");
+                return acc;
+            }, []);
+
+            if (match && match.length > 0) {       
+                matches.push(...match);
+            } else {
+                show = false;
+            }
+        }
+
+        // special filters
         if (onlyObtainable) {
             if (pokemon.encounters[version]?.length > 0) {
                 matches.push(`OBTAINABLE IN "${Globals.Database.Versions[version].name.toUpperCase()}"`);
@@ -392,6 +553,7 @@ function filterPokemons (version, slot) {
             break;
         }
 
+        // min encounter level
         // case "base-exp": getOrderByValue = p => p[PokemonIndexes.BaseExperience]; break;
         // case "capture-rate": getOrderByValue = p => p[PokemonIndexes.CaptureRate]; break;
         // case "base-happiness": getOrderByValue = p => p[PokemonIndexes.BaseHappiness]; break;
