@@ -242,6 +242,66 @@ function renderPokemonFilter (version, slot) {
 
                             </details>
 
+                            <details>
+
+                                <summary>FLAGS</summary>
+
+                                <div class="flex-rows gap">
+
+                                    <label class="el-switch">
+                                        <input type="checkbox" name="is-baby-filter" id="is-baby-filter" />
+                                        <span class="el-switch-style"></span>
+                                        <label for="is-baby-filter">IS BABY</label>
+                                    </label>
+
+                                    <label class="el-switch">
+                                        <input type="checkbox" name="is-legendary-filter" id="is-legendary-filter" />
+                                        <span class="el-switch-style"></span>
+                                        <label for="is-legendary-filter">IS LEGENDARY</label>
+                                    </label>
+                                    
+                                    <label class="el-switch">
+                                        <input type="checkbox" name="is-mythical-filter" id="is-mythical-filter" />
+                                        <span class="el-switch-style"></span>
+                                        <label for="is-mythical-filter">IS MYTHICAL</label>
+                                    </label>
+
+                                    <label class="el-switch">
+                                        <input type="checkbox" name="is-regional-filter" id="is-regional-filter" />
+                                        <span class="el-switch-style"></span>
+                                        <label for="is-regional-filter">IS REGIONAL</label>
+                                    </label>
+                                    
+                                    <label class="el-switch">
+                                        <input type="checkbox" name="is-mega-filter" id="is-mega-filter" />
+                                        <span class="el-switch-style"></span>
+                                        <label for="is-mega-filter">IS MEGA</label>
+                                    </label>
+
+                                    <label class="el-switch">
+                                        <input type="checkbox" name="is-totem-filter" id="is-totem-filter" />
+                                        <span class="el-switch-style"></span>
+                                        <label for="is-totem-filter">IS TOTEM</label>
+                                    </label>
+
+                                    <label class="el-switch">
+                                        <input type="checkbox" name="is-gmax-filter" id="is-gmax-filter" />
+                                        <span class="el-switch-style"></span>
+                                        <label for="is-gmax-filter">IS GMAX</label>
+                                    </label>
+
+                                    <label class="el-switch">
+                                        <input type="checkbox" name="has-gender-differences-filter" id="has-gender-differences-filter" />
+                                        <span class="el-switch-style"></span>
+                                        <label for="has-gender-differences-filter">HAS GENDER DIFFERENCES</label>
+                                    </label>
+
+                                </div>
+
+                            </details>
+
+                            <hr>
+
                             <label class="el-switch">
                                 <input type="checkbox" name="only-obtainable-filter" id="only-obtainable-filter" checked="true" />
                                 <span class="el-switch-style"></span>
@@ -337,6 +397,11 @@ function filterPokemons (version, slot) {
     // characteristics filters
     const ability = parseInt(document.getElementById("ability-filter").value);
     const heldItem = parseInt(document.getElementById("held-item-filter").value);
+    const habitat = parseInt(document.getElementById("habitat-filter").value);
+    const shape = parseInt(document.getElementById("shape-filter").value);
+    const color = parseInt(document.getElementById("color-filter").value);
+    const eggGroup1 = parseInt(document.getElementById("egg-group1-filter").value);
+    const eggGroup2 = parseInt(document.getElementById("egg-group2-filter").value);
 
     // move filters
     const move1 = parseInt(document.getElementById("move1-filter").value);
@@ -355,6 +420,9 @@ function filterPokemons (version, slot) {
     const encounterMethod = parseInt(document.getElementById("encounter-method-filter").value);
     const encounterCondition = parseInt(document.getElementById("encounter-condition-filter").value);
     const encounterLocation = parseInt(document.getElementById("encounter-location-filter").value);
+
+    // flags
+    const isBaby = document.getElementById("is-baby-filter").checked;
 
     // special filters
     const onlyObtainable = document.getElementById("only-obtainable-filter").checked;
@@ -421,6 +489,46 @@ function filterPokemons (version, slot) {
             if (pokemon.items[version]?.some(i => i.id === heldItem)) {
                 const rarity = pokemon.items[version].filter(i => i.id === heldItem)[0].rarity;
                 matches.push(`${rarity}% CHANCE OF HOLDING "${Globals.Database.Items[heldItem].name.toUpperCase()}" IN "${Globals.Database.Versions[version].name.toUpperCase()}"`);
+            } else {
+                show = false;
+            }
+        }
+
+        if (habitat) {
+            if(pokemon.habitatId === habitat){
+                matches.push(`LIVES IN HABITAT "${Globals.Database.Habitats[habitat].toUpperCase()}"`);
+            } else{
+                show = false;
+            }
+        }
+
+        if(shape){
+            if(pokemon.shapeId === shape){
+                matches.push(`IS OF SHAPE "${Globals.Database.Shapes[shape].toUpperCase()}"`);
+            } else{
+                show = false;
+            }
+        }
+        
+        if(color){
+            if(pokemon.colorId === color){
+                matches.push(`IS OF COLOR "${Globals.Database.Colors[color].toUpperCase()}"`);
+            } else{
+                show = false;
+            }
+        }
+
+        if (eggGroup1) {
+            if (pokemon.eggGroups.includes(eggGroup1)) {
+                matches.push(`IS OF EGG GROUP "${Globals.Database.EggGroups[eggGroup1].toUpperCase()}"`);
+            } else {
+                show = false;
+            }
+        }
+
+        if (eggGroup2) {
+            if (pokemon.eggGroups.includes(eggGroup2)) {
+                matches.push(`IS OF EGG GROUP "${Globals.Database.EggGroups[eggGroup2].toUpperCase()}"`);
             } else {
                 show = false;
             }
@@ -514,6 +622,15 @@ function filterPokemons (version, slot) {
 
             if (match && match.length > 0) {       
                 matches.push(...match);
+            } else {
+                show = false;
+            }
+        }
+
+        // flags
+        if (isBaby) {
+            if (pokemon.flags.isBaby) {
+                matches.push(`IS BABY`);
             } else {
                 show = false;
             }

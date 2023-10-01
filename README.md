@@ -32,6 +32,8 @@ https://github.com/KierranFalloon/FootprintAPI/
 
 # TO-DO
 
+- figure a way to use separate .html files (web loader?)
+
 ## database
 
   - determine if pokemon is obtainable in version 
@@ -60,6 +62,7 @@ https://github.com/KierranFalloon/FootprintAPI/
   - determine move damage type by generation
   - encounters for regional forms should be the same as their base form (?)
   - remember to properly show corresponding versions on encounters, held items, etc
+  - change "only obtainable" flag to "show from all versions" (remember to unconsider version on moves, held items, etc)
 
 ## add filters
 
