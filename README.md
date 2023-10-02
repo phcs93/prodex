@@ -42,14 +42,6 @@ https://github.com/KierranFalloon/FootprintAPI/
     - by trading from sister version
       - detect if pokemon can be traded from other generations
 
-## filter window
-
-  - show pokemon info base on filtered field in the list
-    - ex: filter by move learned -> show that move bellow the pokemon card
-    - ex: filter by encounter level -> show that encounter bellow pokemon card
-    - ex: filter by type -> no need to show since type is the card already
-    - ex: order by type weakness -> show type weakness table bellow pokemon card
-
 ## moves window
 
   - show pre-evolution moves
@@ -61,7 +53,6 @@ https://github.com/KierranFalloon/FootprintAPI/
   - consider generation when filtering move type (some normal moves became fairy)
   - determine move damage type by generation
   - encounters for regional forms should be the same as their base form (?)
-  - remember to properly show corresponding versions on encounters, held items, etc
   - change "only obtainable" flag to "show from all versions" (remember to unconsider version on moves, held items, etc)
 
 ## add filters
@@ -70,9 +61,6 @@ https://github.com/KierranFalloon/FootprintAPI/
     - by item
     - by method
     - by number of evolutions
-  - moves
-    - learns moves from type
-      - only damaging moves (to filter stuff like sun light)
 
 ## team builder 
 

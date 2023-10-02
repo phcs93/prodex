@@ -113,3 +113,24 @@ function renderWeight (weight) {
     return `${weight} kg (${(weight * 2.205).toFixed(2)} lbs)`;
 }
 
+function renderGrowthRate (growthRateId) {
+    switch (growthRateId) {
+        case 1: return "Slow";
+        case 2: return "Medium Fast";
+        case 3: return "Fast";
+        case 4: return "Medium Slow";
+        case 5: return "Erratic";
+        case 6: return "Fluctuating";
+    }
+}
+
+function getGrowthRateOrder (growthRateId) {
+    switch (growthRateId) {
+        case 5: return 1; // erratic      
+        case 3: return 2; // fast         
+        case 2: return 3; // medium fast  
+        case 4: return 4; // medium slow  
+        case 1: return 5; // slow         
+        case 6: return 6; // fluctuating  
+    }
+}
