@@ -829,20 +829,24 @@ function filterPokemons (version, slot) {
             break;
         }
         case "encounter-level": {
-            getOrderByValue = p => Math.min(...p.encounters[version].map(e => e.minlvl));
+            getOrderByValue = p => p.encounters[version] ? Math.min(...p.encounters[version].map(e => e.minlvl)) : 99;
             formatOrderByValue = p => {
-                const lvl = Math.min(...p.encounters[version].map(e => e.minlvl));
-                const e = p.encounters[version].filter(e => e.minlvl === lvl)[0];
-                const method = Globals.Database.EncounterMethods[e.method].toUpperCase();
-                const conditions = e.conditions.map(c => Globals.Database.EncounterConditions[c].toUpperCase());
-                return `
-                    <label>
-                        FOUND IN "${Globals.Database.Locations[e.location].name.toUpperCase()}" <br>
-                    </label>
-                    <label>    
-                        AT LEVEL "${e.minlvl}~${e.maxlvl}" VIA "${method}" ${conditions.length > 0 ? `(${conditions.join(", ")})` : ""} IN "${Globals.Database.Versions[version].name.toUpperCase()}"
-                    </label>
-                `;
+                if (p.encounters[version]) {
+                    const lvl = Math.min(...p.encounters[version].map(e => e.minlvl));
+                    const e = p.encounters[version].filter(e => e.minlvl === lvl)[0];
+                    const method = Globals.Database.EncounterMethods[e.method].toUpperCase();
+                    const conditions = e.conditions.map(c => Globals.Database.EncounterConditions[c].toUpperCase());
+                    return `
+                        <label>
+                            FOUND IN "${Globals.Database.Locations[e.location].name.toUpperCase()}" <br>
+                        </label>
+                        <label>    
+                            AT LEVEL "${e.minlvl}~${e.maxlvl}" VIA "${method}" ${conditions.length > 0 ? `(${conditions.join(", ")})` : ""} IN "${Globals.Database.Versions[version].name.toUpperCase()}"
+                        </label>
+                    `;
+                } else {
+                    return "";
+                }
             };
             break;
         }
