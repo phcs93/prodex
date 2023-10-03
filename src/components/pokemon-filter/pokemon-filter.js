@@ -126,12 +126,7 @@ function renderPokemonFilter(version, slot) {
                                             ${eggGroupsOptions}
                                         </select>
                                     </div>
-                                </div>
-
-                                <div class="flex-rows">
-                                    <label for="evolutions-filter">NUMBER OF EVOLUTIONS (disabled)</label>
-                                    <input type="number" name="evolutions-filter" id="evolutions-filter" />
-                                </div>
+                                </div>                                
 
                             </div>
 
@@ -234,6 +229,21 @@ function renderPokemonFilter(version, slot) {
                                         <option value="">---</option>
                                         ${locationOptions}
                                     </select>
+                                </div>
+
+                            </div>
+
+                        </details>
+
+                        <details>
+
+                            <summary>EVOLUTION FILTERS</summary>
+
+                            <div class="flex-rows gap">
+
+                                <div class="flex-rows">
+                                    <label for="evolutions-filter">NUMBER OF EVOLUTIONS</label>
+                                    <input type="number" name="evolutions-filter" id="evolutions-filter" />
                                 </div>
 
                             </div>
@@ -399,6 +409,7 @@ function filterPokemons (version, slot) {
     const color = parseInt(document.getElementById("color-filter").value);
     const eggGroup1 = parseInt(document.getElementById("egg-group1-filter").value);
     const eggGroup2 = parseInt(document.getElementById("egg-group2-filter").value);
+    const evolutions = parseInt(document.getElementById("evolutions-filter").value);
 
     // move filters
     const move1 = parseInt(document.getElementById("move1-filter").value);
@@ -450,7 +461,6 @@ function filterPokemons (version, slot) {
                 show = false;
             }
         }
-
         if (generation) {
             if (pokemon.introducedInGeneration === generation) {
                 matches.push(`INTRODUCED IN GENERATION "${generation}"`);
@@ -458,7 +468,6 @@ function filterPokemons (version, slot) {
                 show = false;
             }
         }
-
         if (type1) {
             if (pokemon.types.includes(type1)) {
                 matches.push(`IS OF TYPE "${Globals.Database.Types[type1].toUpperCase()}"`);
@@ -466,7 +475,6 @@ function filterPokemons (version, slot) {
                 show = false;
             }
         }
-
         if (type2) {
             if (pokemon.types.includes(type2)) {
                 matches.push(`IS OF TYPE "${Globals.Database.Types[type2].toUpperCase()}"`);
@@ -488,7 +496,6 @@ function filterPokemons (version, slot) {
                 show = false;
             }
         }
-
         if (heldItem) {
             if (pokemon.items[version]?.some(i => i.id === heldItem)) {
                 const rarity = pokemon.items[version].filter(i => i.id === heldItem)[0].rarity;
@@ -497,7 +504,6 @@ function filterPokemons (version, slot) {
                 show = false;
             }
         }
-
         if (habitat) {
             if (pokemon.habitatId === habitat) {
                 matches.push(`LIVES IN HABITAT "${Globals.Database.Habitats[habitat].toUpperCase()}"`);
@@ -505,7 +511,6 @@ function filterPokemons (version, slot) {
                 show = false;
             }
         }
-
         if (shape) {
             if (pokemon.shapeId === shape) {
                 matches.push(`IS OF SHAPE "${Globals.Database.Shapes[shape].toUpperCase()}"`);
@@ -513,7 +518,6 @@ function filterPokemons (version, slot) {
                 show = false;
             }
         }
-
         if (color) {
             if (pokemon.colorId === color) {
                 matches.push(`IS OF COLOR "${Globals.Database.Colors[color].toUpperCase()}"`);
@@ -521,7 +525,6 @@ function filterPokemons (version, slot) {
                 show = false;
             }
         }
-
         if (eggGroup1) {
             if (pokemon.eggGroups.includes(eggGroup1)) {
                 matches.push(`IS OF EGG GROUP "${Globals.Database.EggGroups[eggGroup1].toUpperCase()}"`);
@@ -529,10 +532,17 @@ function filterPokemons (version, slot) {
                 show = false;
             }
         }
-
         if (eggGroup2) {
             if (pokemon.eggGroups.includes(eggGroup2)) {
                 matches.push(`IS OF EGG GROUP "${Globals.Database.EggGroups[eggGroup2].toUpperCase()}"`);
+            } else {
+                show = false;
+            }
+        }
+        if (evolutions) {
+            const chain = Globals.Database.Evolutions[pokemon.evolutionChainId];
+            if (chain && countEvolutionDepth(chain) === evolutions) {
+                matches.push(`EVOLVES "${evolutions}" TIMES (FROM THE START)`);
             } else {
                 show = false;
             }
@@ -875,6 +885,14 @@ function filterPokemons (version, slot) {
     document.getElementById("number-of-matches").innerHTML = `FOUND ${pokemonsHTMLs.length} MATCHES`;
     document.getElementById("pokemon-grid").innerHTML = pokemonsHTMLs.join("");
 
+}
+
+function countEvolutionDepth (chain) {
+    if (chain.evolutions[0].evolutions.length > 0) {
+        return 2;
+    } else {
+        return 1;
+    }
 }
 
 function checkIfPokemonLearnsMove(pokemon, moveId, versionGroup, learnMethodId) {

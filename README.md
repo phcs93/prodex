@@ -34,6 +34,15 @@ https://github.com/KierranFalloon/FootprintAPI/
 
 - figure a way to use separate .html files (web loader?)
 
+## filters
+
+  - evolution filters (render evolutions when filtering)
+    - number of evolutions (depth)
+    - number of branches
+    - evolution method (items, trading, etc)
+      - if item, choose which item to filter by
+
+
 ## database
 
   - determine if pokemon is obtainable in version 
