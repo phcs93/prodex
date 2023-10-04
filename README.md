@@ -46,8 +46,8 @@ https://github.com/KierranFalloon/FootprintAPI/
 ## database
 
   - determine if pokemon is obtainable in version 
-    - by evolution
-    - by hatching egg
+    - by evolution -> DONE
+    - by hatching egg  -> DONE
     - by trading from sister version
       - detect if pokemon can be traded from other generations
 
@@ -63,6 +63,7 @@ https://github.com/KierranFalloon/FootprintAPI/
   - determine move damage type by generation
   - encounters for regional forms should be the same as their base form (?)
   - change "only obtainable" flag to "show from all versions" (remember to unconsider version on moves, held items, etc)
+    - actually it would be simpler to just disable all version dependant filters
 
 ## add filters
 

@@ -211,6 +211,8 @@ function renderPokemonFilter(version, slot) {
                                     <label for="encounter-method-filter">ENCOUNTER METHOD</label>
                                     <select name="encounter-method-filter" id="encounter-method-filter">
                                         <option value="">---</option>
+                                        <option value="-2">Evolve</option>
+                                        <option value="-1">Breed</option>
                                         ${encounterMethodOptions}
                                     </select>
                                 </div>
@@ -626,11 +628,24 @@ function filterPokemons (version, slot) {
             ));
 
             const match = canEncounter?.reduce((acc, e) => {
-                const method = Globals.Database.EncounterMethods[e.method].toUpperCase();
-                const conditions = e.conditions.map(c => Globals.Database.EncounterConditions[c].toUpperCase());
-                acc.push(`FOUND IN "${Globals.Database.Locations[e.location].name.toUpperCase()}"`)
-                acc.push(`AT LEVEL "${e.minlvl}~${e.maxlvl}" VIA "${method}" ${conditions.length > 0 ? `(${conditions.join(", ")})` : ""} IN "${Globals.Database.Versions[version].name.toUpperCase()}"`)
-                acc.push("---");
+                if (e.method > 0) {
+                    const method = Globals.Database.EncounterMethods[e.method].toUpperCase();
+                    const conditions = e.conditions.map(c => Globals.Database.EncounterConditions[c].toUpperCase());
+                    acc.push(`FOUND IN "${Globals.Database.Locations[e.location].name.toUpperCase()}"`)
+                    acc.push(`AT LEVEL "${e.minlvl}~${e.maxlvl}" VIA "${method}" ${conditions.length > 0 ? `(${conditions.join(", ")})` : ""} IN "${Globals.Database.Versions[version].name.toUpperCase()}"`)
+                    acc.push("---");
+                } else {
+                    switch (e.method) {
+                        case -1: { // breed
+                            acc.push(`BREED ${e.conditions.map(id => `"${Globals.Database.Pokemons[id].name.toUpperCase()}"`).join(" OR ")} IN "${Globals.Database.Versions[version].name.toUpperCase()}"`);
+                            break;
+                        }
+                        case -2: { // evolve
+                            acc.push(`EVOLVE ${e.conditions.map(id => `"${Globals.Database.Pokemons[id].name.toUpperCase()}"`).join(" OR ")} IN "${Globals.Database.Versions[version].name.toUpperCase()}"`);
+                            break;
+                        }
+                    }
+                }
                 return acc;
             }, []);
 
