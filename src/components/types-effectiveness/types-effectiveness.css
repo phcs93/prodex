@@ -1,4 +1,4 @@
-div.pokemon-types-effectiveness {
+div.types-effectiveness {
 
     display: grid;
     grid-template-columns: repeat(9, minmax(0, 1fr));

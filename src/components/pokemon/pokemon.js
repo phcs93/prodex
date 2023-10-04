@@ -2,23 +2,32 @@
  * @param {Pokemon} pokemon
  * @param {PokemonSettings} pokemonSettings
  */
-function renderPokemon (pokemon, pokemonSettings, slot) {
+function renderPokemon (pokemon, pokemonSettings, slot, version) {
+    const versionGroupId = Globals.Database.Versions[version].versionGroup;
     return `
         <div class="pokemon flex-rows gap">
             ${renderPokemonHeader(pokemon, pokemonSettings, true)}
             <hr>
-            ${renderPokemonDetails(pokemon)}
+            ${/*renderPokemonDetails(pokemon)*/"&lt;details&gt;"}
             <hr>
-            ${renderPokemonGenderRate(pokemon)}
+            ${renderGenderRate(pokemon)}
             <hr>
-            ${renderPokemonStats(pokemon)}
+            ${renderStats(pokemon)}
             <hr>
-            ${renderPokemonTypesEffectiveness(pokemon)}
+            ${renderTypesEffectiveness(pokemon)}
+            <hr>
+            &lt;moves&gt;
             <hr>
             <button onclick="removePokemon(${slot})">REMOVE</button>
         </div>
     `;
 }
+/*
+${pokemonSettings.moves[0] ? renderMove(pokemonSettings.moves[0], versionGroupId) : ""}
+${pokemonSettings.moves[1] ? renderMove(pokemonSettings.moves[1], versionGroupId) : ""}
+${pokemonSettings.moves[2] ? renderMove(pokemonSettings.moves[2], versionGroupId) : ""}
+${pokemonSettings.moves[3] ? renderMove(pokemonSettings.moves[3], versionGroupId) : ""}
+*/
 
 function removePokemon (slot) {
     Globals.Parameters.Team[slot].id = null;

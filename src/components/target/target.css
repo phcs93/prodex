@@ -1,0 +1,19 @@
+div.target {
+    display: inline-block;
+	line-height: 20px;
+	height: 20px;
+	padding: 0px;
+	color: white;
+	font-weight: bold;
+	font-family: monospace;
+	text-shadow: 1px 1px 2px black;
+	border-radius: 3px;
+
+	/* width: 74px; */ 
+    flex-shrink: 1; 
+    padding: 0 4px;
+    margin-right: 4px;
+
+	text-align: center;
+    background-color: #828282;
+}

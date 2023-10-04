@@ -1,19 +1,19 @@
-table.pokemon-gender-rate {
+table.gender-rate {
     width: 100%;
 }
 
-table.pokemon-gender-rate th {
+table.gender-rate th {
     width: 10%;
     font-size: 12px;
 }
 
-table.pokemon-gender-rate th:nth-child(2),
-table.pokemon-gender-rate th:nth-child(4) {
+table.gender-rate th:nth-child(2),
+table.gender-rate th:nth-child(4) {
     width: 20%;
     font-size: 12px;
 }
 
-span.pokemon-gender-rate {
+span.gender-rate {
     display: inline-block;
     height: 8px;
     border-radius: 5px;

@@ -1,0 +1,42 @@
+div.damage-class {
+    display: inline-block;
+	line-height: 20px;
+	height: 20px;
+	padding: 0px;
+	margin: 6px 0px;
+	font-weight: bold;
+	font-family: monospace;
+	text-shadow: 1px 1px 2px black;
+	border-radius: 3px;
+
+    /* width: 74px; */ 
+    flex-shrink: 1; 
+    padding: 0 4px;
+    margin-right: 4px;
+
+    text-align: center;
+    &[data-damage-id="1"] {
+        background-color: #828282;
+        color: #FFFFFF;
+        border-color: #6D6662;
+        &::before { 
+            content: 'ST';
+        }
+    }
+    &[data-damage-id="2"] {
+        background-color: #EB5628;
+        color: #FFF064;
+        border-color: #EB1414;
+        &::before {
+            content: 'PH';
+        }
+    }
+    &[data-damage-id="3"] {
+        background-color: #4A68D3;
+        color: #91E1E1;
+        border-color: #2350AF;
+        &::before{
+            content: 'SP';
+        }
+    }
+}

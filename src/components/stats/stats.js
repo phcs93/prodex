@@ -1,7 +1,7 @@
 /**
  * @param {Pokemon} pokemon
  */
-function renderPokemonStats (pokemon) {
+function renderStats (pokemon) {
 
     const hudColor = (v) => {
         if (v < 30) return "#F34444";
@@ -13,7 +13,7 @@ function renderPokemonStats (pokemon) {
     };
 
     return `
-        <table class="pokemon-stats">
+        <table class="stats">
             <tr>
                 <td style="width: 52px;">HP</td>
                 <td style="width: 25px;">${pokemon.stats.hp.base}</td>

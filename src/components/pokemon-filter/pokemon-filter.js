@@ -765,77 +765,77 @@ function filterPokemons (version, slot) {
         }
         case "gender-rate": {
             getOrderByValue = p => p.genderRate[0] === 0 && p.genderRate[1] === 0 ? 101 : p.genderRate[1]; 
-            formatOrderByValue = p => renderPokemonGenderRate(p);
+            formatOrderByValue = p => renderGenderRate(p);
             break;
         }
         case "hp": {
             getOrderByValue = p => p.stats.hp.base;
-            formatOrderByValue = p => renderPokemonStats(p);
+            formatOrderByValue = p => renderStats(p);
             break;
         }
         case "atk": {
             getOrderByValue = p => p.stats.atk.base;
-            formatOrderByValue = p => renderPokemonStats(p);
+            formatOrderByValue = p => renderStats(p);
             break;
         }
         case "def": {
             getOrderByValue = p => p.stats.def.base;
-            formatOrderByValue = p => renderPokemonStats(p);
+            formatOrderByValue = p => renderStats(p);
             break;
         }
         case "sp-atk": {
             getOrderByValue = p => p.stats.spatk.base;
-            formatOrderByValue = p => renderPokemonStats(p);
+            formatOrderByValue = p => renderStats(p);
             break;
         }
         case "sp-def": {
             getOrderByValue = p => p.stats.spdef.base;
-            formatOrderByValue = p => renderPokemonStats(p);
+            formatOrderByValue = p => renderStats(p);
             break;
         }
         case "speed": {
             getOrderByValue = p => p.stats.speed.base;
-            formatOrderByValue = p => renderPokemonStats(p);
+            formatOrderByValue = p => renderStats(p);
             break;
         }
         case "total": {
             getOrderByValue = p => p.stats.total;
-            formatOrderByValue = p => renderPokemonStats(p);
+            formatOrderByValue = p => renderStats(p);
             break;
         }
         case "ev-hp": {
             getOrderByValue = p => p.stats.hp.ev;
-            formatOrderByValue = p => renderPokemonStats(p);
+            formatOrderByValue = p => renderStats(p);
             break;
         }
         case "ev-atk": {
             getOrderByValue = p => p.stats.atk.ev;
-            formatOrderByValue = p => renderPokemonStats(p);
+            formatOrderByValue = p => renderStats(p);
             break;
         }
         case "ev-def": {
             getOrderByValue = p => p.stats.def.ev;
-            formatOrderByValue = p => renderPokemonStats(p);
+            formatOrderByValue = p => renderStats(p);
             break;
         }
         case "ev-sp-atk": {
             getOrderByValue = p => p.stats.spatk.ev;
-            formatOrderByValue = p => renderPokemonStats(p);
+            formatOrderByValue = p => renderStats(p);
             break;
         }
         case "ev-sp-def": {
             getOrderByValue = p => p.stats.spdef.ev;
-            formatOrderByValue = p => renderPokemonStats(p);
+            formatOrderByValue = p => renderStats(p);
             break;
         }
         case "ev-speed": {
             getOrderByValue = p => p.stats.speed.ev;
-            formatOrderByValue = p => renderPokemonStats(p);
+            formatOrderByValue = p => renderStats(p);
             break;
         }        
         case "type-weakness": {
             getOrderByValue = p => p.typeEfficacy.sum(v => v);
-            formatOrderByValue = p => renderPokemonTypesEffectiveness(p);
+            formatOrderByValue = p => renderTypesEffectiveness(p);
             break;
         }
         case "encounter-level": {

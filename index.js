@@ -51,12 +51,25 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     render();
 
-    // randomize
+    // randomize team
+    Globals.Reset();
     for (let i = 0; i < 6; i++) {
-        if (Math.random() > 0.5) {
+        if (Math.random() > 0.5/*false*/) {
             Globals.Parameters.Team[i].id = null;
         } else {
-            Globals.Parameters.Team[i].id = Math.floor(Math.random() * 1000);
+            Globals.Parameters.Team[i].id = Math.floor(Math.random() * 100);
+
+            // set moves randomly
+            for (let m = 0; m < 4; m++) {
+                if (/*Math.random() > 0.8*/true) {
+                    const versionGroupId = Globals.Database.Versions[Globals.Parameters.Version].versionGroup;
+                    const learns = Globals.Database.Pokemons[Globals.Parameters.Team[i].id].moves[versionGroupId];
+                    if (learns) {
+                        Globals.Parameters.Team[i].moves[m] = learns[Math.floor(Math.random() * Object.keys(learns).length)];
+                    }
+                }
+            }
+
         }
     }
 
@@ -137,7 +150,7 @@ function renderTeam () {
 
             // render details
             document.getElementById(`team-slot-${slot}`).innerHTML = `
-                ${renderPokemon(Globals.Database.Pokemons[pokemonId], Globals.Parameters.Team[i], i)}
+                ${renderPokemon(Globals.Database.Pokemons[pokemonId], Globals.Parameters.Team[i], i, Globals.Parameters.Version)}
             `;
 
         } else {

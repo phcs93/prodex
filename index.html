@@ -35,15 +35,24 @@
     <script src="src/components/pokemon-header/pokemon-header.js"></script>
     <link rel="stylesheet" href="src/components/pokemon-details/pokemon-details.css">
     <script src="src/components/pokemon-details/pokemon-details.js"></script>
-    <link rel="stylesheet" href="src/components/pokemon-gender-rate/pokemon-gender-rate.css">
-    <script src="src/components/pokemon-gender-rate/pokemon-gender-rate.js"></script>    
-    <link rel="stylesheet" href="src/components/pokemon-stats/pokemon-stats.css">
-    <script src="src/components/pokemon-stats/pokemon-stats.js"></script>
-    <link rel="stylesheet" href="src/components/pokemon-types-effectiveness/pokemon-types-effectiveness.css">
-    <script src="src/components/pokemon-types-effectiveness/pokemon-types-effectiveness.js"></script>
+    <link rel="stylesheet" href="src/components/gender-rate/gender-rate.css">
+    <script src="src/components/gender-rate/gender-rate.js"></script>    
+    <link rel="stylesheet" href="src/components/stats/stats.css">
+    <script src="src/components/stats/stats.js"></script>
+    <link rel="stylesheet" href="src/components/types-effectiveness/types-effectiveness.css">
+    <script src="src/components/types-effectiveness/types-effectiveness.js"></script>
     
     <link rel="stylesheet" href="src/components/type/type.css">
     <script src="src/components/type/type.js"></script>
+
+    <link rel="stylesheet" href="src/components/damage-class/damage-class.css">
+    <script src="src/components/damage-class/damage-class.js"></script>
+
+    <link rel="stylesheet" href="src/components/target/target.css">
+    <script src="src/components/target/target.js"></script>
+
+    <link rel="stylesheet" href="src/components/move/move.css">
+    <script src="src/components/move/move.js"></script>
 
     <link rel="stylesheet" href="src/components/pokemon-filter/pokemon-filter.css">
     <script src="src/components/pokemon-filter/pokemon-filter.js"></script>
@@ -58,8 +67,8 @@
 
         <div class="flex-rows padding gap">
 
-            <div class="flex-columns center">
-                <div class="flex-rows gap  box">
+            <div class="flex-columns justify-center">
+                <div class="flex-rows gap box">
 
                     <div class="flex-rows">
                         <label for="version">GAME VERSION</label>
@@ -73,7 +82,7 @@
 
             <div class="slider">
 
-                <div id="team" class="flex-columns gap center wrap grow" >
+                <div id="team" class="flex-columns gap justify-center wrap grow" >
 
                     <div id="team-slot-1" class="box flex-rows">
 
@@ -105,7 +114,7 @@
 
             <!-- <div class="slider"> -->
 
-                <!-- <div id="metrics" class="flex-columns gap center wrap grow">
+                <!-- <div id="metrics" class="flex-columns gap justify-center wrap grow">
 
                     <div id="metric-1" class="metric box">
                         <img src="res/placeholders/1.png">
@@ -142,12 +151,12 @@
                 </div> -->
 
             <!-- </div> -->
+            <!-- <img src="res/github-icon.svg" alt="phcs93"> -->
+            <a class="made-by" href="https://github.com/phcs93/" target="_blank">                
+                MADE BY PHCS93
+            </a>
 
-            <div class="made-by flex-rows center">
-                <label>MADE BY <a href="https://github.com/phcs93/prodex">PHCS93</a></label>
-            </div>
-
-            <div class="buy-me-a-coffee flex-rows center">
+            <div class="buy-me-a-coffee flex-rows justify-center">
                 <script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="phcs93i" data-color="#FFDD00" data-emoji="" data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#000000" data-font-color="#000000" data-coffee-color="#ffffff"></script>
             </div>
 

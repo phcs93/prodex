@@ -1,11 +1,11 @@
 /**
  * @param {Pokemon} pokemon
  */
-function renderPokemonTypesEffectiveness(pokemon) {
+function renderTypesEffectiveness(pokemon) {
 
     return `
 
-        <div class="pokemon-types-effectiveness">
+        <div class="types-effectiveness">
             
             <div data-type-id="${Globals.Database.TypeEnum.Normal}"></div>
             <div data-type-id="${Globals.Database.TypeEnum.Fire}"></div>

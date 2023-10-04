@@ -38,12 +38,9 @@ div.box {
     box-sizing: border-box;
     padding: 16px;
     box-shadow: 0px 0px 2px 2px #000A;
-    /* 6 of these at 1920 width viewport + scrollbar */
-    min-width: 298px; 
-    /* 6 of these at 3440/2 width viewport + scrollbar */
-    /* min-width: 263px;  */
+    min-width: 298px;    
     @media (pointer:none), (pointer:coarse) {
-        flex-grow: 1; /* 100% width on mobile */
+        flex-grow: 1;
     }
 }
 
@@ -61,8 +58,12 @@ div.gap {
     gap: 16px;
 }
 
-div.center {
+div.justify-center {
     justify-content: center;
+}
+
+div.align-center {
+    align-items: center;
 }
 
 div.wrap {
@@ -319,8 +320,28 @@ label.el-switch > label {
 /* made by */
 /* ================================================================================ */
 
-div.made-by {
+a.made-by {
     text-align: center;
+    align-self: center;
+    background-color: white;
+    height: 32px;
+    line-height: 32px;
+    border-radius: 5px;
+    padding: 0 16px;
+    color: black;
+    text-decoration: none;
+    text-shadow: none;
+    font-weight: bold;
+    font-family: monospace;
+    text-align: center;
+    line-height: 32px;
+    height: 32px;
+    &::before {
+        content: url("res/github-icon.svg");
+        vertical-align: middle;
+        margin-bottom: 2px;
+        display: inline-block;
+    }
 }
 
 /* ================================================================================ */
@@ -331,6 +352,7 @@ div.buy-me-a-coffee {
     height: 32px;
     align-self: center;
     & * {
+        border-radius: 5px;
         font-family: "Cookie";
         color: black;
         text-shadow: none;
