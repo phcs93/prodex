@@ -1,6 +1,24 @@
+Object.defineProperty(Array.prototype, "trim", {
+    value: function (f) {
+        return this.filter(v => v);
+    }
+});
+
+Object.defineProperty(Array.prototype, "groupBy", {
+    value: function (k, f) {
+        return this.reduce((g, v) => {g[k(v)] ? g[k(v)].push(f ? f(v) : v) : g[k(v)] = [f ? f(v) : v]; return g;}, {});
+    }
+});
+
+Object.defineProperty(Array.prototype, "toDictionary", {
+    value: function (k, f) {
+        return this.reduce((d, v) => {d[k(v)] = f ? f(v) : v; return d;}, {});
+    }
+});
+
 Object.defineProperty(Array.prototype, "mapReduce", {
     value: function (f) {
-        return this.reduce((acc, crr) => {acc.push(...f(crr)); return acc;}, []);
+        return this.reduce((a, v) => {a.push(...f(v)); return a;}, []);
     }
 });
 
@@ -20,51 +38,9 @@ Object.defineProperty(Array.prototype, "orderByDesc", {
     }
 });
 
-Object.defineProperty(Array.prototype, "groupBy", {
-    value: function (f) {
-        return this.reduce((g, v) => {g[f(v)] ? g[f(v)].push(v) : g[f(v)] = [v]; return g;}, {});
-    }
-});
-
-Object.defineProperty(Object.prototype, "thenBy", {
-    value: function(f) {
-        for (const k of Object.keys(this)) {
-            this[k] = this[k].groupBy(f);
-        }
-        return this;
-    }
-});
-
-Object.defineProperty(Array.prototype, "mapGroupBy", {
-    value: function (f, m) {
-        return this.reduce((g, v) => {g[f(v)] ? g[f(v)].push(m(v)) : g[f(v)] = [m(v)]; return g;}, {});
-    }
-});
-
-Object.defineProperty(Object.prototype, "mapThenBy", {
-    value: function(f, m) {
-        for (const k of Object.keys(this)) {
-            this[k] = this[k].mapGroupBy(f, m);
-        }
-        return this;
-    }
-});
-
-Object.defineProperty(Array.prototype, "toDictionary", {
-    value: function (f) {
-        return this.reduce((acc, crr) => {acc[f(crr)] = crr; return acc;}, {});
-    }
-});
-
-Object.defineProperty(Array.prototype, "mapToDictionary", {
-    value: function (f, m) {
-        return this.reduce((acc, crr) => {acc[f(crr)] = m(crr); return acc;}, {});
-    }
-});
-
 Object.defineProperty(Array.prototype, "sum", {
     value: function (f) {
-        return this.reduce((sum, v) => sum += f(v), 0);
+        return this.reduce((s, v) => s += f ? f(v) : v, 0);
     }
 });
 

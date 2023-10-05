@@ -211,9 +211,7 @@ function renderPokemonFilter(version, slot) {
                                     <label for="encounter-method-filter">ENCOUNTER METHOD</label>
                                     <select name="encounter-method-filter" id="encounter-method-filter">
                                         <option value="">---</option>
-                                        <option value="-2">Evolve</option>
-                                        <option value="-1">Breed</option>
-                                        ${encounterMethodOptions}
+                                        ${encounterMethodOptions}                                        
                                     </select>
                                 </div>
 
@@ -232,6 +230,18 @@ function renderPokemonFilter(version, slot) {
                                         ${locationOptions}
                                     </select>
                                 </div>
+
+                                <label class="el-switch">
+                                    <input type="checkbox" name="by-breeding-filter" id="by-breeding-filter" />
+                                    <span class="el-switch-style"></span>
+                                    <label for="by-breeding-filter">BY BREEDING</label>
+                                </label>
+
+                                <label class="el-switch">
+                                    <input type="checkbox" name="by-evolving-filter" id="by-evolving-filter" />
+                                    <span class="el-switch-style"></span>
+                                    <label for="by-evolving-filter">BY EVOLVING</label>
+                                </label>
 
                             </div>
 
@@ -430,6 +440,8 @@ function filterPokemons (version, slot) {
     const encounterMethod = parseInt(document.getElementById("encounter-method-filter").value);
     const encounterCondition = parseInt(document.getElementById("encounter-condition-filter").value);
     const encounterLocation = parseInt(document.getElementById("encounter-location-filter").value);
+    const byBreeding = document.getElementById("by-breeding-filter").checked;
+    const byEvolving = document.getElementById("by-evolving-filter").checked;
 
     // flags
     const isBaby = document.getElementById("is-baby-filter").checked;
@@ -618,32 +630,29 @@ function filterPokemons (version, slot) {
         }
 
         // encounter filters
-        if (maxEcounterLevel || encounterMethod || encounterCondition || encounterLocation) {
+        if (maxEcounterLevel || encounterMethod || encounterCondition || encounterLocation || byBreeding || byEvolving) {
 
             const canEncounter = pokemon.encounters[version]?.filter(e => (
                 (!maxEcounterLevel || e.minlvl <= maxEcounterLevel) &&
                 (!encounterMethod || e.method === encounterMethod) &&
                 (!encounterCondition || e.conditions.includes(encounterCondition)) &&
-                (!encounterLocation || e.location === encounterLocation)
+                (!encounterLocation || e.location === encounterLocation) &&
+                (!byBreeding || e.isBreed) &&
+                (!byEvolving || e.isEvolve)
             ));
 
             const match = canEncounter?.reduce((acc, e) => {
-                if (e.method > 0) {
+                if (!e.isBreed && !e.isEvolve) {
                     const method = Globals.Database.EncounterMethods[e.method].toUpperCase();
                     const conditions = e.conditions.map(c => Globals.Database.EncounterConditions[c].toUpperCase());
                     acc.push(`FOUND IN "${Globals.Database.Locations[e.location].name.toUpperCase()}"`)
                     acc.push(`AT LEVEL "${e.minlvl}~${e.maxlvl}" VIA "${method}" ${conditions.length > 0 ? `(${conditions.join(", ")})` : ""} IN "${Globals.Database.Versions[version].name.toUpperCase()}"`)
                     acc.push("---");
                 } else {
-                    switch (e.method) {
-                        case -1: { // breed
-                            acc.push(`BREED ${e.conditions.map(id => `"${Globals.Database.Pokemons[id].name.toUpperCase()}"`).join(" OR ")} IN "${Globals.Database.Versions[version].name.toUpperCase()}"`);
-                            break;
-                        }
-                        case -2: { // evolve
-                            acc.push(`EVOLVE ${e.conditions.map(id => `"${Globals.Database.Pokemons[id].name.toUpperCase()}"`).join(" OR ")} IN "${Globals.Database.Versions[version].name.toUpperCase()}"`);
-                            break;
-                        }
+                    if (e.isBreed) {
+                        acc.push(`BREED ${e.pokemonsIds.map(id => `"${Globals.Database.Pokemons[id].name.toUpperCase()}"`).join(" OR ")} IN "${Globals.Database.Versions[version].name.toUpperCase()}"`);
+                    } else if (e.isEvolve) {
+                        acc.push(`EVOLVE ${e.pokemonsIds.map(id => `"${Globals.Database.Pokemons[id].name.toUpperCase()}"`).join(" OR ")} IN "${Globals.Database.Versions[version].name.toUpperCase()}"`);
                     }
                 }
                 return acc;

@@ -1,13 +1,13 @@
 
-            img.pokemon-sprite {
-                background-image: url('pokemon-spritesheet.png');
-                background-repeat: no-repeat;
-                object-fit: scale-down;
-                width: 64px;
-                height: 64px;
-                border: none;
-            }
-        
+        img.pokemon-sprite {
+            background-image: url('pokemon-spritesheet.png');
+            background-repeat: no-repeat;
+            object-fit: scale-down;
+            width: 64px;
+            height: 64px;
+            border: none;
+        }
+    
 img.pokemon-sprite[data-id="1"] { background-position: -0px -0px; }
 img.pokemon-sprite[data-id="2"] { background-position: -64px -0px; }
 img.pokemon-sprite[data-id="3"] { background-position: -128px -0px; }

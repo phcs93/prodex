@@ -1,0 +1,22 @@
+{
+  "name": "prodex",
+  "version": "1.0.0",
+  "description": "",
+  "main": "etl.js",
+  "scripts": {
+    "start": "node etl.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/phcs93/prodex.git"
+  },
+  "author": "phcs93",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/phcs93/prodex/issues"
+  },
+  "homepage": "https://github.com/phcs93/prodex#readme",
+  "dependencies": {
+    "sharp": "^0.31.1"
+  }
+}

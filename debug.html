@@ -46,7 +46,7 @@
 
         document.addEventListener("DOMContentLoaded", async () => {
 
-            const response = await fetch("res/database.bin");
+            const response = await fetch("res/database.gzip");
             const output = await response.arrayBuffer();
 
             const jsonString = pako.ungzip(output, { to: "string" });
@@ -63,7 +63,7 @@
                 // normal male
                 imgs.push(`
                     <div style="border: 1px solid #2E2E2E; width: 128px; height: 128px;">
-                        <img class="pokemon-sprite" src="../poke-3d-sprites/gifs/${pokemon.id}.gif" onerror="addFailed(${pokemon.introducedInGeneration}, ${pokemon.id}, '${pokemon.name}', false, false)">
+                        <img class="pokemon-sprite" src="res/gifs/${pokemon.id}.gif" onerror="addFailed(${pokemon.introducedInGeneration}, ${pokemon.id}, '${pokemon.name}', false, false)">
                         <div style="color: white;">
                             #${pokemon.id} | #${pokemon.pokedexId}<br />
                             ${name} [${pokemon.introducedInGeneration}]
@@ -74,7 +74,7 @@
                 // shiny male
                 imgs.push(`
                     <div style="border: 1px solid #2E2E2E; width: 128px; height: 128px;">
-                        <img class="pokemon-sprite" src="../poke-3d-sprites/gifs/${pokemon.id}_s.gif" onerror="addFailed(${pokemon.introducedInGeneration}, ${pokemon.id}, '${pokemon.name}', false, true)">             
+                        <img class="pokemon-sprite" src="res/gifs/${pokemon.id}_s.gif" onerror="addFailed(${pokemon.introducedInGeneration}, ${pokemon.id}, '${pokemon.name}', false, true)">             
                         <div style="color: white;">
                             #${pokemon.id} | #${pokemon.pokedexId}<br />
                             ${name}_s [${pokemon.introducedInGeneration}]
@@ -87,7 +87,7 @@
                     // normal female
                     imgs.push(`
                         <div style="border: 1px solid #2E2E2E; width: 128px; height: 128px;" data-hasgenderdifferences="true">
-                            <img class="pokemon-sprite" src="../poke-3d-sprites/gifs/${pokemon.id}-f.gif" onerror="addFailed(${pokemon.introducedInGeneration}, ${pokemon.id}, '${pokemon.name}', true, false)">          
+                            <img class="pokemon-sprite" src="res/gifs/${pokemon.id}-f.gif" onerror="addFailed(${pokemon.introducedInGeneration}, ${pokemon.id}, '${pokemon.name}', true, false)">          
                             <div style="color: white;">
                                 #${pokemon.id} | #${pokemon.pokedexId}<br />
                                 ${name}-f [${pokemon.introducedInGeneration}]
@@ -98,7 +98,7 @@
                     // shiny female
                     imgs.push(`
                         <div style="border: 1px solid #2E2E2E; width: 128px; height: 128px;" data-hasgenderdifferences="true">
-                            <img class="pokemon-sprite" src="../poke-3d-sprites/gifs/${pokemon.id}-f_s.gif" onerror="addFailed(${pokemon.introducedInGeneration}, ${pokemon.id}, '${pokemon.name}', true, true)">                
+                            <img class="pokemon-sprite" src="res/gifs/${pokemon.id}-f_s.gif" onerror="addFailed(${pokemon.introducedInGeneration}, ${pokemon.id}, '${pokemon.name}', true, true)">                
                             <div style="color: white;">
                                 #${pokemon.id} | #${pokemon.pokedexId}<br />
                                 ${name}-f_s [${pokemon.introducedInGeneration}]

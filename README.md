@@ -12,23 +12,36 @@ https://github.com/phcs93/pokefy/
 
 # Credits
 
-All data was obtained from `PokeAPI`:  
+All data was obtained (extracted using my `etl.js`) from PokeAPI:  
 https://pokeapi.co/
 
-I've actually built a tool to extract and transform the CSV data directly from their repository:  
-https://github.com/phcs93/poke-api-etl/
-
-All 2D sprites also from `PokeAPI`:  
+All 2D sprites also from PokeAPI:  
 https://github.com/PokeAPI/sprites/
-
-Almost all 3D sprites were obtained from `PkParaíso`:  
-https://www.pkparaiso.com/
-
-I've reorganized and rehosted them here (more credits in the repo):  
-https://github.com/phcs93/poke-3d-sprites/
 
 Pokemon footprint images from KierranFalloon (veekun + pokecommunity):  
 https://github.com/KierranFalloon/FootprintAPI/
+
+## Animated GIFs
+
+The majority of animated gifs were obtained from PkParaiso:  
+https://www.pkparaiso.com/
+
+Some Pikachu alternative forms from Smogon dex:  
+https://www.smogon.com/dex/sv/pokemon/pikachu/
+
+Some hisuian sprites from users Flicks and arodriguez810 at smogon forums:  
+https://www.smogon.com/forums/threads/custom-3d-animated-renders.3526922/page-15
+
+Generation 9 sprites from users Flicks and arodriguez810 at smogon forums as well:  
+https://www.smogon.com/forums/threads/custom-3d-animated-renders.3526922/page-16
+
+Rillaboom Gigantamax and Cinderace Gigantamax from Wikidex:  
+https://www.wikidex.net/wiki/Rillaboom  
+https://www.wikidex.net/wiki/Cinderace  
+
+Walking Wake and Iron Leaves gifs from Wikidex:  
+https://www.wikidex.net/wiki/Ondulagua  
+https://www.wikidex.net/wiki/Ferroverdor
 
 # TO-DO
 
@@ -91,3 +104,50 @@ https://github.com/KierranFalloon/FootprintAPI/
   - number of pokemons per type
   - type effectiveness table
   - natures & tastes
+
+## Missing sprites
+
+- [GEN 7] #10094 Pikachu Original Cap [shiny]
+- [GEN 7] #10094 Pikachu Original Cap [female]
+- [GEN 7] #10094 Pikachu Original Cap [female] [shiny]
+- [GEN 7] #10095 Pikachu Hoenn Cap [shiny]
+- [GEN 7] #10095 Pikachu Hoenn Cap [female]
+- [GEN 7] #10095 Pikachu Hoenn Cap [female] [shiny]
+- [GEN 7] #10096 Pikachu Sinnoh Cap [shiny]
+- [GEN 7] #10096 Pikachu Sinnoh Cap [female]
+- [GEN 7] #10096 Pikachu Sinnoh Cap [female] [shiny]
+- [GEN 7] #10097 Pikachu Unova Cap [shiny]
+- [GEN 7] #10097 Pikachu Unova Cap [female]
+- [GEN 7] #10097 Pikachu Unova Cap [female] [shiny]
+- [GEN 7] #10098 Pikachu Kalos Cap [shiny]
+- [GEN 7] #10098 Pikachu Kalos Cap [female]
+- [GEN 7] #10098 Pikachu Kalos Cap [female] [shiny]
+- [GEN 7] #10099 Pikachu Alola Cap [shiny]
+- [GEN 7] #10099 Pikachu Alola Cap [female]
+- [GEN 7] #10099 Pikachu Alola Cap [female] [shiny]
+- [GEN 7] #10148 Pikachu Partner Cap [shiny]
+- [GEN 7] #10148 Pikachu Partner Cap [female]
+- [GEN 7] #10148 Pikachu Partner Cap [female] [shiny]
+- [GEN 7] #10158 Pikachu Starter [shiny]
+- [GEN 7] #10158 Pikachu Starter [female]
+- [GEN 7] #10158 Pikachu Starter [female] [shiny]
+- [GEN 7] #10159 Eevee Starter [shiny]
+- [GEN 8] #10160 Pikachu World Cap [shiny]
+- [GEN 8] #10160 Pikachu World Cap [female]
+- [GEN 8] #10160 Pikachu World Cap [female] [shiny]
+- [GEN 9] #10264 Koraidon Limited Build
+- [GEN 9] #10264 Koraidon Limited Build [shiny]
+- [GEN 9] #10265 Koraidon Sprinting Build
+- [GEN 9] #10265 Koraidon Sprinting Build [shiny]
+- [GEN 9] #10266 Koraidon Swimming Build
+- [GEN 9] #10266 Koraidon Swimming Build [shiny]
+- [GEN 9] #10267 Koraidon Gliding Build
+- [GEN 9] #10267 Koraidon Gliding Build [shiny]
+- [GEN 9] #10268 Miraidon Low Power Mode
+- [GEN 9] #10268 Miraidon Low Power Mode [shiny]
+- [GEN 9] #10269 Miraidon Drive Mode
+- [GEN 9] #10269 Miraidon Drive Mode [shiny]
+- [GEN 9] #10270 Miraidon Aquatic Mode
+- [GEN 9] #10270 Miraidon Aquatic Mode [shiny]
+- [GEN 9] #10271 Miraidon Glide Mode
+- [GEN 9] #10271 Miraidon Glide Mode [shiny]
