@@ -21,8 +21,6 @@ https://github.com/PokeAPI/sprites/
 Pokemon footprint images from KierranFalloon (veekun + pokecommunity):  
 https://github.com/KierranFalloon/FootprintAPI/
 
-## Animated GIFs
-
 The majority of animated gifs were obtained from PkParaiso:  
 https://www.pkparaiso.com/
 
@@ -49,63 +47,62 @@ https://www.wikidex.net/wiki/Ferroverdor
 
 ## filters
 
-  - evolution filters (render evolutions when filtering)
-    - number of evolutions (depth)
-    - number of branches
-    - evolution method (items, trading, etc)
-      - if item, choose which item to filter by
-
+- evolution filters (render evolutions when filtering)
+  - number of evolutions (depth)
+  - number of branches
+  - evolution method (items, trading, etc)
+    - if item, choose which item to filter by
 
 ## database
 
-  - determine if pokemon is obtainable in version 
-    - by evolution -> DONE
-    - by hatching egg  -> DONE
-    - by trading from sister version
-      - detect if pokemon can be traded from other generations
+- determine if pokemon is obtainable in version 
+  - by evolution -> DONE
+  - by hatching egg  -> DONE
+  - by trading from sister version
+    - detect if pokemon can be traded from other generations
 
 ## moves window
 
-  - show pre-evolution moves
-  - highlight STAB (also highlight damage type based on highest pokemon stat)
+- show pre-evolution moves
+- highlight STAB (also highlight damage type based on highest pokemon stat)
 
 ## important things
 
-  - consider abilities when calculating pokemon weakness (attacking and defending)
-  - consider generation when filtering move type (some normal moves became fairy)
-  - determine move damage type by generation
-  - encounters for regional forms should be the same as their base form (?)
-  - change "only obtainable" flag to "show from all versions" (remember to unconsider version on moves, held items, etc)
-    - actually it would be simpler to just disable all version dependant filters
+- consider abilities when calculating pokemon weakness (attacking and defending)
+- consider generation when filtering move type (some normal moves became fairy)
+- determine move damage type by generation
+- encounters for regional forms should be the same as their base form (?)
+- change "only obtainable" flag to "show from all versions" (remember to unconsider version on moves, held items, etc)
+  - actually it would be simpler to just disable all version dependant filters
 
 ## add filters
 
-  - evolution
-    - by item
-    - by method
-    - by number of evolutions
+- evolution
+  - by item
+  - by method
+  - by number of evolutions
 
 ## team builder 
 
-  - select pokemon moves
-  - also select ability, nature, level, EVs, IVs
-  - select gender
-  - select shiny
-  - hear cry
-  - show location with both list and map image (like in the game)
-  - show sprite based on selected generation
-    - one spritesheet per generation?
-    - one gif collection per generation?
+- select pokemon moves
+- also select ability, nature, level, EVs, IVs
+- select gender
+- select shiny
+- hear cry
+- show location with both list and map image (like in the game)
+- show sprite based on selected generation
+  - one spritesheet per generation?
+  - one gif collection per generation?
 
 ## charts
 
-  - calculate team types vulnerabilites and advantages
-  - number of pokemons team has advantage on by type
-  - number of pokemons per type
-  - type effectiveness table
-  - natures & tastes
+- calculate team types vulnerabilites and advantages
+- number of pokemons team has advantage on by type
+- number of pokemons per type
+- type effectiveness table
+- natures & tastes
 
-## Missing sprites
+## missing sprites / gifs
 
 - [GEN 7] #10094 Pikachu Original Cap [shiny]
 - [GEN 7] #10094 Pikachu Original Cap [female]
