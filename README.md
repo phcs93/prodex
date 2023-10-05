@@ -1,6 +1,6 @@
 # Prodex
 
-A tool for building the perfect Pokémon team.
+A tool for querying and building the perfect Pokémon team.
 
 You can access the app here:  
 https://phcs93.github.io/prodex/
