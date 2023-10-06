@@ -2,6 +2,11 @@
 /* globals */
 /* ================================================================================ */
 
+@font-face {
+    font-family: pokemon-gb;
+    src: url(res/pokemon-gb-font.ttf);
+}
+
 * {
     /* font-family: "Candara"; */
     font-family: "Segoe UI";
@@ -316,6 +321,14 @@ label.el-switch > label {
 }
 
 /* ================================================================================ */
+/* logo */
+/* ================================================================================ */
+span.logo {
+    font-family: pokemon-gb;
+    font-size: 32px;
+}
+
+/* ================================================================================ */
 /* made by */
 /* ================================================================================ */
 
@@ -331,7 +344,9 @@ a.made-by {
     text-decoration: none;
     text-shadow: none;
     font-weight: bold;
-    font-family: monospace;
+    /* font-family: monospace; */
+    font-family: pokemon-gb;
+    font-size: 10px;
     text-align: center;
     line-height: 32px;
     height: 32px;

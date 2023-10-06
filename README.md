@@ -75,13 +75,6 @@ https://www.wikidex.net/wiki/Ferroverdor
 - change "only obtainable" flag to "show from all versions" (remember to unconsider version on moves, held items, etc)
   - actually it would be simpler to just disable all version dependant filters
 
-## add filters
-
-- evolution
-  - by item
-  - by method
-  - by number of evolutions
-
 ## team builder 
 
 - select pokemon moves
@@ -89,10 +82,6 @@ https://www.wikidex.net/wiki/Ferroverdor
 - select gender
 - select shiny
 - hear cry
-- show location with both list and map image (like in the game)
-- show sprite based on selected generation
-  - one spritesheet per generation?
-  - one gif collection per generation?
 
 ## charts
 
@@ -148,3 +137,15 @@ https://www.wikidex.net/wiki/Ferroverdor
 - [GEN 9] #10270 Miraidon Aquatic Mode [shiny]
 - [GEN 9] #10271 Miraidon Glide Mode
 - [GEN 9] #10271 Miraidon Glide Mode [shiny]
+
+## crazy ideias
+
+- change style based on selected game version
+  - css (match in-game menus and font)
+  - pokemon sprites
+  - pokemon cries
+  - menu sounds
+  - background
+
+- show the map of the region corresponding to the selected version when visualizing pokemon encounter details
+  - just like this guy did here: https://simplyblgdev.github.io/Pokemon/Kanto

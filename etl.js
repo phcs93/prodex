@@ -125,67 +125,75 @@ const execSync = require("node:child_process").execSync;
         0 = id
         1 = identifier
     */
-    const eggGroupDictionary = parseCSV("egg_groups.csv").toDictionary(eg => eg[0], eg => {
-        return format(eg[1]);
-    });
+    const eggGroupDictionary = parseCSV("egg_groups.csv").toDictionary(eg => eg[0], eg => ({
+        id: parseInt(eg[0]),
+        name: format(eg[1])
+    }));
     
     /*
         0 = id
         1 = identifier
     */
-    const colorsDictionary = parseCSV("pokemon_colors.csv").toDictionary(c => c[0], c => {
-        return format(c[1]);
-    });
+    const colorsDictionary = parseCSV("pokemon_colors.csv").toDictionary(c => c[0], c => ({
+        id: parseInt(c[0]),
+        name: format(c[1])
+    }));
     
     /*
         0 = id
         1 = identifier
     */
-    const shapesDictionary = parseCSV("pokemon_shapes.csv").toDictionary(s => s[0], s => {
-        return format(s[1]);
-    });
+    const shapesDictionary = parseCSV("pokemon_shapes.csv").toDictionary(s => s[0], s => ({
+        id: parseInt(s[0]),
+        name: format(s[1])
+    }));
     
     /*
         0 = id
         1 = identifier
     */
-    const habitatDictionary = parseCSV("pokemon_habitats.csv").toDictionary(h => h[0], h => {
-        return format(h[1]);
-    });
+    const habitatDictionary = parseCSV("pokemon_habitats.csv").toDictionary(h => h[0], h => ({
+        id: parseInt(h[0]),
+        name: format(h[1])
+    }));
     
     /*
         0 = id
         1 = identifier
         2 = formula
     */
-    const growthRateDictionary = parseCSV("growth_rates.csv").filter(gr => gr[0].indexOf("\\") === -1).toDictionary(gr => gr[0], gr => {
-        return format(gr[1]);
-    });
+    const growthRateDictionary = parseCSV("growth_rates.csv").filter(gr => gr[0].indexOf("\\") === -1).toDictionary(gr => gr[0], gr => ({
+        id: parseInt(gr[0]),
+        name: format(gr[1])
+    }));
     
     /*
         0 = id
         1 = identifier
     */
-    const moveLearnMethodDictionary = parseCSV("pokemon_move_methods.csv").toDictionary(mm => mm[0], mm => {
-        return format(mm[1]);
-    });
+    const moveLearnMethodDictionary = parseCSV("pokemon_move_methods.csv").toDictionary(mm => mm[0], mm => ({
+        id: parseInt(mm[0]),
+        name: format(mm[1])
+    }));
 
     /*
         0 = id
         1 = identifier
     */
-    const moveTargetDictionary = parseCSV("move_targets.csv").toDictionary(mt => mt[0], mt => {
-        return format(mt[1]);
-    });
+    const moveTargetDictionary = parseCSV("move_targets.csv").toDictionary(mt => mt[0], mt => ({
+        id: parseInt(mt[0]),
+        name: format(mt[1])
+    }));
     
     /*
         0 = id
         1 = identifier
         2 = order
     */
-    const encounterMethodDictionary = parseCSV("encounter_methods.csv").toDictionary(em => em[0], em => {
-        return format(em[1]);
-    });
+    const encounterMethodDictionary = parseCSV("encounter_methods.csv").toDictionary(em => em[0], em => ({
+        id: parseInt(em[0]),
+        name: format(em[1])
+    }));
 
     // TODO => na tela .filter(ec => parseInt(ec[3]) !== 1 || [2, 8].includes(parseInt(ec[1])))
     /*
@@ -205,9 +213,10 @@ const execSync = require("node:child_process").execSync;
         0 = id
         1 = identifier
     */
-    const evolutionTriggerDictionary = parseCSV("evolution_triggers.csv").toDictionary(et => et[0], et => {
-        return format(et[1]);
-    });
+    const evolutionTriggerDictionary = parseCSV("evolution_triggers.csv").toDictionary(et => et[0], et => ({
+        id: parseInt(et[0]),
+        name: format(et[1])
+    }));
    
     /*
         0 = id
@@ -216,9 +225,10 @@ const execSync = require("node:child_process").execSync;
         3 = damage_class_id
         // move damage class is dealt with in the front end (pior to gen 4, the move damage class was based on the move elemental type)
     */
-    const typeDictionary = parseCSV("types.csv").toDictionary(t => t[0], t => {
-        return format(t[1]);
-    });
+    const typeDictionary = parseCSV("types.csv").toDictionary(t => t[0], t => ({
+        id: parseInt(t[0]),
+        name: format(t[1])
+    }));
 
     /*
         0 = id
@@ -282,10 +292,10 @@ const execSync = require("node:child_process").execSync;
         targetId: parseInt(m[8]) || 0,
         damageClassId: parseInt(m[9]) || 0,
         effect: _moveEffectDictionary[m[10]],
-        effectChance: parseInt(m[11]) || 0
-        //contest_type_id: parseInt(m[12]) || 0,
-        //contest_effect_id: parseInt(m[13]) || 0,
-        //super_contest_effect_id: parseInt(m[14]) || 0
+        effectChance: parseInt(m[11]) || 0,
+        contestTypeId: parseInt(m[12]) || 0,
+        contestEffectId: parseInt(m[13]) || 0,
+        superContestEffectId: parseInt(m[14]) || 0
     }));
 
     /*
@@ -691,9 +701,9 @@ const execSync = require("node:child_process").execSync;
         const conditions = (_pokemonEncounterConditionsDictionary[encounter[0]] ?? []).map(ec => ec.encounterConditionValueId);
 
         dictionary[encounter[4]][encounter[1]].push({
-            location: parseInt(encounter[2]),
-            method: parseInt(slot.encounterMethodId),          
-            conditions: conditions.filter(conditionId => {
+            locationId: parseInt(encounter[2]),
+            methodId: parseInt(slot.encounterMethodId),          
+            conditionIds: conditions.filter(conditionId => {
                 const condition = encounterConditionDictionary[conditionId];
                 if ([2, 8].includes(condition.encounterConditionId)) { // don't ignore time or tv-option
                     return false;
@@ -709,19 +719,19 @@ const execSync = require("node:child_process").execSync;
 
     }, {});
 
-    // group by location|method|conditions => min minlvl | max maxlvl | sum rarity 
+    // group by locationId|methodId|conditionIds => min minlvl | max maxlvl | sum rarity 
     // I don't understand why the hell this is like this but, it is what it is
     for (const pokemonId of Object.keys(_pokemonEncountersDictionary)) {
         for (const versionId of Object.keys(_pokemonEncountersDictionary[pokemonId])) {
-            const encounters = _pokemonEncountersDictionary[pokemonId][versionId].groupBy(e => `${e.location}|${e.method}|${e.conditions.join("#")}`);
+            const encounters = _pokemonEncountersDictionary[pokemonId][versionId].groupBy(e => `${e.locationId}|${e.methodId}|${e.conditionIds.join("#")}`);
             const reducedEncounters = [];
             for (const lmc of Object.keys(encounters)) {
                 const mmr = encounters[lmc].reduce((a, c) => [Math.min(a[0], c.minlvl), Math.max(a[1], c.maxlvl), a[2] + c.rarity], [100, 0, 0]);
                 const split = lmc.split("|");
                 reducedEncounters.push({
-                    location: parseInt(split[0]), 
-                    method: parseInt(split[1]), 
-                    conditions: split[2] ? split[2].split("#").map(v => parseInt(v)) : [], 
+                    locationId: parseInt(split[0]), 
+                    methodId: parseInt(split[1]), 
+                    conditionIds: split[2] ? split[2].split("#").map(v => parseInt(v)) : [], 
                     minlvl: mmr[0],
                     maxlvl: mmr[1],
                     rarity: mmr[2]
@@ -1024,9 +1034,9 @@ function addEncounterIfCanBeEvolvedOrHatched (pokemons, evolutions, versions, ve
                                 const presentSpecieIds = getWhichArePresentInVersion(chain, versionId);
 
                                 pokemon.encounters[versionId] = [{
-                                    location: null,
-                                    method: null,
-                                    conditions: [],
+                                    locationId: null,
+                                    methodId: null,
+                                    conditionIds: [],
                                     maxlvl: null,
                                     minlvl: null,
                                     rarity: null,
@@ -1040,9 +1050,9 @@ function addEncounterIfCanBeEvolvedOrHatched (pokemons, evolutions, versions, ve
                                 const preSpecieId = getWhoEvolvesIntoId(pokemon.pokedexId, chain, versionId);
 
                                 pokemon.encounters[versionId] = [{
-                                    location: null,
-                                    method: null, 
-                                    conditions: [],
+                                    locationId: null,
+                                    methodId: null, 
+                                    conditionIds: [],
                                     maxlvl: null,
                                     minlvl: null,
                                     rarity: null,

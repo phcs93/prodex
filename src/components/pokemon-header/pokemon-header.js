@@ -10,7 +10,7 @@ function renderPokemonHeader(pokemon, pokemonSettings, isGif) {
     if (isGif) {
         const female = pokemon.flags.hasGenderDifferences && pokemonSettings?.gender === "F" ? "-f" : "";
         const shiny = pokemonSettings?.shiny ? "_s" : "";
-        img = `<img src="https://raw.githubusercontent.com/phcs93/poke-3d-sprites/main/gifs/${pokemon.id}${female}${shiny}.gif" alt="${pokemon.name}">`;
+        img = `<img src="https://raw.githubusercontent.com/phcs93/prodex/master/res/gifs/${pokemon.id}${female}${shiny}.gif" alt="${pokemon.name}">`;
     } else {
         img = `<img class="pokemon-sprite" data-id="${pokemon.id}" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="${pokemon.name}">`;
     }

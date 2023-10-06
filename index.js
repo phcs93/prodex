@@ -1,7 +1,7 @@
 Globals = function (database, parameters) {
 
     const createProxy = p => new Proxy({
-        Version: p?.Version || 1,
+        VersionId: p?.VersionId || 1,
         Team: new Array(6).fill(null).map((_, i) => new Proxy({
             id: p?.Team[i]?.id || null,
             ability: p?.Team[i]?.ability || null,
@@ -43,11 +43,9 @@ Globals = function (database, parameters) {
 document.addEventListener("DOMContentLoaded", async () => {
     
     Globals = new Globals(
-        JSON.parse(pako.ungzip(await (await fetch("res/database.bin")).arrayBuffer(), { to: "string" })),
+        JSON.parse(pako.ungzip(await (await fetch("res/database.gzip")).arrayBuffer(), { to: "string" })),
         JSON.parse(new URL(window.location).searchParams.get("parameters"))
     );
-    
-    Globals.Database.TypeEnum = Object.keys(Globals.Database.Types).reduce((acc, typeId) => { acc[Globals.Database.Types[typeId]] = typeId; return acc; }, {});
 
     render();
 
@@ -62,7 +60,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             // set moves randomly
             for (let m = 0; m < 4; m++) {
                 if (/*Math.random() > 0.8*/true) {
-                    const versionGroupId = Globals.Database.Versions[Globals.Parameters.Version].versionGroup;
+                    const versionGroupId = Globals.Database.Versions[Globals.Parameters.VersionId].versionGroupId;
                     const learns = Globals.Database.Pokemons[Globals.Parameters.Team[i].id].moves[versionGroupId];
                     if (learns) {
                         Globals.Parameters.Team[i].moves[m] = learns[Math.floor(Math.random() * Object.keys(learns).length)];
@@ -104,11 +102,11 @@ function renderVersions () {
 
     const element = document.getElementById("version");
 
-    const generationToVersionDictionary = Object.values(versions).groupBy(v => versionGroups[v.versionGroup].generation);
+    const generationToVersionDictionary = Object.values(versions).groupBy(v => versionGroups[v.versionGroupId].generationId);
 
     const optgroups = Object.keys(generationToVersionDictionary).map(generationId => {
         return `
-            <optgroup label="${generations[generationId]}">
+            <optgroup label="${generations[generationId].name}">
                 ${generationToVersionDictionary[generationId].map(v => `<option value="${v.id}">${v.name}</option>`).join("")}
             </optgroup>
         `;
@@ -116,20 +114,20 @@ function renderVersions () {
 
     element.innerHTML = optgroups.join("\r\n");
 
-    element.value = Globals.Parameters.Version;
+    element.value = Globals.Parameters.VersionId;
 
     element.onchange = e => {
 
-        const version = parseInt(e.target.value);
+        const versionId = parseInt(e.target.value);
 
         if (Globals.Parameters.Team.some(p => p.id)) {
             const choice = confirm("Changing the game version will reset your team. Are you sure you want to change the game version?");
             if (choice) {
                 Globals.Reset();
-                Globals.Parameters.Version = version;
+                Globals.Parameters.VersionId = versionId;
             }
         } else {
-            Globals.Parameters.Version = version;
+            Globals.Parameters.VersionId = versionId;
         }        
 
     };
@@ -150,7 +148,7 @@ function renderTeam () {
 
             // render details
             document.getElementById(`team-slot-${slot}`).innerHTML = `
-                ${renderPokemon(Globals.Database.Pokemons[pokemonId], Globals.Parameters.Team[i], i, Globals.Parameters.Version)}
+                ${renderPokemon(Globals.Database.Pokemons[pokemonId], Globals.Parameters.Team[i], i, Globals.Parameters.VersionId)}
             `;
 
         } else {
@@ -184,9 +182,9 @@ function showFilterSwal (slot) {
         hideClass: {
             popup: "animate__animated animate__fadeOut animate__faster"
         },
-        html: renderPokemonFilter(Globals.Parameters.Version, slot)
+        html: renderPokemonFilter(Globals.Parameters.VersionId, slot)
     });
 
-    filterPokemons(Globals.Parameters.Version, slot);
+    filterPokemons(Globals.Parameters.VersionId, slot);
 
 }

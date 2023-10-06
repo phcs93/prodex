@@ -2,8 +2,8 @@
  * @param {Pokemon} pokemon
  * @param {PokemonSettings} pokemonSettings
  */
-function renderPokemon (pokemon, pokemonSettings, slot, version) {
-    const versionGroupId = Globals.Database.Versions[version].versionGroup;
+function renderPokemon (pokemon, pokemonSettings, slot, versionId) {
+    const versionGroupId = Globals.Database.Versions[versionId].versionGroupId;
     return `
         <div class="pokemon flex-rows gap">
             ${renderPokemonHeader(pokemon, pokemonSettings, true)}
