@@ -12,7 +12,7 @@ https://github.com/phcs93/pokefy/
 
 # Credits
 
-All data was obtained (extracted using my `etl.js`) from PokeAPI:  
+All data was obtained from PokeAPI:  
 https://pokeapi.co/ (https://github.com/PokeAPI/pokeapi)
 
 All 2D sprites also from PokeAPI:  
