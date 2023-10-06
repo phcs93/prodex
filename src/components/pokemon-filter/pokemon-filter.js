@@ -405,7 +405,6 @@ function renderPokemonFilter(versionId, slot) {
 function filterPokemons (versionId, slot) {
 
     const versionGroupId = Globals.Database.Versions[versionId].versionGroupId;
-    const versionGroup = Globals.Database.VersionGroups[versionGroupId];
 
     // common filters
     const name = document.getElementById("name-filter").value;
@@ -633,7 +632,7 @@ function filterPokemons (versionId, slot) {
         if (maxEcounterLevel || encounterMethodId || encounterConditionId || encounterLocationId || byBreeding || byEvolving) {
 
             const canEncounter = pokemon.encounters[versionId]?.filter(e => (
-                (!maxEcounterLevel || e.minlvl <= maxEcounterLevel) &&
+                (!maxEcounterLevel || (e.minlvl !== null && e.minlvl <= maxEcounterLevel)) &&
                 (!encounterMethodId || e.methodId === encounterMethodId) &&
                 (!encounterConditionId || e.conditionIds.includes(encounterConditionId)) &&
                 (!encounterLocationId || e.locationId === encounterLocationId) &&
@@ -864,21 +863,37 @@ function filterPokemons (versionId, slot) {
             break;
         }
         case "encounter-level": {
-            getOrderByValue = p => p.encounters[versionId] ? Math.min(...p.encounters[versionId].map(e => e.minlvl)) : 99;
+            getOrderByValue = p => {
+                if (p.encounters[versionId]){
+                    const lvl = Math.min(...p.encounters[versionId].map(e => e.minlvl));
+                    return lvl > 0 ? lvl : 998; // breed or evolve, throw at the end
+                } else {
+                    return 999; // if it cant be encountered, throw at the end
+                }
+            }
             formatOrderByValue = p => {
                 if (p.encounters[versionId]) {
                     const lvl = Math.min(...p.encounters[versionId].map(e => e.minlvl));
-                    const e = p.encounters[versionId].filter(e => e.minlvl === lvl)[0];
-                    const methodName = Globals.Database.EncounterMethods[e.methodId].name.toUpperCase();
-                    const conditionNames = e.conditionIds.map(c => Globals.Database.EncounterConditions[c].name.toUpperCase());
-                    return `
-                        <label>
-                            FOUND IN "${Globals.Database.Locations[e.locationId].name.toUpperCase()}" <br>
-                        </label>
-                        <label>    
-                            AT LEVEL "${e.minlvl}~${e.maxlvl}" VIA "${methodName}" ${conditionNames.length > 0 ? `(${conditionNames.join(", ")})` : ""} IN "${Globals.Database.Versions[versionId].name.toUpperCase()}"
-                        </label>
-                    `;
+                    if (lvl) {
+                        const e = p.encounters[versionId].filter(e => e.minlvl === lvl)[0];
+                        const methodName = Globals.Database.EncounterMethods[e.methodId].name.toUpperCase();
+                        const conditionNames = e.conditionIds.map(c => Globals.Database.EncounterConditions[c].name.toUpperCase());
+                        return `
+                            <label>
+                                FOUND IN "${Globals.Database.Locations[e.locationId].name.toUpperCase()}" <br>
+                            </label>
+                            <label>    
+                                AT LEVEL "${e.minlvl}~${e.maxlvl}" VIA "${methodName}" ${conditionNames.length > 0 ? `(${conditionNames.join(", ")})` : ""} IN "${Globals.Database.Versions[versionId].name.toUpperCase()}"
+                            </label>
+                        `;
+                    } else {
+                        const e = p.encounters[versionId][0];
+                        if (e.isBreed) {
+                            return `<label>BREED ${e.pokemonsIds.map(id => `"${Globals.Database.Pokemons[id].name.toUpperCase()}"`).join(" OR ")} IN "${Globals.Database.Versions[versionId].name.toUpperCase()}"</label>`;
+                        } else if (e.isEvolve) {
+                            return `<label>EVOLVE ${e.pokemonsIds.map(id => `"${Globals.Database.Pokemons[id].name.toUpperCase()}"`).join(" OR ")} IN "${Globals.Database.Versions[versionId].name.toUpperCase()}"</label>`;
+                        }
+                    }
                 } else {
                     return "";
                 }
@@ -920,11 +935,12 @@ function countEvolutionDepth (chain) {
     }
 }
 
-function checkIfPokemonLearnsMove(pokemon, moveId, versionGroup, learnMethodId) {
+function checkIfPokemonLearnsMove(pokemon, moveId, versionGroupId, learnMethodId) {
+    const versionGroup = Globals.Database.VersionGroups[versionGroupId];
     const learns = pokemon.moves[versionGroup.id]?.filter(m => m.id === moveId)[0];
     if (learns && (!learnMethodId || learnMethodId === learns.methodId)) {
         const move = Globals.Database.Moves[learns.id];
-        switch (learns.method) {
+        switch (learns.methodId) {
             // by level up
             case 1: {
                 return `LEARNS "<span class="type" data-type-id="${move.typeId}">${move.name.toUpperCase()}</span>" AT LEVEL "${learns.level}" IN "${versionGroup.name.toUpperCase()}"`;
@@ -945,7 +961,9 @@ function checkIfPokemonLearnsMove(pokemon, moveId, versionGroup, learnMethodId) 
     }
 }
 
-function checkIfPokemonLearnsMovesFromType(pokemon, typeId, versionGroup, learnMethodId, onlyAttacks) {
+function checkIfPokemonLearnsMovesFromType(pokemon, typeId, versionGroupId, learnMethodId, onlyAttacks) {
+
+    const versionGroup = Globals.Database.VersionGroups[versionGroupId];
 
     const learns = pokemon.moves[versionGroup.id]?.filter(learn => {
         const move = Globals.Database.Moves[learn.id];

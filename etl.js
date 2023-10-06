@@ -203,7 +203,7 @@ const execSync = require("node:child_process").execSync;
         3 = is_default
     */
     const encounterConditionDictionary = parseCSV("encounter_condition_values.csv").toDictionary(ec => ec[0], ec => ({
-        id: ec[0],
+        id: parseInt(ec[0]),
         encounterConditionId: parseInt(ec[1]),
         name: format(ec[2]),
         isDefault: parseInt(ec[3]) === 1
@@ -474,10 +474,14 @@ const execSync = require("node:child_process").execSync;
 
         };
 
-        dictionary[specie.evolutionChainId] = {
-            specieId: specie.id, 
-            triggers: [], 
-            evolutions: getEvolutions(specie)
+        const evolutions = getEvolutions(specie);
+
+        if (evolutions && evolutions.length > 0) {
+            dictionary[specie.evolutionChainId] = {
+                specieId: specie.id, 
+                triggers: [], 
+                evolutions: evolutions
+            }
         }
 
         return dictionary;
@@ -644,7 +648,7 @@ const execSync = require("node:child_process").execSync;
 
         dictionary[move[0]][move[1]].push({
             id: move[2], 
-            method: move[3], 
+            methodId: move[3], 
             level: move[4]
         });
 
@@ -699,16 +703,16 @@ const execSync = require("node:child_process").execSync;
 
         const slot = _pokemonEncounterSlotsDictionary[encounter[3]];
         const conditions = (_pokemonEncounterConditionsDictionary[encounter[0]] ?? []).map(ec => ec.encounterConditionValueId);
-
+        
         dictionary[encounter[4]][encounter[1]].push({
             locationId: parseInt(encounter[2]),
             methodId: parseInt(slot.encounterMethodId),          
             conditionIds: conditions.filter(conditionId => {
                 const condition = encounterConditionDictionary[conditionId];
                 if ([2, 8].includes(condition.encounterConditionId)) { // don't ignore time or tv-option
-                    return false;
+                    return true;
                 }
-                return condition.isDefault; // ignore all default conditions
+                return !condition.isDefault; // ignore all default conditions
             }),      
             minlvl: parseInt(encounter[5]),
             maxlvl: parseInt(encounter[6]),
@@ -767,7 +771,7 @@ const execSync = require("node:child_process").execSync;
 
             name: format(pokemon[1]),
             specie: _pokemonSpecieNameDictionary[pokemon[2]], // seed pokemon, etc...
-            form: form.formIdentifier, // alolan, mega, etc...
+            form: form.formIdentifier || null, // alolan, mega, etc...
 
             introducedInGeneration: versionGroupDictionary[form.introducedInVersionGroupId].generationId,
 
@@ -791,14 +795,14 @@ const execSync = require("node:child_process").execSync;
             hatchCounter: specie.hatchCounter,
             growthRateId: specie.growthRateId,
 
-            evolutionChainId: specie.evolutionChainId,
+            evolutionChainId: evolutionChainDictionary[specie.evolutionChainId] ? specie.evolutionChainId : null,
 
             flags: {
                 isBaby: specie.isBaby,
                 isLegendary: specie.isLegendary,
                 isMythical: specie.isMythical,
                 isMega: form.isMega,
-                isRegional: Object.values(regionDictionary).map(r => r.name).includes(form.formIdentifier),
+                isRegional: Object.values(regionDictionary).map(r => r.name.toUpperCase()).includes(form.formIdentifier.toUpperCase()),
                 isGmax: form.formIdentifier === "gmax",
                 isTotem: form.formIdentifier.includes("totem"),
                 isBattleOnly: form.isBattleOnly,
@@ -1020,7 +1024,7 @@ function addEncounterIfCanBeEvolvedOrHatched (pokemons, evolutions, versions, ve
                 if (!pokemon.encounters[versionId]) {
 
                     // if pokemon has an envolution chain
-                    if (evolutions[pokemon.evolutionChainId]) {
+                    if (pokemon.evolutionChainId /*&& evolutions[pokemon.evolutionChainId]*/) {
 
                         const chain = evolutions[pokemon.evolutionChainId];
 
