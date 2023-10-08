@@ -342,7 +342,7 @@ a.made-by {
     padding: 0 16px;
     color: black;
     text-decoration: none;
-    text-shadow: none;
+    text-shadow: none !important;
     font-weight: bold;
     /* font-family: monospace; */
     font-family: pokemon-gb;
@@ -369,7 +369,7 @@ div.buy-me-a-coffee {
         border-radius: 5px;
         font-family: "Cookie";
         color: black;
-        text-shadow: none;
+        text-shadow: none !important;
     }
     & a {
         height: 32px;

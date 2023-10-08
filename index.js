@@ -51,6 +51,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     // randomize team
     Globals.Reset();
+    Globals.Parameters.VersionId = Math.floor(Math.random() * 24) + 1;
     for (let i = 0; i < 6; i++) {
         if (Math.random() > 0.5/*false*/) {
             Globals.Parameters.Team[i].id = null;
@@ -58,7 +59,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             Globals.Parameters.Team[i].id = Math.floor(Math.random() * 100);
 
             // set moves randomly
-            for (let m = 0; m < 4; m++) {
+            for (let m = 0; m < Math.floor(Math.random() * 5); m++) {
                 if (/*Math.random() > 0.8*/true) {
                     const versionGroupId = Globals.Database.Versions[Globals.Parameters.VersionId].versionGroupId;
                     const learns = Globals.Database.Pokemons[Globals.Parameters.Team[i].id].moves[versionGroupId];
@@ -157,7 +158,7 @@ function renderTeam () {
 
             // render button
             document.getElementById(`team-slot-${slot}`).innerHTML = `
-                <button class="add-pokemon" onclick="showFilterSwal(${slot})">ADD POKEMON</button>
+                <button class="add-pokemon" onclick="showPokemonFilterSwal(${slot})">ADD POKEMON</button>
             `;
 
         }
@@ -166,7 +167,7 @@ function renderTeam () {
 
 }
 
-function showFilterSwal (slot) {
+function showPokemonFilterSwal (slot) {
 
     Swal.fire({
         width: "80%",

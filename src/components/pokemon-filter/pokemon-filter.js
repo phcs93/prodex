@@ -13,10 +13,11 @@ function renderPokemonFilter(versionId, slot) {
     // moves
     const moveOptions = Object.values(Globals.Database.Moves).orderBy(m => m.name).map(m => `<option value="${m.id}">${m.name}</option>`).join("");
     const learnMethodOptions = Object.values(Globals.Database.MoveLearnMethods).map(m => `<option value="${m.id}">${m.name}</option>`).join("");
+    const moveTargetOptions = Object.values(Globals.Database.MoveTargets).map(t => `<option value="${t.id}">${t.name}</option>`).join("");
 
     // encounter
     const encounterMethodOptions = Object.values(Globals.Database.EncounterMethods).map(m => `<option value="${m.id}">${m.name}</option>`).join("");
-    const encounterConditionOptions = Object.values(Globals.Database.EncounterConditions).map(c => `<option value="${c.id}">${c.name}</option>`).join("");
+    const encounterConditionOptions = Object.values(Globals.Database.EncounterConditions).filter(ec => !ec.isDefault || [2, 8].includes(ec.encounterConditionId)).map(c => `<option value="${c.id}">${c.name}</option>`).join("");
 
     const locationsGroupedByRegion = Object.values(Globals.Database.Locations).groupBy(l => l.regionId);
 
@@ -183,6 +184,14 @@ function renderPokemonFilter(versionId, slot) {
                                     <select name="move-from-type4-filter" id="move-from-type4-filter">
                                         <option value="">---</option>
                                         ${typeOptions}
+                                    </select>
+                                </div>
+
+                                <div class="flex-rows">
+                                    <label for="move-target-filter">MOVE TARGET</label>
+                                    <select name="move-target-filter" id="move-target-filter">
+                                        <option value="">---</option>
+                                        ${moveTargetOptions}
                                     </select>
                                 </div>
 
@@ -433,6 +442,7 @@ function filterPokemons (versionId, slot) {
     const movesFromTypeId4 = parseInt(document.getElementById("move-from-type4-filter").value);
     const learnMethodId = parseInt(document.getElementById("learn-method-filter").value);
     const onlyAttacks = document.getElementById("only-attacks-filter").checked;
+    const moveTargetId = parseInt(document.getElementById("move-target-filter").value);
 
     // encounter filters
     const maxEcounterLevel = parseInt(document.getElementById("max-encounter-level-filter").value);
@@ -595,32 +605,32 @@ function filterPokemons (versionId, slot) {
             }
         }
 
-        if (movesFromTypeId1) {
-            const match = checkIfPokemonLearnsMovesFromType(pokemon, movesFromTypeId1, versionGroupId, learnMethodId, onlyAttacks);
+        if (movesFromTypeId1 || moveTargetId) {
+            const match = checkIfPokemonLearnsMovesFromType(pokemon, movesFromTypeId1, versionGroupId, learnMethodId, moveTargetId, onlyAttacks);
             if (match.length > 0) {
                 matches.push(...match);
             } else {
                 show = false;
             }
         }
-        if (movesFromTypeId2) {
-            const match = checkIfPokemonLearnsMovesFromType(pokemon, movesFromTypeId2, versionGroupId, learnMethodId, onlyAttacks);
+        if (movesFromTypeId2 || moveTargetId) {
+            const match = checkIfPokemonLearnsMovesFromType(pokemon, movesFromTypeId2, versionGroupId, learnMethodId, moveTargetId, onlyAttacks);
             if (match.length > 0) {
                 matches.push(...match);
             } else {
                 show = false;
             }
         }
-        if (movesFromTypeId3) {
-            const match = checkIfPokemonLearnsMovesFromType(pokemon, movesFromTypeId3, versionGroupId, learnMethodId, onlyAttacks);
+        if (movesFromTypeId3 || moveTargetId) {
+            const match = checkIfPokemonLearnsMovesFromType(pokemon, movesFromTypeId3, versionGroupId, learnMethodId, moveTargetId, onlyAttacks);
             if (match.length > 0) {
                 matches.push(...match);
             } else {
                 show = false;
             }
         }
-        if (movesFromTypeId4) {
-            const match = checkIfPokemonLearnsMovesFromType(pokemon, movesFromTypeId4, versionGroupId, learnMethodId, onlyAttacks);
+        if (movesFromTypeId4 || moveTargetId) {
+            const match = checkIfPokemonLearnsMovesFromType(pokemon, movesFromTypeId4, versionGroupId, learnMethodId, moveTargetId, onlyAttacks);
             if (match.length > 0) {
                 matches.push(...match);
             } else {
@@ -961,16 +971,17 @@ function checkIfPokemonLearnsMove(pokemon, moveId, versionGroupId, learnMethodId
     }
 }
 
-function checkIfPokemonLearnsMovesFromType(pokemon, typeId, versionGroupId, learnMethodId, onlyAttacks) {
+function checkIfPokemonLearnsMovesFromType(pokemon, typeId, versionGroupId, learnMethodId, moveTargetId, onlyAttacks) {
 
     const versionGroup = Globals.Database.VersionGroups[versionGroupId];
 
     const learns = pokemon.moves[versionGroup.id]?.filter(learn => {
         const move = Globals.Database.Moves[learn.id];
         return (
-            move.typeId === typeId &&
+            (!typeId || typeId === move.typeId) &&
             (!learnMethodId || learnMethodId === learn.methodId) &&
-            (!onlyAttacks || [2, 3].includes(move.damageClassId))
+            (!onlyAttacks || [2, 3].includes(move.damageClassId)) &&
+            (!moveTargetId || moveTargetId === move.targetId)
         );
     });
 

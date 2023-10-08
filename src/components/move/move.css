@@ -8,3 +8,13 @@ div.move {
         background-color: #1E1E1E !important;
     }
 }
+
+div.move div.type {
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+}
+
+div.move div.damage-class {
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+}

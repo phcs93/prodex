@@ -195,7 +195,6 @@ const execSync = require("node:child_process").execSync;
         name: format(em[1])
     }));
 
-    // TODO => na tela .filter(ec => parseInt(ec[3]) !== 1 || [2, 8].includes(parseInt(ec[1])))
     /*
         0 = id
         1 = encounter_condition_id
@@ -253,14 +252,15 @@ const execSync = require("node:child_process").execSync;
         regionId: _locationDictionary[l[1]].regionId
     }));
     
+    // TODO => parse placeholders
     /*
         0 = move_effect_id
         1 = local_language_id
         2 = short_effect
         3 = effect
     */
-    const _moveEffectDictionary = parseCSV("move_effect_prose.csv").filter(me => me[1] === 9).toDictionary(me => me[0], me => {
-        return me[3];
+    const _moveEffectDictionary = parseCSV("move_effect_prose.csv").filter(me => me[1] === "9").toDictionary(me => me[0], me => {
+        return me[2].replace(/\<comma\>/gm, ",").replace("/\<break\>/gm", "\n");
     });
 
     /*
@@ -296,7 +296,7 @@ const execSync = require("node:child_process").execSync;
         contestTypeId: parseInt(m[12]) || 0,
         contestEffectId: parseInt(m[13]) || 0,
         superContestEffectId: parseInt(m[14]) || 0
-    }));
+    }));    
 
     /*
         0 = id
