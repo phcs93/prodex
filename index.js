@@ -149,7 +149,7 @@ function renderTeam () {
 
             // render details
             document.getElementById(`team-slot-${slot}`).innerHTML = `
-                ${renderPokemon(Globals.Database.Pokemons[pokemonId], Globals.Parameters.Team[i], i, Globals.Parameters.VersionId)}
+                ${renderPokemon(Globals.Database.Pokemons[pokemonId], Globals.Parameters.Team[i], slot, Globals.Parameters.VersionId)}
             `;
 
         } else {

@@ -1,4 +1,4 @@
-function renderMove (learn, versionGroupId) {
+function renderMove (learn, versionGroupId, clickCallback) {
 
     const move = Globals.Database.Moves[learn.id];
     const learnMethodName = formatLearnMethodName(learn, versionGroupId);
@@ -6,7 +6,7 @@ function renderMove (learn, versionGroupId) {
     const damageClassId = determineDamageClass(move.typeId, move.damageClassId, generationId);
 
     return `
-        <div class="move flex-rows" title="${move.effect}">
+        <div class="move flex-rows" title="${move.effect}" onclick="${clickCallback}">
             <div class="flex-columns align-center">
                 <div class="grow">
                     <label>${move.name.toUpperCase()}</label>

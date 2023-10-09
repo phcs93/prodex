@@ -1,11 +1,14 @@
 div.move {
     background-color: #0E0E0E !important;
-    cursor: pointer;
     border-radius: 5px;
     border: 1px solid black;
     padding: 8px 16px;
-    &:hover {
+    &:hover {        
         background-color: #1E1E1E !important;
+        cursor: pointer;
+    }
+    & * {
+        cursor: pointer;
     }
 }
 

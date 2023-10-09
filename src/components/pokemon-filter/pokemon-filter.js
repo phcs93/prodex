@@ -1016,7 +1016,7 @@ function checkIfPokemonLearnsMovesFromType(pokemon, typeId, versionGroupId, lear
 
 }
 
-function selectPokemon(id, slot) {
-    Globals.Parameters.Team[slot - 1].id = id;
+function selectPokemon(pokemonId, teamSlot) {
+    Globals.Parameters.Team[teamSlot - 1].id = pokemonId;
     Swal.close();
 }
