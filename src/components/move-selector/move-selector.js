@@ -1,6 +1,6 @@
 function showMoveSelectorSwal (teamSlot, moveSlot) {
 
-    const pokemonId = Globals.Parameters.Team[teamSlot].id;
+    const pokemonId = Globals.Parameters.Team[teamSlot-1].id;
     const versionGroupId = Globals.Database.Versions[Globals.Parameters.VersionId].versionGroupId;
 
     Swal.fire({
