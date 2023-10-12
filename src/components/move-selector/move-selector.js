@@ -30,14 +30,20 @@ function renderMoveSelector (pokemonId, versionGroupId, teamSlot, moveSlot) {
     return `
         <div class="flex-rows gap padding">
             <button class="select-move-button" onclick="selectEmptyMove(${teamSlot}, ${moveSlot})">NONE</button>
-            ${learns.orderBy(l => l.preEvolution ? 0 : l.methodId).map(learn => renderMove(learn, versionGroupId, `selectMove(${teamSlot}, ${moveSlot}, ${learn.moveId}, ${learn.methodId}, ${learn.level})`, setMovesIds.includes(learn.moveId))).join("")}
+            ${learns.orderBy(l => l.preEvolution ? 0 : l.methodId).map(learn => renderMove(learn, versionGroupId, `selectMove(${teamSlot}, ${moveSlot}, ${learn.moveId}, ${learn.methodId}, ${learn.level}, ${learn.preEvolution ? "true" : "false"}, ${learn.preEvolution ? learn.pokemonId : "0"})`, setMovesIds.includes(learn.moveId))).join("")}
         </div>
     `;
     
 }
 
-function selectMove (teamSlot, moveSlot, moveId, methodId, level) {
-    Globals.Parameters.Team[teamSlot - 1].moves[moveSlot - 1] = {moveId: moveId, methodId, level};
+function selectMove (teamSlot, moveSlot, moveId, methodId, level, preEvolution, pokemonId) {
+    Globals.Parameters.Team[teamSlot - 1].moves[moveSlot - 1] = {
+        moveId: moveId, 
+        methodId, 
+        level,
+        preEvolution,
+        pokemonId
+    };
     Swal.close();
 }
 
