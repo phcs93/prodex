@@ -1,41 +1,43 @@
 function renderMove (learn, versionGroupId, clickCallback, disable) {
 
-    const move = Globals.Database.Moves[learn.id];
+    const move = Globals.Database.Moves[learn.moveId];
     const learnMethodName = formatLearnMethodName(learn, versionGroupId);
     const generationId = Globals.Database.VersionGroups[versionGroupId].generationId;
     const damageClassId = determineDamageClass(move.typeId, move.damageClassId, generationId);
 
     return `
-        <div class="move flex-rows ${disable ? "disabled" : ""}" title="${move.effect}" onclick="${!disable ? clickCallback : ""}">
-            <div class="flex-columns align-center">
-                <div class="grow">
-                    <label>${move.name.toUpperCase()}</label>
-                </div>  
-                <div>
-                    ${renderType(move.typeId)}
-                </div>    
-                <div>
-                    ${renderDamageClass(damageClassId)}
-                </div>       
+        <div>
+            <div class="move flex-rows ${disable ? "disabled" : ""}" title="${move.effect}" onclick="${!disable ? clickCallback : ""}">
+                <div class="flex-columns align-center">
+                    <div class="grow">
+                        <label>${move.name.toUpperCase()}</label>
+                    </div>  
+                    <div>
+                        ${renderType(move.typeId)}
+                    </div>    
+                    <div>
+                        ${renderDamageClass(damageClassId)}
+                    </div>       
+                </div>
+                <div class="flex-columns gap">
+                    <div style="width: 25%">
+                        <label>${learnMethodName}</label>
+                    </div>  
+                    <div class="flex-columns" style="width: 25%">
+                        <label>PWR&nbsp;</label>
+                        <label>${move.power || "---"}</label>
+                    </div>
+                    <div class="flex-columns" style="width: 25%">
+                        <label>ACC&nbsp;</label>
+                        <label>${move.accuracy || "---"}</label>
+                    </div>
+                    <div class="flex-columns" style="width: 25%">
+                        <label>PP&nbsp;</label>
+                        <label>${move.pp}</label>
+                    </div>
+                </div>
             </div>
-            <div class="flex-columns gap">
-                <div style="width: 25%">
-                    <label>${learnMethodName}</label>
-                </div>  
-                <div class="flex-columns" style="width: 25%">
-                    <label>PWR&nbsp;</label>
-                    <label>${move.power || "---"}</label>
-                </div>
-                <div class="flex-columns" style="width: 25%">
-                    <label>ACC&nbsp;</label>
-                    <label>${move.accuracy || "---"}</label>
-                </div>
-                <div class="flex-columns" style="width: 25%">
-                    <label>PP&nbsp;</label>
-                    <label>${move.pp}</label>
-                </div>
-            </div>
-
+            ${learn.preEvolution ? `<div class="flex-rows move-info"><label>PRE-EVOLUTION (${Globals.Database.Pokemons[learn.pokemonId].name.toUpperCase()})</label></div>` : ""}
         </div>
     `;
 
@@ -53,7 +55,7 @@ function formatLearnMethodName (learn, versionGroupId) {
         case 2: return `EGG`;
         case 3: return `TUTOR`; 
         case 4: {
-            const machineName = Globals.Database.Items[Globals.Database.Machines[versionGroupId][learn.id]].name;
+            const machineName = Globals.Database.Items[Globals.Database.Machines[versionGroupId][learn.moveId]].name;
             return `${machineName.slice(0, 2).toUpperCase()} ${machineName.slice(2)}`
         }
         default: return Globals.Database.MoveLearnMethods[learn.method];

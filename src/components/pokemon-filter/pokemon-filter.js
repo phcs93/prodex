@@ -573,40 +573,40 @@ function filterPokemons (versionId, slot) {
 
         // move filters        
         if (moveId1) {
-            const match = checkIfPokemonLearnsMove(pokemon, moveId1, versionGroupId, learnMethodId);
-            if (match) {
-                matches.push(match);
+            const match = checkIfPokemonLearnsMoves(pokemon, moveId1, null, versionGroupId, learnMethodId, null, null);
+            if (match.length > 0) {
+                matches.push(...match);
             } else {
                 show = false;
             }
         }
         if (moveId2) {
-            const match = checkIfPokemonLearnsMove(pokemon, moveId2, versionGroupId, learnMethodId);
-            if (match) {
-                matches.push(match);
+            const match = checkIfPokemonLearnsMoves(pokemon, moveId2, null, versionGroupId, learnMethodId, null, null);
+            if (match.length > 0) {
+                matches.push(...match);
             } else {
                 show = false;
             }
         }
         if (moveId3) {
-            const match = checkIfPokemonLearnsMove(pokemon, moveId3, versionGroupId, learnMethodId);
-            if (match) {
-                matches.push(match);
+            const match = checkIfPokemonLearnsMoves(pokemon, moveId3, null, versionGroupId, learnMethodId, null, null);
+            if (match.length > 0) {
+                matches.push(...match);
             } else {
                 show = false;
             }
         }
         if (moveId4) {
-            const match = checkIfPokemonLearnsMove(pokemon, moveId4, versionGroupId, learnMethodId);
-            if (match) {
-                matches.push(match);
+            const match = checkIfPokemonLearnsMoves(pokemon, moveId4, null, versionGroupId, learnMethodId, null, null);
+            if (match.length > 0) {
+                matches.push(...match);
             } else {
                 show = false;
             }
         }
 
         if (movesFromTypeId1 || moveTargetId) {
-            const match = checkIfPokemonLearnsMovesFromType(pokemon, movesFromTypeId1, versionGroupId, learnMethodId, moveTargetId, onlyAttacks);
+            const match = checkIfPokemonLearnsMoves(pokemon, null, movesFromTypeId1, versionGroupId, learnMethodId, moveTargetId, onlyAttacks);
             if (match.length > 0) {
                 matches.push(...match);
             } else {
@@ -614,7 +614,7 @@ function filterPokemons (versionId, slot) {
             }
         }
         if (movesFromTypeId2 || moveTargetId) {
-            const match = checkIfPokemonLearnsMovesFromType(pokemon, movesFromTypeId2, versionGroupId, learnMethodId, moveTargetId, onlyAttacks);
+            const match = checkIfPokemonLearnsMoves(pokemon, null, movesFromTypeId2, versionGroupId, learnMethodId, moveTargetId, onlyAttacks);
             if (match.length > 0) {
                 matches.push(...match);
             } else {
@@ -622,7 +622,7 @@ function filterPokemons (versionId, slot) {
             }
         }
         if (movesFromTypeId3 || moveTargetId) {
-            const match = checkIfPokemonLearnsMovesFromType(pokemon, movesFromTypeId3, versionGroupId, learnMethodId, moveTargetId, onlyAttacks);
+            const match = checkIfPokemonLearnsMoves(pokemon, null, movesFromTypeId3, versionGroupId, learnMethodId, moveTargetId, onlyAttacks);
             if (match.length > 0) {
                 matches.push(...match);
             } else {
@@ -630,7 +630,7 @@ function filterPokemons (versionId, slot) {
             }
         }
         if (movesFromTypeId4 || moveTargetId) {
-            const match = checkIfPokemonLearnsMovesFromType(pokemon, movesFromTypeId4, versionGroupId, learnMethodId, moveTargetId, onlyAttacks);
+            const match = checkIfPokemonLearnsMoves(pokemon, null, movesFromTypeId4, versionGroupId, learnMethodId, moveTargetId, onlyAttacks);
             if (match.length > 0) {
                 matches.push(...match);
             } else {
@@ -753,6 +753,7 @@ function filterPokemons (versionId, slot) {
             pokemon.matches = matches
             filteredPokemons.push(pokemon);
         }
+        
     }
 
     let getOrderByValue = null;
@@ -945,39 +946,14 @@ function countEvolutionDepth (chain) {
     }
 }
 
-function checkIfPokemonLearnsMove(pokemon, moveId, versionGroupId, learnMethodId) {
-    const versionGroup = Globals.Database.VersionGroups[versionGroupId];
-    const learns = pokemon.moves[versionGroup.id]?.filter(m => m.id === moveId)[0];
-    if (learns && (!learnMethodId || learnMethodId === learns.methodId)) {
-        const move = Globals.Database.Moves[learns.id];
-        switch (learns.methodId) {
-            // by level up
-            case 1: {
-                return `LEARNS "<span class="type" data-type-id="${move.typeId}">${move.name.toUpperCase()}</span>" AT LEVEL "${learns.level}" IN "${versionGroup.name.toUpperCase()}"`;
-            }
-            // by machine
-            case 4: {
-                const itemId = Globals.Database.Machines[versionGroup.id][move.id];
-                const machineName = Globals.Database.Items[itemId].name.toUpperCase();
-                return `LEARNS "<span class="type" data-type-id="${move.typeId}">${move.name.toUpperCase()}</span>" FROM "${machineName}" IN "${versionGroup.name.toUpperCase()}"`;
-            }
-            // anything else
-            default: {
-                return `LEARNS "<span class="type" data-type-id="${move.typeId}">${move.name.toUpperCase()}</span>" FROM "${Globals.Database.MoveLearnMethods[learns.methodId].name.toUpperCase()}" IN "${versionGroup.name.toUpperCase()}"`;
-            }
-        }
-    } else {
-        return null;
-    }
-}
-
-function checkIfPokemonLearnsMovesFromType(pokemon, typeId, versionGroupId, learnMethodId, moveTargetId, onlyAttacks) {
+function checkIfPokemonLearnsMoves(pokemon, moveId, typeId, versionGroupId, learnMethodId, moveTargetId, onlyAttacks) {
 
     const versionGroup = Globals.Database.VersionGroups[versionGroupId];
 
     const learns = pokemon.moves[versionGroup.id]?.filter(learn => {
-        const move = Globals.Database.Moves[learn.id];
+        const move = Globals.Database.Moves[learn.moveId];
         return (
+            (!moveId || moveId === move.id) &&
             (!typeId || typeId === move.typeId) &&
             (!learnMethodId || learnMethodId === learn.methodId) &&
             (!onlyAttacks || [2, 3].includes(move.damageClassId)) &&
@@ -988,11 +964,12 @@ function checkIfPokemonLearnsMovesFromType(pokemon, typeId, versionGroupId, lear
     if (learns && learns.length > 0) {
         const matches = [];
         for (const learn of learns) {
-            const move = Globals.Database.Moves[learn.id];
+            const move = Globals.Database.Moves[learn.moveId];
             switch (learn.methodId) {
                 // by level up
                 case 1: {
-                    matches.push(`LEARNS "<span class="type" data-type-id="${move.typeId}">${move.name.toUpperCase()}</span>" AT LEVEL "${learn.level}" IN "${versionGroup.name.toUpperCase()}"`);
+                    const preEvolution = learn.preEvolution ? Globals.Database.Pokemons[learn.pokemonId].name.toUpperCase() + " " : "";
+                    matches.push(`${preEvolution} LEARNS "<span class="type" data-type-id="${move.typeId}">${move.name.toUpperCase()}</span>" AT LEVEL "${learn.level}" IN "${versionGroup.name.toUpperCase()}"`);
                     break;
                 }
                 // by machine

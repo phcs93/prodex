@@ -647,7 +647,7 @@ const execSync = require("node:child_process").execSync;
         }
 
         dictionary[move[0]][move[1]].push({
-            id: move[2], 
+            moveId: move[2], 
             methodId: move[3], 
             level: move[4]
         });
@@ -796,6 +796,7 @@ const execSync = require("node:child_process").execSync;
             growthRateId: specie.growthRateId,
 
             evolutionChainId: evolutionChainDictionary[specie.evolutionChainId] ? specie.evolutionChainId : null,
+            evolvesFromSpecieId: specie.evolvesFromSpeciesId,
 
             flags: {
                 isBaby: specie.isBaby,
@@ -819,14 +820,14 @@ const execSync = require("node:child_process").execSync;
 
         };
 
-    });
+    });    
 
     // log
     console.log("CSV data successfully processed!");
 
     // create database json
     const database = {
-        Pokemons: addEncounterIfCanBeEvolvedOrHatched(fix(pokemonDictionary), evolutionChainDictionary, versionDictionary, versionGroupDictionary),
+        Pokemons: addPreEvolutionMoves(addEncounterIfCanBeEvolvedOrHatched(fix(pokemonDictionary), evolutionChainDictionary, versionDictionary, versionGroupDictionary), versionGroupDictionary),
         Evolutions: evolutionChainDictionary,
         Items: itemDictionary,
         Moves: moveDictionary,
@@ -1077,6 +1078,63 @@ function addEncounterIfCanBeEvolvedOrHatched (pokemons, evolutions, versions, ve
 
                 }
 
+            }
+
+        }
+
+    }
+
+    return pokemons;
+
+}
+
+// checks if previous evolution can learn extra moves
+function addPreEvolutionMoves (pokemons, versionGroups) {
+
+    for (const pokemon of Object.values(pokemons)) {
+
+        for (const versionGroup of Object.values(versionGroups)) {
+
+            const preEvolutionMoves = [];
+
+            const localMoveIds = pokemon.moves[versionGroup.id]?.filter(pel => pel.methodId === 1 && !pel.preEvolution).map(pel => pel.moveId) || [];
+
+            const getPreEvolutionMoves = p => {    
+                
+                if (p.evolvesFromSpecieId) {
+
+                    const preEvolution = pokemons[p.evolvesFromSpecieId];
+        
+                    const moves = preEvolution.moves[versionGroup.id] || [];                    
+                    
+                    // find if pre evolution has extra moves in the same version group (that are not from anotherpre evolution)
+                    const extraMoves = moves.filter(l => l.methodId === 1 && !l.preEvolution && !localMoveIds.includes(l.moveId));
+
+                    if (extraMoves) {
+
+                        // add extra moves to array and mark them as pre evolution (and also inform the pre evolution id)
+                        preEvolutionMoves.push(...extraMoves.map(l => ({
+                            ...l,
+                            preEvolution: true,
+                            pokemonId: preEvolution.id
+                        })));
+
+                    }
+
+                    // get pre evolution moves from the pre evolution
+                    getPreEvolutionMoves(preEvolution);
+
+                }
+        
+            };
+
+            getPreEvolutionMoves(pokemon);
+
+            if (preEvolutionMoves.length > 0) {
+                if (!pokemon.moves[versionGroup.id]) {
+                    pokemon.moves[versionGroup.id] = [];
+                }
+                pokemon.moves[versionGroup.id].push(...preEvolutionMoves);
             }
 
         }

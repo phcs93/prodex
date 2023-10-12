@@ -24,20 +24,20 @@ function showMoveSelectorSwal (teamSlot, moveSlot) {
 
 function renderMoveSelector (pokemonId, versionGroupId, teamSlot, moveSlot) {
 
-    const setMovesIds = Globals.Parameters.Team[teamSlot-1].moves.filter(l => l).map(l => l.id);
+    const setMovesIds = Globals.Parameters.Team[teamSlot-1].moves.filter(l => l).map(l => l.moveId);
     const learns = Object.values(Globals.Database.Pokemons[pokemonId].moves[versionGroupId]);
 
     return `
         <div class="flex-rows gap padding">
             <button class="select-move-button" onclick="selectEmptyMove(${teamSlot}, ${moveSlot})">NONE</button>
-            ${learns.map(learn => renderMove(learn, versionGroupId, `selectMove(${teamSlot}, ${moveSlot}, ${learn.id}, ${learn.methodId}, ${learn.level})`, setMovesIds.includes(learn.id))).join("")}
+            ${learns.orderBy(l => l.preEvolution ? 0 : l.methodId).map(learn => renderMove(learn, versionGroupId, `selectMove(${teamSlot}, ${moveSlot}, ${learn.moveId}, ${learn.methodId}, ${learn.level})`, setMovesIds.includes(learn.moveId))).join("")}
         </div>
     `;
     
 }
 
 function selectMove (teamSlot, moveSlot, moveId, methodId, level) {
-    Globals.Parameters.Team[teamSlot - 1].moves[moveSlot - 1] = {id: moveId, methodId, level};
+    Globals.Parameters.Team[teamSlot - 1].moves[moveSlot - 1] = {moveId: moveId, methodId, level};
     Swal.close();
 }
 

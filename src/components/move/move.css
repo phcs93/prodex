@@ -4,6 +4,8 @@ div.move {
     border: 1px solid black;
     padding: 8px 16px;
     cursor: pointer;
+    box-shadow: 0px 0px 1px 1px #000A;
+    position: relative;
     &:hover {        
         background-color: #1E1E1E !important;
         cursor: pointer;
@@ -35,4 +37,23 @@ div.move.disabled {
         cursor: not-allowed;
         opacity: 0.7;
     }
+}
+
+div.move-info {
+    background-color: #111111;
+    margin: 0px 16px;
+    padding: 8px 16px;
+    box-shadow: 0px 0px 1px 1px #000A;
+    border-bottom-left-radius: 10px !important;
+    border-bottom-right-radius: 10px !important;
+    &:empty {
+        display: none;
+    }
+}
+
+div.move-info > label {
+    font-size: 12px;
+    height: 12px !important;
+    line-height: 12px !important;
+    /* color: #e2dd42; */
 }
