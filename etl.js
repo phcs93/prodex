@@ -308,7 +308,7 @@ const execSync = require("node:child_process").execSync;
     */
     const itemDictionary = parseCSV("items.csv").toDictionary(i => i[0], i => ({
         id: parseInt(i[0]) || 0,
-        name: i[1],
+        name: format(i[1]),
         categoryId: parseInt(i[2]) || 0,
         cost: parseInt(i[3]) || 0,
         flingPower: parseInt(i[4]) || 0,
@@ -829,7 +829,8 @@ const execSync = require("node:child_process").execSync;
     const database = {
         Pokemons: addPreEvolutionMoves(addEncounterIfCanBeEvolvedOrHatched(fix(pokemonDictionary), evolutionChainDictionary, versionDictionary, versionGroupDictionary), versionGroupDictionary),
         Evolutions: evolutionChainDictionary,
-        Items: itemDictionary,
+        Items: itemDictionary, 
+        HeldItemIds: [...new Set(parseCSV("pokemon_items.csv").map(i => parseInt(i[2])))], // just for performance
         Moves: moveDictionary,
         Locations: locationDictionary,
         Machines: machineDictionary,

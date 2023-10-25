@@ -63,21 +63,18 @@ https://www.wikidex.net/wiki/Ferroverdor
 
 ## moves window
 
-- show pre-evolution moves
 - highlight STAB (also highlight damage type based on highest pokemon stat)
 
 ## important things
 
 - consider abilities when calculating pokemon weakness (attacking and defending)
 - consider generation when filtering move type (some normal moves became fairy)
-- determine move damage type by generation
 - encounters for regional forms should be the same as their base form (?)
 - change "only obtainable" flag to "show from all versions" (remember to unconsider version on moves, held items, etc)
   - actually it would be simpler to just disable all version dependant filters
 
 ## team builder 
 
-- select pokemon moves
 - also select ability, nature, level, EVs, IVs
 - select gender
 - select shiny

@@ -4,7 +4,7 @@ function renderPokemonFilter(versionId, slot) {
 
     // characteristics
     const abilitieOptions = Object.values(Globals.Database.Abilities).orderBy(a => a.name).map(a => `<option value="${a.id}">${a.name}</option>`).join("");
-    const heldItemOptions = Object.values(Globals.Database.Items).filter(i => i.type === 99999999).orderBy(i => i.name).map(i => `<option value="${i.id}">${i.name}</option>`).join("");
+    const heldItemOptions = Globals.Database.HeldItemIds.map(i => Globals.Database.Items[i]).orderBy(i => i.name).map(i => `<option value="${i.id}">${i.name}</option>`).join("");
     const habitatOptions = Object.values(Globals.Database.Habitats).map(h => `<option value="${h.id}">${h.name}</option>`).join("");
     const shapeOptions = Object.values(Globals.Database.Shapes).map(s => `<option value="${s.id}">${s.name}</option>`).join("");
     const colorOptions = Object.values(Globals.Database.Colors).map(c => `<option value="${c.id}">${c.name}</option>`).join("");
@@ -35,363 +35,356 @@ function renderPokemonFilter(versionId, slot) {
 
             <div class="flex-rows gap padding box filter-form">
 
-                <form onsubmit="event.preventDefault(); filterPokemons(${versionId}, ${slot});">
+                <div class="flex-rows gap">
 
-                    <div class="flex-rows gap">
-
-                        <div class="flex-rows">
-                            <label for="name-filter">NAME</label>
-                            <input type="text" name="name-filter" id="name-filter" />
-                        </div>
-
-                        <div class="flex-rows">
-                            <label for="generation-filter">INTRODUCED IN GENERATION</label>
-                            <input type="number" name="generation-filter" id="generation-filter" />
-                        </div>
-
-                        <div class="flex-columns">
-                            <div class="flex-rows grow">
-                                <label for="type1-filter">TYPE 1</label>
-                                <select name="type1-filter" id="type1-filter" class="input-left-half">
-                                    <option value="">---</option>
-                                    ${typeOptions}
-                                </select>
-                            </div>
-                            <div class="flex-rows grow">
-                                <label for="type-filter">TYPE 2</label>
-                                <select name="type2-filter" id="type2-filter" class="input-right-half">
-                                    <option value="">---</option>
-                                    ${typeOptions}
-                                </select>
-                            </div>
-                        </div>
-
-                        <details>
-
-                            <summary>CHARACTERISTICS FILTERS</summary>
-
-                            <div class="flex-rows gap">
-
-                                <div class="flex-rows">
-                                    <label for="ability-filter">ABILITY</label>
-                                    <select name="ability-filter" id="ability-filter">
-                                        <option value="">---</option>
-                                        ${abilitieOptions}
-                                    </select>
-                                </div>
-                                
-                                <div class="flex-rows">
-                                    <label for="held-item-filter">HELD ITEM</label>
-                                    <select name="held-item-filter" id="held-item-filter">
-                                        <option value="">---</option>
-                                        ${heldItemOptions}
-                                    </select>
-                                </div>
-
-                                <div class="flex-rows">
-                                    <label for="habitat-filter">HABITAT</label>
-                                    <select name="habitat-filter" id="habitat-filter">
-                                        <option value="">---</option>
-                                        ${habitatOptions}
-                                    </select>
-                                </div>
-
-                                <div class="flex-rows">
-                                    <label for="shape-filter">SHAPE</label>
-                                    <select name="shape-filter" id="shape-filter">
-                                        <option value="">---</option>
-                                        ${shapeOptions}
-                                    </select>
-                                </div>
-
-                                <div class="flex-rows">
-                                    <label for="color-filter">COLOR</label>
-                                    <select name="color-filter" id="color-filter">
-                                        <option value="">---</option>
-                                        ${colorOptions}
-                                    </select>
-                                </div>
-
-                                <div class="flex-columns">
-                                    <div class="flex-rows grow">
-                                        <label for="egg-group1-filter">EGG GROUP 1</label>
-                                        <select name="egg-group1-filter" id="egg-group1-filter" class="input-left-half">
-                                            <option value="">---</option>
-                                            ${eggGroupsOptions}
-                                        </select>
-                                    </div>
-                                    <div class="flex-rows grow">
-                                        <label for="egg-group2-filter">EGG GROUP 2</label>
-                                        <select name="egg-group2-filter" id="egg-group2-filter" class="input-right-half">
-                                            <option value="">---</option>
-                                            ${eggGroupsOptions}
-                                        </select>
-                                    </div>
-                                </div>                                
-
-                            </div>
-
-                        </details>
-
-                        <details>
-
-                            <summary>MOVE FILTERS</summary>
-
-                            <div class="flex-rows gap">
-
-                                <div class="flex-rows">
-                                    <label for="move-filter">LEARNS MOVES</label>
-                                    <select name="move1-filter" id="move1-filter">
-                                        <option value="">---</option>
-                                        ${moveOptions}
-                                    </select>
-                                    <select name="move2-filter" id="move2-filter">
-                                        <option value="">---</option>
-                                        ${moveOptions}
-                                    </select>
-                                    <select name="move3-filter" id="move3-filter">
-                                        <option value="">---</option>
-                                        ${moveOptions}
-                                    </select>
-                                    <select name="move4-filter" id="move4-filter">
-                                        <option value="">---</option>
-                                        ${moveOptions}
-                                    </select>
-                                </div>
-
-                                <div class="flex-rows">
-                                    <label for="learn-method-filter">LEARN METHOD</label>
-                                    <select name="learn-method-filter" id="learn-method-filter">
-                                        <option value="">---</option>
-                                        ${learnMethodOptions}
-                                    </select>
-                                </div>
-
-                                <div class="flex-rows">
-                                    <label for="move-filter">LEARNS MOVES FROM TYPES</label>
-                                    <select name="move-from-type1-filter" id="move-from-type1-filter">
-                                        <option value="">---</option>
-                                        ${typeOptions}
-                                    </select>
-                                    <select name="move-from-type2-filter" id="move-from-type2-filter">
-                                        <option value="">---</option>
-                                        ${typeOptions}
-                                    </select>
-                                    <select name="move-from-type3-filter" id="move-from-type3-filter">
-                                        <option value="">---</option>
-                                        ${typeOptions}
-                                    </select>
-                                    <select name="move-from-type4-filter" id="move-from-type4-filter">
-                                        <option value="">---</option>
-                                        ${typeOptions}
-                                    </select>
-                                </div>
-
-                                <div class="flex-rows">
-                                    <label for="move-target-filter">MOVE TARGET</label>
-                                    <select name="move-target-filter" id="move-target-filter">
-                                        <option value="">---</option>
-                                        ${moveTargetOptions}
-                                    </select>
-                                </div>
-
-                                <label class="el-switch">
-                                    <input type="checkbox" name="only-attacks-filter" id="only-attacks-filter" />
-                                    <span class="el-switch-style"></span>
-                                    <label for="only-attacks-filter">ONLY ATTACK MOVES</label>
-                                </label>
-
-                            </div>
-
-                        </details>
-
-                        <details>
-
-                            <summary>ENCOUNTER FILTERS</summary>
-
-                            <div class="flex-rows gap">
-
-                                <div class="flex-rows grow">
-                                    <label for="max-encounter-level-filter">MAXIMUM ENCOUNTER LEVEL</label>
-                                    <input type="number" name="max-encounter-level-filter" id="max-encounter-level-filter" min="0" max="100" step="1" />
-                                </div>
-
-                                <div class="flex-rows">
-                                    <label for="encounter-method-filter">ENCOUNTER METHOD</label>
-                                    <select name="encounter-method-filter" id="encounter-method-filter">
-                                        <option value="">---</option>
-                                        ${encounterMethodOptions}                                        
-                                    </select>
-                                </div>
-
-                                <div class="flex-rows">
-                                    <label for="encounter-condition-filter">ENCOUNTER CONDITION</label>
-                                    <select name="encounter-condition-filter" id="encounter-condition-filter">
-                                        <option value="">---</option>
-                                        ${encounterConditionOptions}
-                                    </select>
-                                </div>
-
-                                <div class="flex-rows">
-                                    <label for="encounter-location-filter">ENCOUNTER LOCATION</label>
-                                    <select name="encounter-location-filter" id="encounter-location-filter">
-                                        <option value="">---</option>
-                                        ${locationOptions}
-                                    </select>
-                                </div>
-
-                                <label class="el-switch">
-                                    <input type="checkbox" name="by-breeding-filter" id="by-breeding-filter" />
-                                    <span class="el-switch-style"></span>
-                                    <label for="by-breeding-filter">BY BREEDING</label>
-                                </label>
-
-                                <label class="el-switch">
-                                    <input type="checkbox" name="by-evolving-filter" id="by-evolving-filter" />
-                                    <span class="el-switch-style"></span>
-                                    <label for="by-evolving-filter">BY EVOLVING</label>
-                                </label>
-
-                            </div>
-
-                        </details>
-
-                        <details>
-
-                            <summary>EVOLUTION FILTERS</summary>
-
-                            <div class="flex-rows gap">
-
-                                <div class="flex-rows">
-                                    <label for="evolutions-filter">NUMBER OF EVOLUTIONS</label>
-                                    <input type="number" name="evolutions-filter" id="evolutions-filter" />
-                                </div>
-
-                            </div>
-
-                        </details>
-
-                        <details>
-
-                            <summary>FLAGS</summary>
-
-                            <div class="flex-rows gap">
-
-                                <label class="el-switch">
-                                    <input type="checkbox" name="is-baby-filter" id="is-baby-filter" />
-                                    <span class="el-switch-style"></span>
-                                    <label for="is-baby-filter">IS BABY</label>
-                                </label>
-
-                                <label class="el-switch">
-                                    <input type="checkbox" name="is-legendary-filter" id="is-legendary-filter" />
-                                    <span class="el-switch-style"></span>
-                                    <label for="is-legendary-filter">IS LEGENDARY</label>
-                                </label>
-                                
-                                <label class="el-switch">
-                                    <input type="checkbox" name="is-mythical-filter" id="is-mythical-filter" />
-                                    <span class="el-switch-style"></span>
-                                    <label for="is-mythical-filter">IS MYTHICAL</label>
-                                </label>
-
-                                <label class="el-switch">
-                                    <input type="checkbox" name="is-regional-filter" id="is-regional-filter" />
-                                    <span class="el-switch-style"></span>
-                                    <label for="is-regional-filter">IS REGIONAL</label>
-                                </label>
-                                
-                                <label class="el-switch">
-                                    <input type="checkbox" name="is-mega-filter" id="is-mega-filter" />
-                                    <span class="el-switch-style"></span>
-                                    <label for="is-mega-filter">IS MEGA</label>
-                                </label>
-
-                                <label class="el-switch">
-                                    <input type="checkbox" name="is-totem-filter" id="is-totem-filter" />
-                                    <span class="el-switch-style"></span>
-                                    <label for="is-totem-filter">IS TOTEM</label>
-                                </label>
-
-                                <label class="el-switch">
-                                    <input type="checkbox" name="is-gmax-filter" id="is-gmax-filter" />
-                                    <span class="el-switch-style"></span>
-                                    <label for="is-gmax-filter">IS GMAX</label>
-                                </label>
-
-                                <label class="el-switch">
-                                    <input type="checkbox" name="has-gender-differences-filter" id="has-gender-differences-filter" />
-                                    <span class="el-switch-style"></span>
-                                    <label for="has-gender-differences-filter">HAS GENDER DIFFERENCES</label>
-                                </label>
-
-                            </div>
-
-                        </details>
-
-                        <hr>
-
-                        <label class="el-switch">
-                            <input type="checkbox" name="only-obtainable-filter" id="only-obtainable-filter" checked="true" />
-                            <span class="el-switch-style"></span>
-                            <label for="only-obtainable-filter">OBTAINABLE IN "${Globals.Database.Versions[versionId].name.toUpperCase()}"</label>
-                        </label>
-
-                        <hr>
-
-                        <div class="flex-columns">
-                            <div class="flex-rows" style="width: 50%;">
-                                <label for="order-filter">ORDER BY</label>
-                                <select name="order-filter" id="order-filter" class="input-left-half">
-                                    <option value="id">ID</option>
-                                    <option value="name">Name</option>
-                                    <option value="generation">Generation</option>
-                                    <option value="weight">Weight</option>
-                                    <option value="height">Height</option>
-                                    <option value="base-exp">Base Experience</option>
-                                    <option value="capture-rate">Capture Rate</option>
-                                    <option value="base-happiness">Base Happiness</option>
-                                    <option value="growth-rate">Growth Rate</option>
-                                    <option value="hatch-counter">Hatch Counter</option>
-                                    <option value="gender-rate">Gender Rate</option>
-                                    <option value="hp">HP</option>
-                                    <option value="atk">Attack</option>
-                                    <option value="def">Defense</option>
-                                    <option value="sp-atk">Sp.Atk</option>
-                                    <option value="sp-def">Sp.Def</option>
-                                    <option value="speed">Speed</option>
-                                    <option value="total">Total Stats</option>
-                                    <option value="ev-hp">HP EV Yield</option>
-                                    <option value="ev-atk">Attack EV Yield</option>
-                                    <option value="ev-def">Defense EV Yield</option>
-                                    <option value="ev-sp-atk">Sp.Atk EV Yield</option>
-                                    <option value="ev-sp-def">Sp.Def EV Yield</option>
-                                    <option value="ev-speed">Speed EV Yield</option>
-                                    <option value="type-weakness">Type Weaknesses</option>
-                                    <option value="encounter-level">Encounter Level</option>
-                                </select>
-                            </div>
-                            <div class="flex-rows" style="width: 50%;">
-                                <label for="direction-filter">DIRECTION</label>
-                                <select name="direction-filter" id="direction-filter" class="input-right-half">
-                                    <option value="asc">Ascending</option>
-                                    <option value="desc">Descending</option>
-                                </select>
-                            </div>
-                        </div>
-
+                    <div class="flex-rows">
+                        <label for="name-filter">NAME</label>
+                        <input type="text" name="name-filter" id="name-filter" oninput="filterPokemons(${versionId}, ${slot});" />
                     </div>
 
-                    <input type="submit" style="display: none;" />
+                    <div class="flex-rows">
+                        <label for="generation-filter">INTRODUCED IN GENERATION</label>
+                        <input type="number" name="generation-filter" id="generation-filter" oninput="filterPokemons(${versionId}, ${slot});" />
+                    </div>
 
-                </form>
+                    <div class="flex-columns">
+                        <div class="flex-rows grow">
+                            <label for="type1-filter">TYPE 1</label>
+                            <select name="type1-filter" id="type1-filter" class="input-left-half" onchange="filterPokemons(${versionId}, ${slot});">
+                                <option value="">---</option>
+                                ${typeOptions}
+                            </select>
+                        </div>
+                        <div class="flex-rows grow">
+                            <label for="type-filter">TYPE 2</label>
+                            <select name="type2-filter" id="type2-filter" class="input-right-half" onchange="filterPokemons(${versionId}, ${slot});">
+                                <option value="">---</option>
+                                ${typeOptions}
+                            </select>
+                        </div>
+                    </div>
+
+                    <details>
+
+                        <summary>CHARACTERISTICS FILTERS</summary>
+
+                        <div class="flex-rows gap">
+
+                            <div class="flex-rows">
+                                <label for="ability-filter">ABILITY</label>
+                                <select name="ability-filter" id="ability-filter" onchange="filterPokemons(${versionId}, ${slot});">
+                                    <option value="">---</option>
+                                    ${abilitieOptions}
+                                </select>
+                            </div>
+                            
+                            <div class="flex-rows">
+                                <label for="held-item-filter">HELD ITEM</label>
+                                <select name="held-item-filter" id="held-item-filter" onchange="filterPokemons(${versionId}, ${slot});">
+                                    <option value="">---</option>
+                                    ${heldItemOptions}
+                                </select>
+                            </div>
+
+                            <div class="flex-rows">
+                                <label for="habitat-filter">HABITAT</label>
+                                <select name="habitat-filter" id="habitat-filter" onchange="filterPokemons(${versionId}, ${slot});">
+                                    <option value="">---</option>
+                                    ${habitatOptions}
+                                </select>
+                            </div>
+
+                            <div class="flex-rows">
+                                <label for="shape-filter">SHAPE</label>
+                                <select name="shape-filter" id="shape-filter" onchange="filterPokemons(${versionId}, ${slot});">
+                                    <option value="">---</option>
+                                    ${shapeOptions}
+                                </select>
+                            </div>
+
+                            <div class="flex-rows">
+                                <label for="color-filter">COLOR</label>
+                                <select name="color-filter" id="color-filter" onchange="filterPokemons(${versionId}, ${slot});">
+                                    <option value="">---</option>
+                                    ${colorOptions}
+                                </select>
+                            </div>
+
+                            <div class="flex-columns">
+                                <div class="flex-rows grow">
+                                    <label for="egg-group1-filter">EGG GROUP 1</label>
+                                    <select name="egg-group1-filter" id="egg-group1-filter" class="input-left-half" onchange="filterPokemons(${versionId}, ${slot});">
+                                        <option value="">---</option>
+                                        ${eggGroupsOptions}
+                                    </select>
+                                </div>
+                                <div class="flex-rows grow">
+                                    <label for="egg-group2-filter">EGG GROUP 2</label>
+                                    <select name="egg-group2-filter" id="egg-group2-filter" class="input-right-half" onchange="filterPokemons(${versionId}, ${slot});">
+                                        <option value="">---</option>
+                                        ${eggGroupsOptions}
+                                    </select>
+                                </div>
+                            </div>                                
+
+                        </div>
+
+                    </details>
+
+                    <details>
+
+                        <summary>MOVE FILTERS</summary>
+
+                        <div class="flex-rows gap">
+
+                            <div class="flex-rows">
+                                <label for="move-filter">LEARNS MOVES</label>
+                                <select name="move1-filter" id="move1-filter" onchange="filterPokemons(${versionId}, ${slot});">
+                                    <option value="">---</option>
+                                    ${moveOptions}
+                                </select>
+                                <select name="move2-filter" id="move2-filter" onchange="filterPokemons(${versionId}, ${slot});">
+                                    <option value="">---</option>
+                                    ${moveOptions}
+                                </select>
+                                <select name="move3-filter" id="move3-filter" onchange="filterPokemons(${versionId}, ${slot});">
+                                    <option value="">---</option>
+                                    ${moveOptions}
+                                </select>
+                                <select name="move4-filter" id="move4-filter" onchange="filterPokemons(${versionId}, ${slot});">
+                                    <option value="">---</option>
+                                    ${moveOptions}
+                                </select>
+                            </div>
+
+                            <div class="flex-rows">
+                                <label for="learn-method-filter">LEARN METHOD</label>
+                                <select name="learn-method-filter" id="learn-method-filter" onchange="filterPokemons(${versionId}, ${slot});">
+                                    <option value="">---</option>
+                                    ${learnMethodOptions}
+                                </select>
+                            </div>
+
+                            <div class="flex-rows">
+                                <label for="move-filter">LEARNS MOVES FROM TYPES</label>
+                                <select name="move-from-type1-filter" id="move-from-type1-filter" onchange="filterPokemons(${versionId}, ${slot});">
+                                    <option value="">---</option>
+                                    ${typeOptions}
+                                </select>
+                                <select name="move-from-type2-filter" id="move-from-type2-filter" onchange="filterPokemons(${versionId}, ${slot});">
+                                    <option value="">---</option>
+                                    ${typeOptions}
+                                </select>
+                                <select name="move-from-type3-filter" id="move-from-type3-filter" onchange="filterPokemons(${versionId}, ${slot});">
+                                    <option value="">---</option>
+                                    ${typeOptions}
+                                </select>
+                                <select name="move-from-type4-filter" id="move-from-type4-filter" onchange="filterPokemons(${versionId}, ${slot});">
+                                    <option value="">---</option>
+                                    ${typeOptions}
+                                </select>
+                            </div>
+
+                            <div class="flex-rows">
+                                <label for="move-target-filter">MOVE TARGET</label>
+                                <select name="move-target-filter" id="move-target-filter" onchange="filterPokemons(${versionId}, ${slot});">
+                                    <option value="">---</option>
+                                    ${moveTargetOptions}
+                                </select>
+                            </div>
+
+                            <label class="el-switch">
+                                <input type="checkbox" name="only-attacks-filter" id="only-attacks-filter" onchange="filterPokemons(${versionId}, ${slot});" />
+                                <span class="el-switch-style"></span>
+                                <label for="only-attacks-filter">ONLY ATTACK MOVES</label>
+                            </label>
+
+                        </div>
+
+                    </details>
+
+                    <details>
+
+                        <summary>ENCOUNTER FILTERS</summary>
+
+                        <div class="flex-rows gap">
+
+                            <div class="flex-rows grow">
+                                <label for="max-encounter-level-filter">MAXIMUM ENCOUNTER LEVEL</label>
+                                <input type="number" name="max-encounter-level-filter" id="max-encounter-level-filter" min="0" max="100" step="1" oninput="filterPokemons(${versionId}, ${slot});" />
+                            </div>
+
+                            <div class="flex-rows">
+                                <label for="encounter-method-filter">ENCOUNTER METHOD</label>
+                                <select name="encounter-method-filter" id="encounter-method-filter" onchange="filterPokemons(${versionId}, ${slot});">
+                                    <option value="">---</option>
+                                    ${encounterMethodOptions}                                        
+                                </select>
+                            </div>
+
+                            <div class="flex-rows">
+                                <label for="encounter-condition-filter">ENCOUNTER CONDITION</label>
+                                <select name="encounter-condition-filter" id="encounter-condition-filter" onchange="filterPokemons(${versionId}, ${slot});">
+                                    <option value="">---</option>
+                                    ${encounterConditionOptions}
+                                </select>
+                            </div>
+
+                            <div class="flex-rows">
+                                <label for="encounter-location-filter">ENCOUNTER LOCATION</label>
+                                <select name="encounter-location-filter" id="encounter-location-filter" onchange="filterPokemons(${versionId}, ${slot});">
+                                    <option value="">---</option>
+                                    ${locationOptions}
+                                </select>
+                            </div>
+
+                            <label class="el-switch">
+                                <input type="checkbox" name="by-breeding-filter" id="by-breeding-filter" onchange="filterPokemons(${versionId}, ${slot});" />
+                                <span class="el-switch-style"></span>
+                                <label for="by-breeding-filter">BY BREEDING</label>
+                            </label>
+
+                            <label class="el-switch">
+                                <input type="checkbox" name="by-evolving-filter" id="by-evolving-filter" onchange="filterPokemons(${versionId}, ${slot});" />
+                                <span class="el-switch-style"></span>
+                                <label for="by-evolving-filter">BY EVOLVING</label>
+                            </label>
+
+                        </div>
+
+                    </details>
+
+                    <details>
+
+                        <summary>EVOLUTION FILTERS</summary>
+
+                        <div class="flex-rows gap">
+
+                            <div class="flex-rows">
+                                <label for="evolutions-filter">NUMBER OF EVOLUTIONS</label>
+                                <input type="number" name="evolutions-filter" id="evolutions-filter" oninput="filterPokemons(${versionId}, ${slot});" />
+                            </div>
+
+                        </div>
+
+                    </details>
+
+                    <details>
+
+                        <summary>FLAGS</summary>
+
+                        <div class="flex-rows gap">
+
+                            <label class="el-switch">
+                                <input type="checkbox" name="is-baby-filter" id="is-baby-filter" onchange="filterPokemons(${versionId}, ${slot});" />
+                                <span class="el-switch-style"></span>
+                                <label for="is-baby-filter">IS BABY</label>
+                            </label>
+
+                            <label class="el-switch">
+                                <input type="checkbox" name="is-legendary-filter" id="is-legendary-filter" onchange="filterPokemons(${versionId}, ${slot});" />
+                                <span class="el-switch-style"></span>
+                                <label for="is-legendary-filter">IS LEGENDARY</label>
+                            </label>
+                            
+                            <label class="el-switch">
+                                <input type="checkbox" name="is-mythical-filter" id="is-mythical-filter" onchange="filterPokemons(${versionId}, ${slot});" />
+                                <span class="el-switch-style"></span>
+                                <label for="is-mythical-filter">IS MYTHICAL</label>
+                            </label>
+
+                            <label class="el-switch">
+                                <input type="checkbox" name="is-regional-filter" id="is-regional-filter" onchange="filterPokemons(${versionId}, ${slot});" />
+                                <span class="el-switch-style"></span>
+                                <label for="is-regional-filter">IS REGIONAL</label>
+                            </label>
+                            
+                            <label class="el-switch">
+                                <input type="checkbox" name="is-mega-filter" id="is-mega-filter" onchange="filterPokemons(${versionId}, ${slot});" />
+                                <span class="el-switch-style"></span>
+                                <label for="is-mega-filter">IS MEGA</label>
+                            </label>
+
+                            <label class="el-switch">
+                                <input type="checkbox" name="is-totem-filter" id="is-totem-filter" onchange="filterPokemons(${versionId}, ${slot});" />
+                                <span class="el-switch-style"></span>
+                                <label for="is-totem-filter">IS TOTEM</label>
+                            </label>
+
+                            <label class="el-switch">
+                                <input type="checkbox" name="is-gmax-filter" id="is-gmax-filter" onchange="filterPokemons(${versionId}, ${slot});" />
+                                <span class="el-switch-style"></span>
+                                <label for="is-gmax-filter">IS GMAX</label>
+                            </label>
+
+                            <label class="el-switch">
+                                <input type="checkbox" name="has-gender-differences-filter" id="has-gender-differences-filter" onchange="filterPokemons(${versionId}, ${slot});" />
+                                <span class="el-switch-style"></span>
+                                <label for="has-gender-differences-filter">HAS GENDER DIFFERENCES</label>
+                            </label>
+
+                        </div>
+
+                    </details>
+
+                    <hr>
+
+                    <label class="el-switch">
+                        <input type="checkbox" name="only-obtainable-filter" id="only-obtainable-filter" checked="true" onchange="filterPokemons(${versionId}, ${slot});" />
+                        <span class="el-switch-style"></span>
+                        <label for="only-obtainable-filter">OBTAINABLE IN "${Globals.Database.Versions[versionId].name.toUpperCase()}"</label>
+                    </label>
+
+                    <hr>
+
+                    <div class="flex-columns">
+                        <div class="flex-rows" style="width: 50%;">
+                            <label for="order-filter">ORDER BY</label>
+                            <select name="order-filter" id="order-filter" class="input-left-half" onchange="filterPokemons(${versionId}, ${slot});">
+                                <option value="id">ID</option>
+                                <option value="name">Name</option>
+                                <option value="generation">Generation</option>
+                                <option value="weight">Weight</option>
+                                <option value="height">Height</option>
+                                <option value="base-exp">Base Experience</option>
+                                <option value="capture-rate">Capture Rate</option>
+                                <option value="base-happiness">Base Happiness</option>
+                                <option value="growth-rate">Growth Rate</option>
+                                <option value="hatch-counter">Hatch Counter</option>
+                                <option value="gender-rate">Gender Rate</option>
+                                <option value="hp">HP</option>
+                                <option value="atk">Attack</option>
+                                <option value="def">Defense</option>
+                                <option value="sp-atk">Sp.Atk</option>
+                                <option value="sp-def">Sp.Def</option>
+                                <option value="speed">Speed</option>
+                                <option value="total">Total Stats</option>
+                                <option value="ev-hp">HP EV Yield</option>
+                                <option value="ev-atk">Attack EV Yield</option>
+                                <option value="ev-def">Defense EV Yield</option>
+                                <option value="ev-sp-atk">Sp.Atk EV Yield</option>
+                                <option value="ev-sp-def">Sp.Def EV Yield</option>
+                                <option value="ev-speed">Speed EV Yield</option>
+                                <option value="type-weakness">Type Weaknesses</option>
+                                <option value="encounter-level">Encounter Level</option>
+                            </select>
+                        </div>
+                        <div class="flex-rows" style="width: 50%;">
+                            <label for="direction-filter">DIRECTION</label>
+                            <select name="direction-filter" id="direction-filter" class="input-right-half" onchange="filterPokemons(${versionId}, ${slot});">
+                                <option value="asc">Ascending</option>
+                                <option value="desc">Descending</option>
+                            </select>
+                        </div>
+                    </div>
+
+                </div>
 
                 <hr>
 
                 <div class="flex-rows gap">
-                    <button type="button" class="primary" onclick="filterPokemons(${versionId}, ${slot}); event.preventDefault();">FILTER</button>
                     <button type="button" onclick="Swal.close();">CANCEL</button>
-                </div>                    
+                </div>
                 
             </div>
 
