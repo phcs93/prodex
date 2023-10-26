@@ -17,8 +17,3 @@ div.pokemon-details label + label {
     text-align: left;
     margin: 0px 16px;
 }
-
-div.pokemon-details hr {
-    margin: 10px;
-    border-top: 1px dashed #2E2E2E;
-}

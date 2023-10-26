@@ -156,6 +156,10 @@ button.primary {
     color: white;
 }
 
+input[type="radio"]+label {
+    cursor: pointer;
+}
+
 /* ================================================================================ */
 /* summary + details */
 /* ================================================================================ */
@@ -220,6 +224,30 @@ details[open] summary:after {
 /* select#version {
     min-width: 298px;
 } */
+
+/* ================================================================================ */
+/* display toggle */
+/* ================================================================================ */
+div.display-toggle {
+    border-radius: 90px;
+    padding: 8px;
+}
+
+input[name="display-toggle"] {
+    display: none;
+    & + label {
+        display: inline-block;
+        padding: 8px 16px;
+        border-radius: 90px;
+        /* width: 80%; */
+        height: 16px;
+        line-height: 16px;
+        text-align: center;
+    }
+    &:checked + label {
+        background-color: #0E0E0E;
+    }
+}
 
 /* ================================================================================ */
 /* team */

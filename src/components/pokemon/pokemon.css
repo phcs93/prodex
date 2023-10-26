@@ -3,3 +3,15 @@ button.select-move-button {
     border: 1px dashed #2E2E2E;
     background-color: transparent;
 }
+
+body:has(input#display-build:checked)  {
+    & div.pokemon-build {
+        display: none;
+    }
+}
+
+body:has(input#display-details:checked) {
+    & div.pokemon-details {
+        display: none;
+    }
+}
