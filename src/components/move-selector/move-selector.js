@@ -20,20 +20,54 @@ function showMoveSelectorSwal (teamSlot, moveSlot) {
         html: renderMoveSelector(pokemonId, versionGroupId, teamSlot, moveSlot)
     });
 
+    filterMoves(pokemonId, versionGroupId, teamSlot, moveSlot);
+
 }
 
 function renderMoveSelector (pokemonId, versionGroupId, teamSlot, moveSlot) {
 
-    const setMovesIds = Globals.Parameters.Team[teamSlot-1].moves.filter(l => l).map(l => l.moveId);
-    const learns = Object.values(Globals.Database.Pokemons[pokemonId].moves[versionGroupId]);
-
     return `
         <div class="flex-rows gap padding">
+            <div class="flex-rows">
+                <label for="move-filter">FILTER</label>
+                <input type="text" name="move-filter" id="move-filter" oninput="filterMoves(${pokemonId}, ${versionGroupId}, ${teamSlot}, ${moveSlot});" />
+            </div>
             <button class="select-move-button" onclick="selectEmptyMove(${teamSlot}, ${moveSlot})">NONE</button>
-            ${learns.orderBy(l => l.preEvolution ? 0 : l.methodId).map(learn => renderMove(learn, versionGroupId, `selectMove(${teamSlot}, ${moveSlot}, ${learn.moveId}, ${learn.methodId}, ${learn.level}, ${learn.preEvolution ? "true" : "false"}, ${learn.preEvolution ? learn.pokemonId : "0"})`, setMovesIds.includes(learn.moveId))).join("")}
+            <div id="move-list" class="flex-rows gap">
+                
+            </div>
         </div>
     `;
     
+}
+
+function filterMoves (pokemonId, versionGroupId, teamSlot, moveSlot) {
+
+    const filter = document.getElementById("move-filter").value.toUpperCase();
+
+    const setMovesIds = Globals.Parameters.Team[teamSlot-1].moves.filter(l => l).map(l => l.moveId);
+    const learns = Object.values(Globals.Database.Pokemons[pokemonId].moves[versionGroupId]);
+    const generationId = Globals.Database.VersionGroups[versionGroupId].generationId;
+
+    const damageClassIdToText = {
+        "1": "STATUS",
+        "2": "PHYSICAL",
+        "3": "SPECIAL"
+    };
+
+    const moves = learns.filter(l => (
+        // name
+        filter.split(" ").some(f => Globals.Database.Moves[l.moveId].name.toUpperCase().indexOf(f) > -1) ||
+        // type
+        filter.split(" ").some(f => Globals.Database.Types[Globals.Database.Moves[l.moveId].typeId].name.toUpperCase().indexOf(f) > -1) ||
+        // damage class
+        filter.split(" ").some(f => damageClassIdToText[determineDamageClass(Globals.Database.Moves[l.moveId].typeId, Globals.Database.Moves[l.moveId].damageClassId, generationId)].indexOf(f) > -1)
+    ));
+
+    const movesHTML = moves.orderBy(l => l.preEvolution ? 0 : l.methodId).map(learn => renderMove(learn, versionGroupId, `selectMove(${teamSlot}, ${moveSlot}, ${learn.moveId}, ${learn.methodId}, ${learn.level}, ${learn.preEvolution ? "true" : "false"}, ${learn.preEvolution ? learn.pokemonId : "0"})`, setMovesIds.includes(learn.moveId)));
+
+    document.getElementById("move-list").innerHTML = movesHTML.join("");
+
 }
 
 function selectMove (teamSlot, moveSlot, moveId, methodId, level, preEvolution, pokemonId) {
