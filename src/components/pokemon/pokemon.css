@@ -5,13 +5,13 @@ button.select-move-button {
 }
 
 body:has(input#display-build:checked)  {
-    & div.pokemon-build {
+    & div.pokemon-details {
         display: none;
     }
 }
 
 body:has(input#display-details:checked) {
-    & div.pokemon-details {
+    & div.pokemon-build {
         display: none;
     }
 }
