@@ -5,28 +5,28 @@ function renderPokemonDetails (pokemon) {
 
     const getAbilityName = (abilityId) => {
         if (!abilityId) return "---";
-        return Globals.Database.Abilities[abilityId];
+        return Globals.Database.Abilities[abilityId].name;
     };
     
     const getGrowthRateName = (growthRateId) => {
-        return Globals.Database.GrowthRates[growthRateId];
+        return Globals.Database.GrowthRates[growthRateId].name;
     };
     
     const getEggGroupsNames = (eggGroupsIds) => {
-        return eggGroupsIds.map(id => Globals.Database.EggGroups[id]).join(", ");
+        return eggGroupsIds.map(id => Globals.Database.EggGroups[id].name).join(", ");
     };
     
     const getShapeName = (shapeId) => {
-        return Globals.Database.Shapes[shapeId];
+        return Globals.Database.Shapes[shapeId].name;
     };
     
     const getHabitatName = (habitatId) => {
         if (!habitatId) return "---";
-        return Globals.Database.Habitats[habitatId];
+        return Globals.Database.Habitats[habitatId].name;
     };
     
     const getColorName = (colorId) => {
-        return Globals.Database.Colors[colorId];
+        return Globals.Database.Colors[colorId].name;
     };
 
     return `
@@ -89,7 +89,7 @@ function renderPokemonDetails (pokemon) {
             </div>
             <div class="flex-columns">
                 <label>Hatch Counter</label>
-                <label>${pokemon.hatchCounter} cycles (# steps)</label> <!-- thousands -->
+                <label>${pokemon.hatchCounter} cycles (${pokemon.hatchCounter * 255} steps)</label>
             </div>
             <div class="flex-columns">
                 <label>Generation</label>

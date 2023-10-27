@@ -884,9 +884,6 @@ const execSync = require("node:child_process").execSync;
     // create pokemon pokemon-spritesheet.png and pokemon-spritesheet.css
     await genereatePokemonSpritesheet(pokemonDictionary);
 
-    // create pokemon footprint-spritesheet.png and footprint-spritesheet.css
-    await generateFootprintSpritesheet(pokemonDictionary);
-
 })();
 
 // this function "fixes" some wrong data generated due to the way I've merged forms, species and pokemon data togheter
@@ -1236,83 +1233,5 @@ async function genereatePokemonSpritesheet (pokemons) {
 
     const spritesheetCSSSize = fs.statSync("res/pokemon-spritesheet.css").size / (1024 * 1024);
     console.log(`\x1b[32m✓\x1b[0m [\x1b[33m${"res/pokemon-spritesheet.css"}\x1b[0m] successfully generated! (\x1b[33m${spritesheetCSSSize.toFixed(4)} MB\x1b[0m)`);
-
-}
-
-// generate footprint spritesheet (footprintapi sprites repository)
-async function generateFootprintSpritesheet (pokemons) {
-
-    const ids = Object.values(pokemons).map(p => p.id);
-
-    console.log("Processing footprint sprite data...");
-
-    const footprintDirectory = "git/FootprintAPI/Sprites";
-
-    const sprites = [];
-
-    for (const id of ids) {
-
-        if (fs.existsSync(`${footprintDirectory}/${id}.png`)) {
-            sprites.push(`${footprintDirectory}/${id}.png`);
-        } else {
-            sprites.push(`git/sprites/sprites/pokemon/0.png`)           
-            //console.log(`\x1b[91m✗\x1b[0m footprint sprite id [\x1b[33m${id}\x1b[0m] (\x1b[94m#${pokemons[id].pokedexId} ${pokemons[id].name}\x1b[0m) couldn't be found!`);
-        }
-
-    }
-
-    console.log(`\x1b[32m✓\x1b[0m [\x1b[33m${Object.keys(sprites).length}\x1b[0m] footprint sprites processed!`);
-    console.log("Creating footprint-spritesheet.png...");
-
-    const rowandcols = Math.ceil(Math.sqrt(sprites.length));
-    const widthheight = rowandcols * 16;
-
-    const spriteMap = await Promise.all(sprites.map(async (image, index) => {
-        const x = parseInt(index % rowandcols);
-        const y = parseInt(index / rowandcols);
-        return {
-            input: await sharp(image).resize(16).toBuffer(),
-            left: x * 16,
-            top: y * 16,
-            width: 16,
-            height: 16
-        };
-    }));
-
-    await sharp({
-        create: {
-            width: widthheight,
-            height: widthheight,
-            channels: 4,
-            background: { r: 0, g: 0, b: 0, alpha: 0 }
-        }
-    })
-    .composite(spriteMap)
-    .toFile("res/footprint-spritesheet.png");
-
-    const spritesheetSize = fs.statSync("res/footprint-spritesheet.png").size / (1024 * 1024);
-    console.log(`\x1b[32m✓\x1b[0m [\x1b[33m${"res/footprint-spritesheet.png"}\x1b[0m] successfully generated! (\x1b[33m${spritesheetSize.toFixed(4)} MB\x1b[0m)`);
-
-    console.log("Creating footprint-spritesheet.css...");
-
-    const spritesheetCSS = [`
-        img.footprint-sprite {
-            background-image: url('footprint-spritesheet.png');
-            background-repeat: no-repeat;
-            object-fit: scale-down;
-            width: 16px;
-            height: 16px;
-            border: none;
-        }
-    `];
-
-    spritesheetCSS.push(...spriteMap.map((s, i) => {
-        return `img.footprint-sprite[data-id="${ids[i]}"] { background-position: -${s.left}px -${s.top}px; }`;
-    }));
-
-    fs.writeFileSync("res/footprint-spritesheet.css", spritesheetCSS.join("\r\n"));
-
-    const spritesheetCSSSize = fs.statSync("res/footprint-spritesheet.css").size / (1024 * 1024);
-    console.log(`\x1b[32m✓\x1b[0m [\x1b[33m${"res/footprint-spritesheet.css"}\x1b[0m] successfully generated! (\x1b[33m${spritesheetCSSSize.toFixed(4)} MB\x1b[0m)`);
 
 }

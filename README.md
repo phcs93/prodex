@@ -18,9 +18,6 @@ https://pokeapi.co/ (https://github.com/PokeAPI/pokeapi)
 All 2D sprites also from PokeAPI:  
 https://github.com/PokeAPI/sprites/
 
-Pokemon footprint images from KierranFalloon (veekun + pokecommunity):  
-https://github.com/KierranFalloon/FootprintAPI/
-
 The majority of animated gifs were obtained from PkParaiso:  
 https://www.pkparaiso.com/
 
@@ -41,6 +38,9 @@ Walking Wake and Iron Leaves gifs from Wikidex:
 https://www.wikidex.net/wiki/Ondulagua  
 https://www.wikidex.net/wiki/Ferroverdor
 
+Pokemon footprints and cries from veekun:  
+https://veekun.com/dex/downloads
+
 # TO-DO
 
 - figure a way to use separate .html files (web loader?)
@@ -57,7 +57,7 @@ https://www.wikidex.net/wiki/Ferroverdor
 
 - determine if pokemon is obtainable in version 
   - by evolution -> DONE
-  - by hatching egg  -> DONE
+  - by hatching egg -> DONE
   - by trading from sister version
     - detect if pokemon can be traded from other generations
 
@@ -78,7 +78,6 @@ https://www.wikidex.net/wiki/Ferroverdor
 - also select ability, nature, level, EVs, IVs
 - select gender
 - select shiny
-- hear cry
 
 ## charts
 
@@ -134,6 +133,14 @@ https://www.wikidex.net/wiki/Ferroverdor
 - [GEN 9] #10270 Miraidon Aquatic Mode [shiny]
 - [GEN 9] #10271 Miraidon Glide Mode
 - [GEN 9] #10271 Miraidon Glide Mode [shiny]
+
+## missing cries
+
+- from 722 onwards
+
+## missing footprints
+
+- I think newer generations don't use footprints anymore
 
 ## crazy ideias
 

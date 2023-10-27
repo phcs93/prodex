@@ -19,13 +19,21 @@ function renderPokemon (pokemon, pokemonSettings, teamSlot, versionId) {
             </div>
 
             <div class="flex-rows gap pokemon-details">
-                ${/*renderPokemonDetails(pokemon)*/"&lt;details&gt;"}
+                ${renderPokemonDetails(pokemon)}
                 <hr>
                 ${renderGenderRate(pokemon)}
                 <hr>
                 ${renderStats(pokemon)}
                 <hr>
                 ${renderTypesEffectiveness(pokemon)}
+                <hr>
+                &lt;evolutions&gt;
+                <hr>
+                &lt;locations&gt;
+                <hr>
+                &lt;held-items&gt;
+                <hr>
+                &lt;moves?&gt;
             </div>
             
             <hr>
