@@ -17,7 +17,8 @@ function showMoveSelectorSwal (teamSlot, moveSlot) {
         hideClass: {
             popup: "animate__animated animate__fadeOut animate__faster"
         },
-        html: renderMoveSelector(pokemonId, versionGroupId, teamSlot, moveSlot)
+        html: renderMoveSelector(pokemonId, versionGroupId, teamSlot, moveSlot),
+        didOpen: () => document.activeElement.blur()
     });
 
     filterMoves(pokemonId, versionGroupId, teamSlot, moveSlot);

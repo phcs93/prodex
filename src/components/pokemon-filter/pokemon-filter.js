@@ -1,3 +1,27 @@
+function showPokemonFilterSwal (slot) {
+
+    Swal.fire({
+        width: "80%",
+        showConfirmButton: false,
+        customClass: {
+            container: "custom-swal-container",
+            popup: "custom-swal-popup",
+            htmlContainer: "custom-swal-html",
+        },
+        showClass: {
+            popup: "animate__animated animate__fadeIn animate__faster"
+        },
+        hideClass: {
+            popup: "animate__animated animate__fadeOut animate__faster"
+        },
+        html: renderPokemonFilter(Globals.Parameters.VersionId, slot),
+        didOpen: () => document.activeElement.blur()
+    });
+
+    filterPokemons(Globals.Parameters.VersionId, slot);
+
+}
+
 function renderPokemonFilter(versionId, slot) {
 
     const typeOptions = Object.values(Globals.Database.Types).map(t => `<option value="${t.id}">${t.name}</option>`).join("");
