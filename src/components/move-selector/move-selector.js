@@ -62,10 +62,14 @@ function filterMoves (pokemonId, versionGroupId, teamSlot, moveSlot) {
         // type
         filter.split(" ").some(f => Globals.Database.Types[Globals.Database.Moves[l.moveId].typeId].name.toUpperCase().indexOf(f) > -1) ||
         // damage class
-        filter.split(" ").some(f => damageClassIdToText[determineDamageClass(Globals.Database.Moves[l.moveId].typeId, Globals.Database.Moves[l.moveId].damageClassId, generationId)].indexOf(f) > -1)
+        filter.split(" ").some(f => damageClassIdToText[determineDamageClass(Globals.Database.Moves[l.moveId].typeId, Globals.Database.Moves[l.moveId].damageClassId, generationId)].indexOf(f) > -1) ||
+        // effect
+        filter.split(" ").some(f => formatMoveEffect(Globals.Database.Moves[l.moveId]).toUpperCase().indexOf(f) > -1) || 
+        // target
+        filter.split(" ").some(f => Globals.Database.MoveTargets[Globals.Database.Moves[l.moveId].targetId].name.toUpperCase().indexOf(f) > -1)
     ));
 
-    const movesHTML = moves.orderBy(l => l.preEvolution ? 0 : l.methodId).map(learn => renderMove(learn, versionGroupId, `selectMove(${teamSlot}, ${moveSlot}, ${learn.moveId}, ${learn.methodId}, ${learn.level}, ${learn.preEvolution ? "true" : "false"}, ${learn.preEvolution ? learn.pokemonId : "0"})`, setMovesIds.includes(learn.moveId)));
+    const movesHTML = moves.orderBy(l => l.preEvolution ? 0 : l.methodId).map(learn => renderMove(pokemonId, learn, versionGroupId, `selectMove(${teamSlot}, ${moveSlot}, ${learn.moveId}, ${learn.methodId}, ${learn.level}, ${learn.preEvolution ? "true" : "false"}, ${learn.preEvolution ? learn.pokemonId : "0"})`, setMovesIds.includes(learn.moveId)));
 
     document.getElementById("move-list").innerHTML = movesHTML.join("");
 

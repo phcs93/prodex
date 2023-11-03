@@ -1,5 +1,5 @@
-function renderDamageClass (damageClassId) {
+function renderDamageClass (damageClassId, hadc) {
     return `
-        <div class="damage-class" data-damage-id="${damageClassId}"></div>
+        <div class="damage-class ${hadc ? "glow" : ""}" data-damage-id="${damageClassId}"></div>
     `;
 }

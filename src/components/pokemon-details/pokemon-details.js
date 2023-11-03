@@ -57,7 +57,7 @@ function renderPokemonDetails (pokemon) {
             </div>
             <div class="flex-columns">
                 <label>Catch Rate (*)</label> <!-- (#% normal pokeball + full hp in gen X) -->
-                <label>${pokemon.captureRate} </label>
+                <label>${renderCaptureRate(pokemon.captureRate)} </label>
             </div>
             <div class="flex-columns">
                 <label>Happiness</label>
@@ -111,6 +111,13 @@ function renderHeight (height) {
 
 function renderWeight (weight) {
     return `${weight} kg (${(weight * 2.205).toFixed(2)} lbs)`;
+}
+
+function renderCaptureRate (captureRate) {
+    const C = captureRate;
+    const S = 1;
+    const B = 1;
+    return `${captureRate} (${(((((C*B)/3)*S)/255)*100).toFixed(2)}%)`;
 }
 
 function renderGrowthRate (growthRateId) {

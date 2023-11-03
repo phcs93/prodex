@@ -42,7 +42,8 @@ div.box {
     box-sizing: border-box;
     padding: 16px;
     box-shadow: 0px 0px 2px 2px #000A;
-    min-width: 295px;    
+    min-width: 295px;
+    /* max-width: 295px; */
     @media (pointer:none), (pointer:coarse) {
         flex-grow: 1;
     }
@@ -78,6 +79,10 @@ div.grow {
     flex-grow: 1;
 }
 
+div.shrink {
+    flex-shrink: 1;
+}
+
 div.margin {
     margin: 16px;
 }
@@ -103,6 +108,7 @@ form {
 }
 
 label {
+    display: table; /* i don't know why but this fixes everything */
     font-family: "Candara";
     font-size: 14px;
     font-weight: bold;
@@ -252,6 +258,14 @@ input[name="display-toggle"] {
 /* ================================================================================ */
 /* team */
 /* ================================================================================ */
+
+/* i don't know any other way to solve this problem */
+div#team > div.box {
+    max-width: 295px;
+    @media (pointer:none), (pointer:coarse) {
+        max-width: unset;
+    }
+}
 
 button.add-pokemon {
     height: 128px;
@@ -408,4 +422,31 @@ div.buy-me-a-coffee {
     & svg {
         height: 20px !important;
     }
+}
+
+/* ================================================================================ */
+/* glow */
+/* ================================================================================ */
+
+.glow {
+    border: 1px solid;
+    border-image: conic-gradient(from var(--angle), red, yellow, lime, aqua, blue, magenta, red) 1;
+    animation: 3s rotate linear infinite;
+    /* -webkit-mask:
+        linear-gradient(#fff 0 0) padding-box, 
+        linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor; 
+            mask-composite: exclude; */
+}
+
+@keyframes rotate {
+	to {
+		--angle: 360deg;
+	}
+}
+
+@property --angle {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
 }

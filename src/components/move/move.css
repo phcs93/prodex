@@ -57,3 +57,7 @@ div.move-info > label {
     line-height: 12px !important;
     /* color: #e2dd42; */
 }
+
+div.move-info > hr {
+    margin: 8px 0px !important;
+}

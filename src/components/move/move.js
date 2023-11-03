@@ -1,9 +1,15 @@
-function renderMove (learn, versionGroupId, clickCallback, disable) {
+function renderMove (pokemonId, learn, versionGroupId, clickCallback, disable) {
 
     const move = Globals.Database.Moves[learn.moveId];
     const learnMethodName = formatLearnMethodName(learn, versionGroupId);
     const generationId = Globals.Database.VersionGroups[versionGroupId].generationId;
     const damageClassId = determineDamageClass(move.typeId, move.damageClassId, generationId);
+    const pokemon = Globals.Database.Pokemons[pokemonId];
+    const stab = pokemon.types.includes(move.typeId);
+
+    // 2 = physical | 3 = special
+    const highestAttackAttributeId = pokemon.stats.atk.base === pokemon.stats.spatk.base ? 0 : (pokemon.stats.atk.base > pokemon.stats.spatk.base ? 2 : 3);
+    const hadc = highestAttackAttributeId === 0 ? false : (damageClassId === highestAttackAttributeId);
 
     return `
         <div>
@@ -13,10 +19,10 @@ function renderMove (learn, versionGroupId, clickCallback, disable) {
                         <label>${move.name.toUpperCase()}</label>
                     </div>  
                     <div>
-                        ${renderType(move.typeId)}
+                        ${renderType(move.typeId, stab)}
                     </div>    
                     <div>
-                        ${renderDamageClass(damageClassId)}
+                        ${renderDamageClass(damageClassId, hadc)}
                     </div>       
                 </div>
                 <div class="flex-columns gap">
@@ -35,19 +41,18 @@ function renderMove (learn, versionGroupId, clickCallback, disable) {
                         <label>PP&nbsp;</label>
                         <label>${move.pp}</label>
                     </div>
-                </div>
+                </div>                
+            </div>            
+            <div class="flex-rows move-info">
+                <label>TARGET [<span>${Globals.Database.MoveTargets[move.targetId].name.toUpperCase()}</span>]</label>
+                <hr>
+                <label>${formatMoveEffect(move)}</label>
+                ${learn.preEvolution ? `<hr><label style="color: goldenrod;">PRE-EVOLUTION (${Globals.Database.Pokemons[learn.pokemonId].name.toUpperCase()})</label>` : ""}
             </div>
-            ${learn.preEvolution ? `<div class="flex-rows move-info"><label>PRE-EVOLUTION (${Globals.Database.Pokemons[learn.pokemonId].name.toUpperCase()})</label></div>` : ""}
         </div>
     `;
 
 }
-
-/*
-    <div>
-        ${renderTarget(move.targetId)}
-    </div>
-*/
 
 function formatLearnMethodName (learn, versionGroupId) {
     switch (learn.methodId) {
@@ -59,7 +64,7 @@ function formatLearnMethodName (learn, versionGroupId) {
             return `${machineName.slice(0, 2).toUpperCase()} ${machineName.slice(2)}`
         }
         default: return Globals.Database.MoveLearnMethods[learn.method];
-    }    
+    }
 }
 
 // determine move damage class based on generation
@@ -74,4 +79,8 @@ function determineDamageClass (typeId, damageClassId, generationId) {
             case 10: case 11: case 12: case 13: case 14: case 15: case 16: case 17: return 3; 
         }
     }
+}
+
+function formatMoveEffect (move) {
+    return move.effect.replace("$effect_chance", move.effectChance).replace(/\{.*?\}/g, "").replace(/\[/g, "").replace(/\]/g, "").toUpperCase();
 }

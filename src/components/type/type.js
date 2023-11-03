@@ -1,5 +1,5 @@
-function renderType(typeId) {
+function renderType(typeId, stab) {
     return `
-        <div class="type" data-type-id="${typeId}"></div>
+        <div class="type ${stab ? "glow" : ""}" data-type-id="${typeId}"></div>
     `;
 }

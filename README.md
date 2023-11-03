@@ -45,6 +45,13 @@ https://veekun.com/dex/downloads
 
 - figure a way to use separate .html files (web loader?)
 
+## pokemon details
+
+- show icon for
+  - shape
+  - footprint
+  - color
+
 ## filters
 
 - evolution filters (render evolutions when filtering)
@@ -60,10 +67,6 @@ https://veekun.com/dex/downloads
   - by hatching egg -> DONE
   - by trading from sister version
     - detect if pokemon can be traded from other generations
-
-## moves window
-
-- highlight STAB (also highlight damage type based on highest pokemon stat)
 
 ## important things
 

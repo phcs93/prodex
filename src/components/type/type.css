@@ -33,31 +33,32 @@ div.type {
 	border-radius: 3px;
 	width: 74px;
 	text-align: center;
-    &[data-type-id="1"] { background-color: var(--normal); &::before { content: "NORMAL"; } }
-    &[data-type-id="2"] { background-color: var(--fighting); &::before { content: "FIGHTING"; } }
-    &[data-type-id="3"] { background-color: var(--flying); &::before { content: "FLYING"; } }
-    &[data-type-id="4"] { background-color: var(--poison); &::before { content: "POISON"; } }
-    &[data-type-id="5"] { background-color: var(--ground); &::before { content: "GROUND"; } }
-    &[data-type-id="6"] { background-color: var(--rock); &::before { content: "ROCK"; } }
-    &[data-type-id="7"] { background-color: var(--bug); &::before { content: "BUG"; } }
-    &[data-type-id="8"] { background-color: var(--ghost); &::before { content: "GHOST"; } }
-    &[data-type-id="9"] { background-color: var(--steel); &::before { content: "STEEL"; } }
-    &[data-type-id="10"] { background-color: var(--fire); &::before { content: "FIRE"; } }
-    &[data-type-id="11"] { background-color: var(--water); &::before { content: "WATER"; } }
-    &[data-type-id="12"] { background-color: var(--grass); &::before { content: "GRASS"; } }
-    &[data-type-id="13"] { background-color: var(--electric); &::before { content: "ELECTRIC"; } }
-    &[data-type-id="14"] { background-color: var(--psychic); &::before { content: "PSYCHIC"; } }
-    &[data-type-id="15"] { background-color: var(--ice); &::before { content: "ICE"; } }
-    &[data-type-id="16"] { background-color: var(--dragon); &::before { content: "DRAGON"; } }
-    &[data-type-id="17"] { background-color: var(--dark); &::before { content: "DARK"; } }
-    &[data-type-id="18"] { background-color: var(--fairy); &::before { content: "FAIRY"; } }
-    &[data-type-id="10001"] { background-color: var(--unknown); &::before { content: "UNKNOWN"; } }
-    &[data-type-id="10002"] { background-color: var(--shadow); &::before { content: "SHADOW"; } }
+    &[data-type-id="1"] { background-color: var(--normal); &::after { content: "NORMAL"; } }
+    &[data-type-id="2"] { background-color: var(--fighting); &::after { content: "FIGHTING"; } }
+    &[data-type-id="3"] { background-color: var(--flying); &::after { content: "FLYING"; } }
+    &[data-type-id="4"] { background-color: var(--poison); &::after { content: "POISON"; } }
+    &[data-type-id="5"] { background-color: var(--ground); &::after { content: "GROUND"; } }
+    &[data-type-id="6"] { background-color: var(--rock); &::after { content: "ROCK"; } }
+    &[data-type-id="7"] { background-color: var(--bug); &::after { content: "BUG"; } }
+    &[data-type-id="8"] { background-color: var(--ghost); &::after { content: "GHOST"; } }
+    &[data-type-id="9"] { background-color: var(--steel); &::after { content: "STEEL"; } }
+    &[data-type-id="10"] { background-color: var(--fire); &::after { content: "FIRE"; } }
+    &[data-type-id="11"] { background-color: var(--water); &::after { content: "WATER"; } }
+    &[data-type-id="12"] { background-color: var(--grass); &::after { content: "GRASS"; } }
+    &[data-type-id="13"] { background-color: var(--electric); &::after { content: "ELECTRIC"; } }
+    &[data-type-id="14"] { background-color: var(--psychic); &::after { content: "PSYCHIC"; } }
+    &[data-type-id="15"] { background-color: var(--ice); &::after { content: "ICE"; } }
+    &[data-type-id="16"] { background-color: var(--dragon); &::after { content: "DRAGON"; } }
+    &[data-type-id="17"] { background-color: var(--dark); &::after { content: "DARK"; } }
+    &[data-type-id="18"] { background-color: var(--fairy); &::after { content: "FAIRY"; } }
+    &[data-type-id="10001"] { background-color: var(--unknown); &::after { content: "UNKNOWN"; } }
+    &[data-type-id="10002"] { background-color: var(--shadow); &::after { content: "SHADOW"; } }
     & + div.type {
         margin-left: 4px;
     }
 }
 
+/* pokemon filter match window */
 span.type {
     &[data-type-id="1"] { color: var(--normal); }
     &[data-type-id="2"] { color: var(--fighting); }
