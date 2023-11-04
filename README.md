@@ -44,7 +44,7 @@ https://veekun.com/dex/downloads
 # TO-DO
 
 - figure a way to use separate .html files (web loader?)
-- I could really improve the UX/UI in general but I don't have for this anymore
+- I could really improve the UX/UI in general but I don't have time for this anymore
 
 ## pokemon details
 
