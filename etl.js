@@ -96,7 +96,42 @@ const execSync = require("node:child_process").execSync;
         versionGroupId: parseInt(v[1])
     }));
 
-    // TODO => parse placeholders
+    /*
+        0 = id
+        1 = damage_class_id
+        2 = identifier
+        3 = is_battle_only
+        4 = game_index
+    */
+    const _statsDictionary = {
+        "1": "HP",
+        "2": "ATK",
+        "3": "DEF",
+        "4": "SP.ATK",
+        "5": "SP.DEF",
+        "6": "SPEED",
+        "7": "ACC",
+        "8": "EVA"
+    };
+
+    /*
+        0 = id
+        1 = identifier
+        2 = decreased_stat_id
+        3 = increased_stat_id
+        4 = hates_flavor_id
+        5 = likes_flavor_id
+        6 = game_index
+    */
+    const natureDictionary = parseCSV("natures.csv").toDictionary(n => n[0], n => ({
+        id: parseInt(n[0]),
+        name: format(n[1]),
+        decreasedStat: _statsDictionary[parseInt(n[2])],
+        increasedStat: _statsDictionary[parseInt(n[3])],
+        hatesFlavorId: parseInt(n[4]),
+        likesFlavorId: parseInt(n[5])
+    }));
+
     /*
         0 = ability_id
         1 = local_language_id
@@ -252,7 +287,6 @@ const execSync = require("node:child_process").execSync;
         regionId: _locationDictionary[l[1]].regionId
     }));
     
-    // TODO => parse placeholders
     /*
         0 = move_effect_id
         1 = local_language_id
@@ -837,6 +871,7 @@ const execSync = require("node:child_process").execSync;
         Generations: generationDictionary,
         VersionGroups: versionGroupDictionary,
         Versions: versionDictionary,
+        Natures: natureDictionary,
         Abilities: abilityDictionary,
         EggGroups: eggGroupDictionary,
         Colors: colorsDictionary,

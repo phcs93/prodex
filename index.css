@@ -107,6 +107,10 @@ form {
     margin: 0px;
 }
 
+small {
+    display: table; /* i don't know why but this fixes everything */
+}
+
 label {
     display: table; /* i don't know why but this fixes everything */
     font-family: "Candara";
@@ -164,6 +168,16 @@ button.primary {
 
 input[type="radio"]+label {
     cursor: pointer;
+}
+
+.input-left-half {
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+}
+
+.input-right-half {
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
 }
 
 /* ================================================================================ */

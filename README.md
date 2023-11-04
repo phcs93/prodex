@@ -44,6 +44,7 @@ https://veekun.com/dex/downloads
 # TO-DO
 
 - figure a way to use separate .html files (web loader?)
+- I could really improve the UX/UI in general but I don't have for this anymore
 
 ## pokemon details
 
@@ -75,12 +76,6 @@ https://veekun.com/dex/downloads
 - encounters for regional forms should be the same as their base form (?)
 - change "only obtainable" flag to "show from all versions" (remember to unconsider version on moves, held items, etc)
   - actually it would be simpler to just disable all version dependant filters
-
-## team builder 
-
-- also select ability, nature, level, EVs, IVs
-- select gender
-- select shiny
 
 ## charts
 

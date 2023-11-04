@@ -5,7 +5,7 @@ function renderMove (pokemonId, learn, versionGroupId, clickCallback, disable) {
     const generationId = Globals.Database.VersionGroups[versionGroupId].generationId;
     const damageClassId = determineDamageClass(move.typeId, move.damageClassId, generationId);
     const pokemon = Globals.Database.Pokemons[pokemonId];
-    const stab = pokemon.types.includes(move.typeId);
+    const stab = damageClassId != 1 && pokemon.types.includes(move.typeId);
 
     // 2 = physical | 3 = special
     const highestAttackAttributeId = pokemon.stats.atk.base === pokemon.stats.spatk.base ? 0 : (pokemon.stats.atk.base > pokemon.stats.spatk.base ? 2 : 3);
@@ -46,7 +46,7 @@ function renderMove (pokemonId, learn, versionGroupId, clickCallback, disable) {
             <div class="flex-rows move-info">
                 <label>TARGET [<span>${Globals.Database.MoveTargets[move.targetId].name.toUpperCase()}</span>]</label>
                 <hr>
-                <label>${formatMoveEffect(move)}</label>
+                <small>${formatMoveEffect(move)}</small>
                 ${learn.preEvolution ? `<hr><label style="color: goldenrod;">PRE-EVOLUTION (${Globals.Database.Pokemons[learn.pokemonId].name.toUpperCase()})</label>` : ""}
             </div>
         </div>
@@ -82,5 +82,5 @@ function determineDamageClass (typeId, damageClassId, generationId) {
 }
 
 function formatMoveEffect (move) {
-    return move.effect.replace("$effect_chance", move.effectChance).replace(/\{.*?\}/g, "").replace(/\[/g, "").replace(/\]/g, "").toUpperCase();
+    return move.effect.replace("$effect_chance", move.effectChance).replace(/\{.*?\}/g, "").replace(/\[/g, "").replace(/\]/g, "");
 }

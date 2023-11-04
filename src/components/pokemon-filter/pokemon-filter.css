@@ -13,16 +13,6 @@ div.filter-form {
     }
 }
 
-.input-left-half {
-    border-top-right-radius: 0px;
-    border-bottom-right-radius: 0px;
-}
-
-.input-right-half {
-    border-top-left-radius: 0px;
-    border-bottom-left-radius: 0px;
-}
-
 div.filtered-pokemon {
     position: relative;
     &:hover {

@@ -6,7 +6,7 @@ Globals = function (database, parameters) {
             id: p?.Team[i]?.id || null,
             ability: p?.Team[i]?.ability || null,
             nature: p?.Team[i]?.nature || null,
-            gender: p?.Team[i]?.gender || null,
+            gender: p?.Team[i]?.gender || "M",
             shiny: p?.Team[i]?.shiny || null,
             moves: new Proxy(new Array(4).fill(null).map((_, m) => p?.Team[i]?.moves[m] || null), proxyHandler)
         }, proxyHandler))
