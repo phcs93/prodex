@@ -43,7 +43,15 @@ https://veekun.com/dex/downloads
 
 # TO-DO
 
-- figure a way to use separate .html files (web loader?)
+- [BUG] properly parse placeholders on moves and abilities
+- change "only obtainable" flag to "ignore version" (disable all version dependant filters)
+
+- consider abilities when calculating pokemon weakness (attacking and defending)
+- consider generation when filtering move type (some normal moves became fairy type)
+- encounters for regional forms should be the same as their base form (?)
+- detect if pokemon can be obtainble at version by trading ([!https://pokemondb.net/pokebase/233293/what-games-can-i-trade-transfer-my-pokemon-to?show=329604#a329604](too much work))
+
+- figure out a way to use separate .html files (web loader?)
 - I could really improve the UX/UI in general but I don't have time for this anymore
 
 ## filters
@@ -53,22 +61,6 @@ https://veekun.com/dex/downloads
   - number of branches
   - evolution method (items, trading, etc)
     - if item, choose which item to filter by
-
-## database
-
-- determine if pokemon is obtainable in version 
-  - by evolution -> DONE
-  - by hatching egg -> DONE
-  - by trading from sister version
-    - detect if pokemon can be traded from other generations
-
-## important things
-
-- consider abilities when calculating pokemon weakness (attacking and defending)
-- consider generation when filtering move type (some normal moves became fairy)
-- encounters for regional forms should be the same as their base form (?)
-- change "only obtainable" flag to "show from all versions" (remember to unconsider version on moves, held items, etc)
-  - actually it would be simpler to just disable all version dependant filters
 
 ## charts
 
@@ -127,7 +119,7 @@ https://veekun.com/dex/downloads
 
 ## missing cries
 
-- from 722 onwards
+- from id 722 onwards
 
 ## missing footprints
 
