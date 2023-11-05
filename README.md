@@ -46,13 +46,6 @@ https://veekun.com/dex/downloads
 - figure a way to use separate .html files (web loader?)
 - I could really improve the UX/UI in general but I don't have time for this anymore
 
-## pokemon details
-
-- show icon for
-  - shape
-  - footprint
-  - color
-
 ## filters
 
 - evolution filters (render evolutions when filtering)

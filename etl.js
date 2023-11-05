@@ -33,9 +33,6 @@ const execSync = require("node:child_process").execSync;
     // clone pokeapi sprites repo if it doesn't exist
     if (!fs.existsSync("git/sprites")) execSync("git clone https://github.com/PokeAPI/sprites.git", { stdio: [0, 1, 2], cwd: "git" });
 
-    // clone footprint api repo if it doesn't exist
-    if (!fs.existsSync("git/FootprintAPI")) execSync("git clone https://github.com/KierranFalloon/FootprintAPI.git", { stdio: [0, 1, 2], cwd: "git" });
-
     // log
     console.log("Processing CSV data...");
 

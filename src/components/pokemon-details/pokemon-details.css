@@ -3,17 +3,77 @@ div.pokemon-details label {
     line-height: 20px !important;
     display: inline-block;
     text-align: right;
-    width: 35%;
+    font-size: small;
 }
 
 div.pokemon-details > div.flex-columns > label:nth-of-type(1) {
     font-weight: normal;
-    font-size: small;
-    color: darkgray
+    color: darkgray;
+    width: 35%;
 }
 
 div.pokemon-details label + label {
     width: 65%;
     text-align: left;
     margin: 0px 16px;
+}
+
+div.habitat {
+    width: 52px;
+    height: 40px;
+    margin: 4px auto;
+    filter: drop-shadow(2px 2px 2px rgba(0,0,0,.4));
+    background-repeat: no-repeat;
+    background-size: contain;
+    &[data-habitat-id="1"] { background-image: url("../../../res/habitats/cave.png"); }
+    &[data-habitat-id="2"] { background-image: url("../../../res/habitats/forest.png"); }
+    &[data-habitat-id="3"] { background-image: url("../../../res/habitats/grassland.png"); }
+    &[data-habitat-id="4"] { background-image: url("../../../res/habitats/mountain.png"); }
+    &[data-habitat-id="5"] { background-image: url("../../../res/habitats/rare.png"); }
+    &[data-habitat-id="6"] { background-image: url("../../../res/habitats/rough-terrain.png"); }
+    &[data-habitat-id="7"] { background-image: url("../../../res/habitats/sea.png"); }
+    &[data-habitat-id="8"] { background-image: url("../../../res/habitats/urban.png"); }
+    &[data-habitat-id="9"] { background-image: url("../../../res/habitats/waters-edge.png"); }
+}
+
+div.shape {
+    width: 40px;
+    height: 40px;
+    margin: 4px auto;
+    filter: invert(50%) drop-shadow(2px 2px 2px rgba(0,0,0,.4));
+    background-repeat: no-repeat;
+    background-size: contain;
+    &[data-shape-id="1"] { background-image: url("../../../res/shapes/ball.png"); }
+    &[data-shape-id="2"] { background-image: url("../../../res/shapes/squiggle.png"); }
+    &[data-shape-id="3"] { background-image: url("../../../res/shapes/fish.png"); }
+    &[data-shape-id="4"] { background-image: url("../../../res/shapes/arms.png"); }
+    &[data-shape-id="5"] { background-image: url("../../../res/shapes/blob.png"); }
+    &[data-shape-id="6"] { background-image: url("../../../res/shapes/upright.png"); }
+    &[data-shape-id="7"] { background-image: url("../../../res/shapes/legs.png"); }
+    &[data-shape-id="8"] { background-image: url("../../../res/shapes/quadruped.png"); }
+    &[data-shape-id="9"] { background-image: url("../../../res/shapes/wings.png"); }
+    &[data-shape-id="10"] { background-image: url("../../../res/shapes/tentacles.png"); }
+    &[data-shape-id="11"] { background-image: url("../../../res/shapes/heads.png"); }
+    &[data-shape-id="12"] { background-image: url("../../../res/shapes/humanoid.png"); }
+    &[data-shape-id="13"] { background-image: url("../../../res/shapes/bug-wings.png"); }
+    &[data-shape-id="14"] { background-image: url("../../../res/shapes/armor.png"); }
+}
+
+img.footprint-sprite {
+    filter: invert(50%) drop-shadow(2px 2px 2px rgba(0,0,0,.4));
+    transform: scale(2);
+    margin: 16px auto;
+}
+
+label.color {
+    &[data-color-id="1"] { color: #2B2B2B; } /* black */
+    &[data-color-id="2"] { color: #0095D9; } /* blue */
+    &[data-color-id="3"] { color: #965042; } /* brown */
+    &[data-color-id="4"] { color: #7D7D7D; } /* gray */
+    &[data-color-id="5"] { color: #3EB370; } /* green */
+    &[data-color-id="6"] { color: #E38698; } /* pink */
+    &[data-color-id="7"] { color: #884898; } /* purple */
+    &[data-color-id="8"] { color: #E60033; } /* red */
+    &[data-color-id="9"] { color: #FFFFFF; } /* white */
+    &[data-color-id="10"] { color: #FFD900; } /* yellow */
 }

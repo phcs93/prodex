@@ -56,7 +56,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         if (Math.random() > 0.5/*false*/) {
             Globals.Parameters.Team[i].id = null;
         } else {
-            Globals.Parameters.Team[i].id = Math.floor(Math.random() * 100);
+            Globals.Parameters.Team[i].id = Math.floor(Math.random() * 800);
 
             // set moves randomly
             for (let m = 0; m < Math.floor(Math.random() * 5); m++) {

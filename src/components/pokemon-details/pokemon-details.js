@@ -30,18 +30,16 @@ function renderPokemonDetails (pokemon) {
     };
 
     return `
+
         <div class="flex-rows pokemon-details">
+
             <div class="flex-columns">
-                <label>Ability 1</label>
-                <label>${getAbilityName(pokemon.abilities[0])}</label>
+                <label style="">Generation</label>
+                <label>${pokemon.introducedInGeneration}</label>
             </div>
             <div class="flex-columns">
-                <label>Ability 2</label>
-                <label>${getAbilityName(pokemon.abilities[1])}</label>
-            </div>
-            <div class="flex-columns">
-                <label>Hidden Ability</label>
-                <label>${getAbilityName(pokemon.abilities[2])}</label>
+                <label>Species</label>
+                <label>${pokemon.specie}</label>
             </div>
             <div class="flex-columns">
                 <label>Height</label>
@@ -56,15 +54,15 @@ function renderPokemonDetails (pokemon) {
                 <label>${pokemon.baseExperience}</label>
             </div>
             <div class="flex-columns">
-                <label>Catch Rate (*)</label> <!-- (#% normal pokeball + full hp in gen X) -->
+                <label>Catch Rate</label>
                 <label>${renderCaptureRate(pokemon.captureRate)} </label>
             </div>
             <div class="flex-columns">
                 <label>Happiness</label>
-                <label>${pokemon.baseHappiness} (normal?)</label>
+                <label>${pokemon.baseHappiness}</label>
             </div>
             <div class="flex-columns">
-                <label>Growth Rat</label>
+                <label>Growth Rate</label>
                 <label>${getGrowthRateName(pokemon.growthRateId)}</label>
             </div>
             <div class="flex-columns">
@@ -72,35 +70,56 @@ function renderPokemonDetails (pokemon) {
                 <label>${getEggGroupsNames(pokemon.eggGroups)}</label>
             </div>
             <div class="flex-columns">
-                <label>Shape</label>
-                <label>${getShapeName(pokemon.shapeId)} (footprint icon)</label>
-            </div>
-            <div class="flex-columns">
-                <label>Habitat</label>
-                <label>${getHabitatName(pokemon.habitatId)} (footprint?)</label>
-            </div>
-            <div class="flex-columns">
-                <label>Color</label>
-                <label>${getColorName(pokemon.colorId)} (show square color)</label>
-            </div>
-            <div class="flex-columns">
-                <label>Specie</label>
-                <label>${pokemon.specie}</label>
-            </div>
-            <div class="flex-columns">
                 <label>Hatch Counter</label>
                 <label>${pokemon.hatchCounter} cycles (${pokemon.hatchCounter * 255} steps)</label>
             </div>
             <div class="flex-columns">
-                <label>Generation</label>
-                <label>${pokemon.introducedInGeneration}</label>
+                <label>Ability 1</label>
+                <label>${getAbilityName(pokemon.abilities[0])}</label>
             </div>
-            <!-- <div class="flex-columns">
-                <label>Evolution Chain Id</label>
-                <label>${pokemon.evolutionChainId}</label>
-            </div> -->
+            <div class="flex-columns">
+                <label>Ability 2</label>
+                <label>${getAbilityName(pokemon.abilities[1])}</label>
+            </div>
+            <div class="flex-columns">
+                <label>Hidden Ability</label>
+                <label>${getAbilityName(pokemon.abilities[2])}</label>
+            </div>
+            <div class="flex-columns">
+                <label>Color</label>
+                <label class="color" data-color-id="${pokemon.colorId}">${getColorName(pokemon.colorId)}</label>
+            </div>
+
+            <br>
+            <hr>
+            <br>
+
+            <div class="flex-columns grow">
+
+                <div class="flex-rows grow align-center" style="width: 33%;">
+                    <label>HABITAT</label>
+                    <div class="habitat" data-habitat-id="${pokemon.habitatId}"></div>
+                    <label style="text-align: center;">${getHabitatName(pokemon.habitatId).toUpperCase()}</label>
+                </div>
+
+                <div class="flex-rows grow align-center" style="width: 33%;">
+                    <label>SHAPE</label>
+                    <div class="shape" data-shape-id="${pokemon.shapeId}"></div>
+                    <label style="text-align: center;">${getShapeName(pokemon.shapeId).toUpperCase()}</label>
+                </div>
+                            
+                <div class="flex-rows grow align-center" style="width: 33%;">
+                    <label>FOOTPRINT</label>
+                    <img class="footprint-sprite" data-id="${pokemon.id}" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" />
+                    <label style="text-align: center;">---</label>
+                </div>
+
+            </div>
+
         </div>
+
     `;
+
 }
 
 function renderHeight (height) {
