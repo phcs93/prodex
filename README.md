@@ -43,6 +43,7 @@ https://veekun.com/dex/downloads
 
 # TO-DO
 
+- [BUG] swal not scrolling correctly when parent not on top
 - [BUG] properly parse placeholders on moves and abilities
 - change "only obtainable" flag to "ignore version" (disable all version dependant filters)
 
