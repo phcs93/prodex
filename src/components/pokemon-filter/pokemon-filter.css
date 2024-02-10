@@ -43,3 +43,14 @@ div.filter-matches > hr {
     margin: 8px 0px !important;
 }
 
+div#pokemon-grid {
+    height: 800px;
+    overflow-y: scroll;
+}
+
+@media (pointer:none), (pointer:coarse) {
+    div#pokemon-grid {
+        height: 100%;
+        overflow-y: hidden;
+    }
+}
