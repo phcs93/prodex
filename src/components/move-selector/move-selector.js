@@ -4,6 +4,7 @@ function showMoveSelectorSwal (teamSlot, moveSlot) {
     const versionGroupId = Globals.Database.Versions[Globals.Parameters.VersionId].versionGroupId;
 
     Swal.fire({
+        position: "top",
         width: "300px",
         showConfirmButton: false,
         customClass: {

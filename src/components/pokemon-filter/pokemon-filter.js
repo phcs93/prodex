@@ -1,6 +1,7 @@
 function showPokemonFilterSwal (slot) {
 
     Swal.fire({
+        position: "top",
         width: "80%",
         showConfirmButton: false,
         customClass: {
