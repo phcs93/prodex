@@ -321,7 +321,7 @@ div.metric > img {
     margin-top: 10vh;
     @media (pointer:none), (pointer:coarse) {              
         width: 100% !important;
-        height: 97vh;
+        height: 90vh;
         margin-top: 0;
     }
 }
