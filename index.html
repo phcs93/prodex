@@ -1,72 +1,72 @@
 <html>
 
-<head>
+    <head>
 
-    <title>prodex</title>
-    <link rel="icon" type="image/x-icon" href="res/favicon.svg">
+        <title>prodex</title>
+        <link rel="icon" type="image/x-icon" href="res/favicon.svg">
 
-    <!-- metas -->
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- metas -->
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!-- lib -->
-    <script src="lib/pako/pako.js"></script>
+        <!-- lib -->
+        <script src="lib/pako/pako.js"></script>
 
-    <script src="lib/swal/swal.js"></script>
-    <link rel="stylesheet" href="lib/swal/swal.css">
+        <script src="lib/swal/swal.js"></script>
+        <link rel="stylesheet" href="lib/swal/swal.css">
 
-    <link rel="stylesheet" href="lib/animate/animate.css">
+        <link rel="stylesheet" href="lib/animate/animate.css">
 
-    <link rel="stylesheet" href="lib/el-checkbox/el-checkbox.css">
+        <link rel="stylesheet" href="lib/el-checkbox/el-checkbox.css">
 
-    <!-- res -->
-    <link rel="stylesheet" href="res/pokemon-spritesheet.css">
-    <link rel="stylesheet" href="res/footprint-spritesheet.css">
+        <!-- res -->
+        <link rel="stylesheet" href="res/pokemon-spritesheet.css">
+        <link rel="stylesheet" href="res/footprint-spritesheet.css">
 
-    <!-- prototypes -->
-    <script src="src/prototypes/Array.js"></script>
+        <!-- prototypes -->
+        <script src="src/prototypes/Array.js"></script>
 
-    <!-- components -->
-    <link rel="stylesheet" href="src/components/slider/slider.css">
-    <script src="src/components/slider/slider.js"></script>
+        <!-- components -->
+        <link rel="stylesheet" href="src/components/slider/slider.css">
+        <script src="src/components/slider/slider.js"></script>
 
-    <link rel="stylesheet" href="src/components/tab-control/tab-control.css">
-    <script src="src/components/tab-control/tab-control.js"></script>
+        <link rel="stylesheet" href="src/components/tab-control/tab-control.css">
+        <script src="src/components/tab-control/tab-control.js"></script>
 
-    <link rel="stylesheet" href="src/components/pokemon/pokemon.css">
-    <script src="src/components/pokemon/pokemon.js"></script>
-    <link rel="stylesheet" href="src/components/pokemon-header/pokemon-header.css">
-    <script src="src/components/pokemon-header/pokemon-header.js"></script>
-    <link rel="stylesheet" href="src/components/pokemon-details/pokemon-details.css">
-    <script src="src/components/pokemon-details/pokemon-details.js"></script>
-    <link rel="stylesheet" href="src/components/gender-rate/gender-rate.css">
-    <script src="src/components/gender-rate/gender-rate.js"></script>    
-    <link rel="stylesheet" href="src/components/stats/stats.css">
-    <script src="src/components/stats/stats.js"></script>
-    <link rel="stylesheet" href="src/components/types-effectiveness/types-effectiveness.css">
-    <script src="src/components/types-effectiveness/types-effectiveness.js"></script>
-    
-    <link rel="stylesheet" href="src/components/type/type.css">
-    <script src="src/components/type/type.js"></script>
+        <link rel="stylesheet" href="src/components/pokemon/pokemon.css">
+        <script src="src/components/pokemon/pokemon.js"></script>
+        <link rel="stylesheet" href="src/components/pokemon-header/pokemon-header.css">
+        <script src="src/components/pokemon-header/pokemon-header.js"></script>
+        <link rel="stylesheet" href="src/components/pokemon-details/pokemon-details.css">
+        <script src="src/components/pokemon-details/pokemon-details.js"></script>
+        <link rel="stylesheet" href="src/components/gender-rate/gender-rate.css">
+        <script src="src/components/gender-rate/gender-rate.js"></script>    
+        <link rel="stylesheet" href="src/components/stats/stats.css">
+        <script src="src/components/stats/stats.js"></script>
+        <link rel="stylesheet" href="src/components/types-effectiveness/types-effectiveness.css">
+        <script src="src/components/types-effectiveness/types-effectiveness.js"></script>
+        
+        <link rel="stylesheet" href="src/components/type/type.css">
+        <script src="src/components/type/type.js"></script>
 
-    <link rel="stylesheet" href="src/components/damage-class/damage-class.css">
-    <script src="src/components/damage-class/damage-class.js"></script>
+        <link rel="stylesheet" href="src/components/damage-class/damage-class.css">
+        <script src="src/components/damage-class/damage-class.js"></script>
 
-    <link rel="stylesheet" href="src/components/move/move.css">
-    <script src="src/components/move/move.js"></script>
+        <link rel="stylesheet" href="src/components/move/move.css">
+        <script src="src/components/move/move.js"></script>
 
-    <link rel="stylesheet" href="src/components/pokemon-filter/pokemon-filter.css">
-    <script src="src/components/pokemon-filter/pokemon-filter.js"></script>
+        <link rel="stylesheet" href="src/components/pokemon-filter/pokemon-filter.css">
+        <script src="src/components/pokemon-filter/pokemon-filter.js"></script>
 
-    <link rel="stylesheet" href="src/components/move-selector/move-selector.css">
-    <script src="src/components/move-selector/move-selector.js"></script>
+        <link rel="stylesheet" href="src/components/move-selector/move-selector.css">
+        <script src="src/components/move-selector/move-selector.js"></script>
 
-    <!-- index -->
-    <link rel="stylesheet" href="index.css">
-    <script src="index.js"></script>
+        <!-- index -->
+        <link rel="stylesheet" href="index.css">
+        <script src="index.js"></script>
 
-</head>
+    </head>
 
     <body>
 
@@ -99,7 +99,7 @@
                         <select name="version" id="version"></select>
                     </div>
                     
-                    <button onclick="reset()">RESET TEAM</button>
+                    <button class="danger" onclick="reset()">RESET TEAM</button>
     
                 </div>
             </div>

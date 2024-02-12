@@ -3,12 +3,13 @@ Globals = function (database, parameters) {
     const createProxy = p => new Proxy({
         VersionId: p?.VersionId || 1,
         Team: new Array(6).fill(null).map((_, i) => new Proxy({
-            id: p?.Team[i]?.id || null,
-            ability: p?.Team[i]?.ability || null,
-            nature: p?.Team[i]?.nature || null,
-            gender: p?.Team[i]?.gender || "M",
-            shiny: p?.Team[i]?.shiny || null,
-            moves: new Proxy(new Array(4).fill(null).map((_, m) => p?.Team[i]?.moves[m] || null), proxyHandler)
+            id: p?.Team?.at(i).id || null,
+            ability: p?.Team?.at(i).ability || null,
+            nature: p?.Team?.at(i).nature || null,
+            item: p?.Team?.at(i).item || null,
+            gender: p?.Team?.at(i).gender || "M",
+            shiny: p?.Team?.at(i).shiny || null,
+            moves: new Proxy(new Array(4).fill(null).map((_, m) => p?.Team?.at(i).moves[m] || null), proxyHandler)
         }, proxyHandler))
     }, proxyHandler);
 
@@ -32,10 +33,9 @@ Globals = function (database, parameters) {
     this.Database = database;
 
     this.Reset = () => {        
-        this.Parameters = createProxy();
+        this.Parameters = createProxy({VersionId: Globals.Parameters.VersionId});
         updateUrl();        
-        render();
-        
+        render();        
     }
     
 };
@@ -49,27 +49,29 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     render();
 
-    // randomize team
-    Globals.Reset();
-    Globals.Parameters.VersionId = Math.floor(Math.random() * 24) + 1;
-    for (let i = 0; i < 6; i++) {
-        if (Math.random() > 0.5/*false*/) {
-            Globals.Parameters.Team[i].id = null;
-        } else {
-            Globals.Parameters.Team[i].id = Math.floor(Math.random() * 800);
+    // set default team if none is set
+    if (Globals.Parameters.Team.every(p => !p.id)) {
 
-            // set moves randomly
-            for (let m = 0; m < Math.floor(Math.random() * 5); m++) {
-                if (/*Math.random() > 0.8*/true) {
-                    const versionGroupId = Globals.Database.Versions[Globals.Parameters.VersionId].versionGroupId;
-                    const learns = Globals.Database.Pokemons[Globals.Parameters.Team[i].id].moves[versionGroupId];
-                    if (learns) {
-                        Globals.Parameters.Team[i].moves[m] = learns[Math.floor(Math.random() * Object.keys(learns).length)];
-                    }
+        Globals.Parameters.VersionId = 1;
+
+        Globals.Parameters.Team[0].id = 25;
+        Globals.Parameters.Team[1].id = 1;
+        Globals.Parameters.Team[2].id = 4;
+        Globals.Parameters.Team[3].id = 7;
+        Globals.Parameters.Team[4].id = 16;
+        Globals.Parameters.Team[5].id = 12;
+
+        // set moves randomly
+        for (let i = 0; i < 6; i++) {            
+            for (let m = 0; m < 4; m++) {
+                const versionGroupId = Globals.Database.Versions[Globals.Parameters.VersionId].versionGroupId;
+                const learns = Globals.Database.Pokemons[Globals.Parameters.Team[i].id].moves[versionGroupId];
+                if (learns) {
+                    Globals.Parameters.Team[i].moves[m] = learns[Math.floor(Math.random() * Object.keys(learns).length)];
                 }
-            }
-
+            }            
         }
+
     }
 
     window.onpopstate = function(e) {

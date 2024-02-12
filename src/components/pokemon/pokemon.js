@@ -46,6 +46,15 @@ function renderPokemon (pokemon, pokemonSettings, teamSlot, versionId) {
                     <div class="flex-rows ability-info">${pokemonSettings.ability ? `<small>${formatAbilityDescription(Globals.Database.Abilities[pokemonSettings.ability])}</small>` : ""}</div>
                 </div>
 
+                <div class="flex-rows grow">
+                    <label for="item">HELD ITEM</label>
+                    <select name="item" id="item" onchange="selectItem(this, ${teamSlot});">
+                        <option value="">---</option>
+                        ${Object.values(Globals.Database.Items).orderBy(i => i.name).map(i => `<option value="${i.id}" ${pokemonSettings.item === i.id ? "selected": ""}>${Globals.Database.Items[i.id].name}</option>`).join("")}
+                    </select>
+                    <div class="flex-rows ability-info">${pokemonSettings.item ? `<small>${Globals.Database.Items[pokemonSettings.item].description}</small>` : ""}</div>
+                </div>
+
                 <hr>
 
                 <div class="flex-rows grow">
@@ -80,7 +89,7 @@ function renderPokemon (pokemon, pokemonSettings, teamSlot, versionId) {
             
             <hr>
 
-            <button onclick="removePokemon(${teamSlot})">REMOVE</button>
+            <button class="danger" onclick="removePokemon(${teamSlot})">REMOVE</button>
 
         </div>
     `;
@@ -103,10 +112,16 @@ function selectNature (e, teamSlot) {
     Globals.Parameters.Team[teamSlot - 1].nature = parseInt(e.value);
 }
 
+function selectItem (e, teamSlot) {
+    Globals.Parameters.Team[teamSlot - 1].item = parseInt(e.value);
+}
+
 function formatAbilityDescription (ability) {
     return ability.description.replace(/\{.*?\}/g, "").replace(/\[/g, "").replace(/\]/g, "");
 }
 
 function removePokemon (teamSlot) {
-    Globals.Parameters.Team[teamSlot-1].id = null;
+    if (confirm(`Are you sure you want to remove ${Globals.Database.Pokemons[Globals.Parameters.Team[teamSlot-1].id].name}?`)) {
+        Globals.Parameters.Team[teamSlot-1].id = null;
+    }    
 }

@@ -408,7 +408,7 @@ function renderPokemonFilter(versionId, slot) {
                 <hr>
 
                 <div class="flex-rows gap">
-                    <button type="button" onclick="Swal.close();">CANCEL</button>
+                    <button class="danger" type="button" onclick="Swal.close();">CLOSE</button>
                 </div>
                 
             </div>

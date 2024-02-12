@@ -327,7 +327,17 @@ const execSync = require("node:child_process").execSync;
         contestTypeId: parseInt(m[12]) || 0,
         contestEffectId: parseInt(m[13]) || 0,
         superContestEffectId: parseInt(m[14]) || 0
-    }));    
+    }));
+
+    /*
+        0 = item_id
+        1 = local_language_id
+        2 = short_effect
+        3 = effect
+    */
+    const _itemDescriptionDictionary = parseCSV("item_prose.csv").filter(id => id[1] === "9").toDictionary(id => id[0], id => {
+        return id[2].replace(/\<comma\>/gm, ",").replace("/\<break\>/gm", "\n");
+    });
 
     /*
         0 = id
@@ -343,7 +353,8 @@ const execSync = require("node:child_process").execSync;
         categoryId: parseInt(i[2]) || 0,
         cost: parseInt(i[3]) || 0,
         flingPower: parseInt(i[4]) || 0,
-        flingEffectId: parseInt(i[5]) || 0
+        flingEffectId: parseInt(i[5]) || 0,
+        description: _itemDescriptionDictionary[i[0]]
     }));
 
     /*
@@ -520,6 +531,7 @@ const execSync = require("node:child_process").execSync;
     }, {});
 
     // TODO => consider ability when calculating type efficacy
+    // TODO => consider held item when calculating type efficacy
     /*
         0 = damage_type_id
         1 = target_type_id
@@ -913,8 +925,11 @@ const execSync = require("node:child_process").execSync;
     // log end and size of generated files
     console.log(`\x1b[32m✓\x1b[0m [\x1b[33mres/database.gzip\x1b[0m] successfully generated! (\x1b[33m${compressedDatabaseSize.toFixed(4)} MB\x1b[0m)`);
 
-    // create pokemon pokemon-spritesheet.png and pokemon-spritesheet.css
+    // create pokemon-spritesheet.png and pokemon-spritesheet.css
     await genereatePokemonSpritesheet(pokemonDictionary);
+
+    // create item-spritesheet.png and item-spritesheet.css
+    await genereateItemSpritesheet(itemDictionary);    
 
 })();
 
@@ -1180,7 +1195,7 @@ async function genereatePokemonSpritesheet (pokemons) {
 
     const ids = Object.values(pokemons).map(p => p.id);
 
-    console.log("Processing sprite data...");
+    console.log("Processing pokemon sprites data...");
 
     const officialArtworkDirectory = "git/sprites/sprites/pokemon/other/official-artwork";
     const defaultArtworkDirectory = "git/sprites/sprites/pokemon";
@@ -1265,5 +1280,86 @@ async function genereatePokemonSpritesheet (pokemons) {
 
     const spritesheetCSSSize = fs.statSync("res/pokemon-spritesheet.css").size / (1024 * 1024);
     console.log(`\x1b[32m✓\x1b[0m [\x1b[33m${"res/pokemon-spritesheet.css"}\x1b[0m] successfully generated! (\x1b[33m${spritesheetCSSSize.toFixed(4)} MB\x1b[0m)`);
+
+}
+
+// genereate items spritesheet (pokeapi sprites repository)
+async function genereateItemSpritesheet (itemDictionary) {
+
+    const items = Object.values(itemDictionary);
+
+    console.log("Processing item sprite data...");
+
+    //const officialArtworkDirectory = "git/sprites/sprites/pokemon/other/official-artwork";
+    const defaultArtworkDirectory = "git/sprites/sprites/items";
+    //const gen8 = "git/sprites/sprites/pokemon/versions/generation-viii/icons";
+
+    const sprites = [];
+
+    for (const item of items) {
+
+        const name = item.name.toLowerCase().replace(/ /g, "-");
+
+        if (fs.existsSync(`${defaultArtworkDirectory}/${name}.png`)) {
+            sprites.push(`${defaultArtworkDirectory}/${name}.png`);
+        } else {
+            sprites.push(`${defaultArtworkDirectory}/data-card-01.png`);
+        }
+
+    }
+
+    console.log(`\x1b[32m✓\x1b[0m [\x1b[33m${Object.keys(sprites).length}\x1b[0m] sprites processed!`);
+    console.log("Creating item-spritesheet.png...");
+
+    const rowandcols = Math.ceil(Math.sqrt(sprites.length));
+    const widthheight = rowandcols * 30;
+
+    const spriteMap = await Promise.all(sprites.map(async (image, index) => {
+        const x = parseInt(index % rowandcols);
+        const y = parseInt(index / rowandcols);
+        return {
+            input: await sharp(image).resize(30).toBuffer(),
+            left: x * 30,
+            top: y * 30,
+            width: 30,
+            height: 30
+        };
+    }));
+
+    await sharp({
+        create: {
+            width: widthheight,
+            height: widthheight,
+            channels: 4,
+            background: { r: 0, g: 0, b: 0, alpha: 0 }
+        }
+    })
+    .composite(spriteMap)
+    .toFile("res/item-spritesheet.png");
+
+    const spritesheetSize = fs.statSync("res/item-spritesheet.png").size / (1024 * 1024);
+    console.log(`\x1b[32m✓\x1b[0m [\x1b[33m${"res/item-spritesheet.png"}\x1b[0m] successfully generated! (\x1b[33m${spritesheetSize.toFixed(4)} MB\x1b[0m)`);
+
+    console.log("Creating item-spritesheet.css...");
+
+    const spritesheetCSS = [`
+        img.item-sprite {
+            background-image: url('item-spritesheet.png');
+            background-repeat: no-repeat;
+            object-fit: scale-down;
+            width: 30px;
+            height: 30px;
+            border: none;
+        }
+    `];
+
+    spritesheetCSS.push(...spriteMap.map((s, i) => {
+        return `img.item-sprite[data-id="${items[i].id}"] { background-position: -${s.left}px -${s.top}px; }`;
+    }));
+
+    fs.writeFileSync("res/item-spritesheet.css", spritesheetCSS.join("\r\n"));
+
+    const spritesheetCSSSize = fs.statSync("res/item-spritesheet.css").size / (1024 * 1024);
+    console.log(`\x1b[32m✓\x1b[0m [\x1b[33m${"res/item-spritesheet.css"}\x1b[0m] successfully generated! (\x1b[33m${spritesheetCSSSize.toFixed(4)} MB\x1b[0m)`);
 
 }
