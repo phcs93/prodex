@@ -1,0 +1,10 @@
+div.evolution-chain div.flex-columns,
+div.evolution-chain div.flex-rows {
+    background-color: #00FF0011;
+}
+
+div.evolution-chain div.type {
+    font-size: 11px; 
+    width: 64px !important;
+    align-self: center;
+}

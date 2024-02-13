@@ -17,7 +17,7 @@ function renderPokemonDetails (pokemon) {
     };
     
     const getShapeName = (shapeId) => {
-        return Globals.Database.Shapes[shapeId].name;
+        return Globals.Database.Shapes[shapeId]?.name;
     };
     
     const getHabitatName = (habitatId) => {
@@ -105,7 +105,7 @@ function renderPokemonDetails (pokemon) {
                 <div class="flex-rows grow align-center" style="width: 33%;">
                     <label>SHAPE</label>
                     <div class="shape" data-shape-id="${pokemon.shapeId}"></div>
-                    <label style="text-align: center;">${getShapeName(pokemon.shapeId).toUpperCase()}</label>
+                    <label style="text-align: center;">${getShapeName(pokemon.shapeId)?.toUpperCase()}</label>
                 </div>
                             
                 <div class="flex-rows grow align-center" style="width: 33%;">

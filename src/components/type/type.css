@@ -53,9 +53,6 @@ div.type {
     &[data-type-id="18"] { background-color: var(--fairy); &::after { content: "FAIRY"; } }
     &[data-type-id="10001"] { background-color: var(--unknown); &::after { content: "UNKNOWN"; } }
     &[data-type-id="10002"] { background-color: var(--shadow); &::after { content: "SHADOW"; } }
-    & + div.type {
-        margin-left: 4px;
-    }
 }
 
 /* pokemon filter match window */

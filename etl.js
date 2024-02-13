@@ -399,7 +399,7 @@ const execSync = require("node:child_process").execSync;
         18 = needs_overworld_rain
         19 = turn_upside_down
     */
-    const _pokemonEvolutionTriggerDictionary = parseCSV("pokemon_evolution.csv").toDictionary(et => et[1], et => ({
+    const _pokemonEvolutionTriggerDictionary = parseCSV("pokemon_evolution.csv").groupBy(et => et[1], et => ({
         //id: parseInt(parseInt(evolution[0])) || 0,
         //evolved_species_id: parseInt(evolution[1]) || 0,
         evolutionTriggerId: parseInt(et[2]) || 0,

@@ -43,11 +43,14 @@ https://veekun.com/dex/downloads
 
 # TO-DO
 
-- [BUG] swal not scrolling correctly when parent not on top
-- [BUG] properly parse placeholders on moves and abilities
 - change "only obtainable" flag to "ignore version" (disable all version dependant filters)
+- show item icons (where?)
+- show move learning method icons (where?)
+
+- currently using "short" descriptions for moves, abilities and items, consider using the full dsecription somewhere for better information (Levitate for example, it says only "evades moves", when it actually makes you immune to ground type moves).
 
 - consider abilities when calculating pokemon weakness (attacking and defending)
+- consider items when calculating pokemon weakness (attacking and defending)
 - consider generation when filtering move type (some normal moves became fairy type)
 - encounters for regional forms should be the same as their base form (?)
 - detect if pokemon can be obtainble at version by trading ([!https://pokemondb.net/pokebase/233293/what-games-can-i-trade-transfer-my-pokemon-to?show=329604#a329604](too much work))

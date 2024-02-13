@@ -10,7 +10,6 @@ function renderPokemonHeader(pokemon, pokemonSettings, isGif) {
     if (isGif) {
         const female = pokemon.flags.hasGenderDifferences && pokemonSettings?.gender === "F" ? "-f" : "";
         const shiny = pokemonSettings?.shiny ? "_s" : "";
-        // img = `<img src="https://raw.githubusercontent.com/phcs93/prodex/master/res/gifs/${pokemon.id}${female}${shiny}.gif" alt="${pokemon.name}" onclick="playCry(this, ${pokemon.id})">`;
         img = `<img src="res/gifs/${pokemon.id}${female}${shiny}.gif" alt="${pokemon.name}" onclick="playCry(this, ${pokemon.id})">`;
     } else {
         img = `<img class="pokemon-sprite" data-id="${pokemon.id}" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="${pokemon.name}">`;
@@ -22,10 +21,10 @@ function renderPokemonHeader(pokemon, pokemonSettings, isGif) {
 
             ${img}
 
-            <div class="pokemon-id-name-types flex-rows space-between">
+            <div class="pokemon-id-name-types flex-rows">
                 <small>#${("0000" + pokemon.pokedexId).slice(-4)}</small>
                 <strong>${pokemon.name}</strong>
-                <div class="types flex-columns" style="margin-top: auto;">
+                <div class="types flex-columns gap4px" style="margin-top: auto;">
                     ${pokemon.types.map(typeId => renderType(typeId)).join("")}
                 </div>
             </div>

@@ -49,28 +49,47 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     render();
 
-    // set default team if none is set
+    // set example team if none is set
     if (Globals.Parameters.Team.every(p => !p.id)) {
 
         Globals.Parameters.VersionId = 1;
 
         Globals.Parameters.Team[0].id = 25;
-        Globals.Parameters.Team[1].id = 1;
-        Globals.Parameters.Team[2].id = 4;
-        Globals.Parameters.Team[3].id = 7;
-        Globals.Parameters.Team[4].id = 16;
-        Globals.Parameters.Team[5].id = 12;
+        Globals.Parameters.Team[0].nature = 3;
+        Globals.Parameters.Team[0].ability = 9;
+        Globals.Parameters.Team[0].item = 219;        ;
+        Globals.Parameters.Team[0].moves[0] = Globals.Database.Pokemons[25].moves[1].find(l => l.moveId === 84);
 
-        // set moves randomly
-        for (let i = 0; i < 6; i++) {            
-            for (let m = 0; m < 4; m++) {
-                const versionGroupId = Globals.Database.Versions[Globals.Parameters.VersionId].versionGroupId;
-                const learns = Globals.Database.Pokemons[Globals.Parameters.Team[i].id].moves[versionGroupId];
-                if (learns) {
-                    Globals.Parameters.Team[i].moves[m] = learns[Math.floor(Math.random() * Object.keys(learns).length)];
-                }
-            }            
-        }
+        Globals.Parameters.Team[1].id = 1;
+        Globals.Parameters.Team[1].nature = 3;
+        Globals.Parameters.Team[1].ability = 34;
+        Globals.Parameters.Team[1].item = 216;
+        Globals.Parameters.Team[1].moves[0] = Globals.Database.Pokemons[1].moves[1].find(l => l.moveId === 75);
+
+        Globals.Parameters.Team[2].id = 4;
+        Globals.Parameters.Team[2].nature = 3;
+        Globals.Parameters.Team[2].ability = 94;
+        Globals.Parameters.Team[2].item = 226;
+        Globals.Parameters.Team[2].moves[0] = Globals.Database.Pokemons[4].moves[1].find(l => l.moveId === 52);
+
+        Globals.Parameters.Team[3].id = 7;
+        Globals.Parameters.Team[3].nature = 3;
+        Globals.Parameters.Team[3].ability = 44;
+        Globals.Parameters.Team[3].item = 220;
+        Globals.Parameters.Team[3].moves[0] = Globals.Database.Pokemons[7].moves[1].find(l => l.moveId === 55);
+
+        Globals.Parameters.Team[4].id = 16;
+        Globals.Parameters.Team[4].nature = 11;
+        Globals.Parameters.Team[4].ability = 145;
+        Globals.Parameters.Team[4].item = 221;
+        Globals.Parameters.Team[4].moves[0] = Globals.Database.Pokemons[16].moves[1].find(l => l.moveId === 16);
+
+        Globals.Parameters.Team[5].id = 12;
+        Globals.Parameters.Team[5].nature = 3;
+        Globals.Parameters.Team[5].ability = 14;
+        Globals.Parameters.Team[5].item = 225;
+        Globals.Parameters.Team[5].moves[0] = Globals.Database.Pokemons[12].moves[1].find(l => l.moveId === 93);
+        Globals.Parameters.Team[5].gender = "F";
 
     }
 

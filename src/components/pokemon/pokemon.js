@@ -78,7 +78,7 @@ function renderPokemon (pokemon, pokemonSettings, teamSlot, versionId) {
                 <hr>
                 ${renderTypesEffectiveness(pokemon)}
                 <hr>
-                &lt;evolutions&gt;
+                ${renderEvolutionChain(pokemon)}
                 <hr>
                 &lt;locations&gt;
                 <hr>
@@ -123,5 +123,14 @@ function formatAbilityDescription (ability) {
 function removePokemon (teamSlot) {
     if (confirm(`Are you sure you want to remove ${Globals.Database.Pokemons[Globals.Parameters.Team[teamSlot-1].id].name}?`)) {
         Globals.Parameters.Team[teamSlot-1].id = null;
+        Globals.Parameters.Team[teamSlot-1].ability = null;
+        Globals.Parameters.Team[teamSlot-1].nature = null;
+        Globals.Parameters.Team[teamSlot-1].item = null;
+        Globals.Parameters.Team[teamSlot-1].gender = "M";
+        Globals.Parameters.Team[teamSlot-1].shiny = null;
+        Globals.Parameters.Team[teamSlot-1].moves[0] = null;
+        Globals.Parameters.Team[teamSlot-1].moves[1] = null;
+        Globals.Parameters.Team[teamSlot-1].moves[2] = null;
+        Globals.Parameters.Team[teamSlot-1].moves[3] = null;
     }    
 }

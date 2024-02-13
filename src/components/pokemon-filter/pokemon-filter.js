@@ -413,7 +413,7 @@ function renderPokemonFilter(versionId, slot) {
                 
             </div>
 
-            <div class="flex-rows grow padding gap">
+            <div class="flex-rows grow padding gap fill">
 
                 <label id="number-of-matches" style="text-align: center !important; font-size: 24px;"></label>
 
