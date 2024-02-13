@@ -11,7 +11,7 @@ function renderEvolutionChain(pokemon) {
         return `
             <div class="flex-columns">
                 ${renderPokemonEvolution(Globals.Database.Pokemons[e.specieId], null, e.triggers)}
-                <div class="flex-rows">
+                <div class="flex-rows gap evolutions">
                     ${e.evolutions.map(_e => recursiveRender(_e)).join("")}
                 </div>
             </div>
@@ -35,13 +35,13 @@ function renderPokemonEvolution(pokemon, pokemonSettings, triggers) {
 
     return `
 
-        <div class="flex-columns">
+        <div class="evolution flex-columns">
         
-            <div class="evolution-triggers">
-                ${triggers.length > 0 ? `<img src="res/arrow.svg">` : ""}
+            <div class="evolution-triggers" style="align-self: center;">
+                ${triggers.length > 0 ? `<img class="arrow" src="res/arrow.svg">` : ""}
             </div>
 
-            <div class="pokemon-header flex-rows">
+            <div class="pokemon-header flex-rows" style="align-self: center;">
 
                 <img style="align-self: center; cursor: pointer !important; width: 48px;" src="res/gifs/${pokemon.id}${female}${shiny}.gif" alt="${pokemon.name}" onclick="playCry(this, ${pokemon.id})">
 
