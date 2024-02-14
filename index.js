@@ -32,16 +32,16 @@ Globals = function (database, parameters) {
 
     this.Database = database;
 
-    this.Reset = () => {        
-        this.Parameters = createProxy({VersionId: Globals.Parameters.VersionId});
-        updateUrl();        
-        render();        
+    this.Reset = () => {
+        this.Parameters = createProxy({ VersionId: Globals.Parameters.VersionId });
+        updateUrl();
+        render();
     }
-    
+
 };
 
 document.addEventListener("DOMContentLoaded", async () => {
-    
+
     Globals = new Globals(
         JSON.parse(pako.ungzip(await (await fetch("res/database.gzip")).arrayBuffer(), { to: "string" })),
         JSON.parse(new URL(window.location).searchParams.get("parameters"))
@@ -57,7 +57,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         Globals.Parameters.Team[0].id = 25;
         Globals.Parameters.Team[0].nature = 3;
         Globals.Parameters.Team[0].ability = 9;
-        Globals.Parameters.Team[0].item = 219;        ;
+        Globals.Parameters.Team[0].item = 219;;
         Globals.Parameters.Team[0].moves[0] = Globals.Database.Pokemons[25].moves[1].find(l => l.moveId === 84);
 
         Globals.Parameters.Team[1].id = 1;
@@ -93,7 +93,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     }
 
-    window.onpopstate = function(e) {
+    window.onpopstate = function (e) {
         if (Swal.getPopup()) {
             Swal.close();
             e.preventDefault();
@@ -102,13 +102,13 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 });
 
-function reset () {
+function reset() {
     if (confirm("Are you sure you want to reset the team?")) {
         Globals.Reset();
     }
 }
 
-function render () {
+function render() {
 
     renderVersions();
 
@@ -116,7 +116,7 @@ function render () {
 
 }
 
-function renderVersions () {
+function renderVersions() {
 
     const versions = Globals.Database.Versions;
     const versionGroups = Globals.Database.VersionGroups;
@@ -150,13 +150,13 @@ function renderVersions () {
             }
         } else {
             Globals.Parameters.VersionId = versionId;
-        }        
+        }
 
     };
 
 }
 
-function renderTeam () {
+function renderTeam() {
 
     for (const i in Globals.Parameters.Team) {
 
@@ -174,7 +174,7 @@ function renderTeam () {
             `;
 
         } else {
-            
+
             // clear box
 
             // render button

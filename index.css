@@ -130,6 +130,10 @@ div.space-evenly {
     justify-content: space-evenly;
 }
 
+.break-word {
+    word-break: break-all;
+}
+
 /* ================================================================================ */
 /* inputs */
 /* ================================================================================ */
@@ -344,10 +348,6 @@ div.metric > img {
 /* swal */
 /* ================================================================================ */
 
-/* .custom-swal-container {
-
-} */
-
 .custom-swal-popup {
     background-color: #060606;    
     border-radius: 10px;
@@ -360,6 +360,13 @@ div.metric > img {
         height: 90vh;
         margin-top: 0;
     }
+}
+
+.swal2-confirm, .swal2-cancel {
+    margin-bottom: 20px;
+    line-height: 1px;
+    height: 48px;
+    width: 92px;
 }
 
 .custom-swal-html {

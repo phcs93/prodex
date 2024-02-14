@@ -1,0 +1,41 @@
+div.held-item {
+    background-color: #181818 !important;
+    border-radius: 5px;
+    border: 1px solid black;
+    padding: 8px 16px;
+    box-shadow: 0px 0px 1px 1px #000A;
+    position: relative;
+}
+
+div.held-item-info {
+    background-color: #111111;
+    margin: 0px 16px;
+    padding: 8px 16px;
+    box-shadow: 0px 0px 1px 1px #000A;
+    border-bottom-left-radius: 10px !important;
+    border-bottom-right-radius: 10px !important;
+    &:empty {
+        display: none;
+    }
+}
+
+div.held-item-info > label {
+    font-size: 12px;
+    height: 12px !important;
+    line-height: 12px !important;
+    /* color: #e2dd42; */
+}
+
+div.held-item-info > hr {
+    margin: 8px 0px !important;
+}
+
+label.held-item-rarity {
+    border-radius: 5px;
+    padding: 0px 8px;
+    &[data-rarity-color="red"] { background-color: #A40000; }
+    &[data-rarity-color="orange"] { background-color: #c1610e; }
+    &[data-rarity-color="yellow"] { background-color: #ddb826; }    
+    &[data-rarity-color="green"] { background-color: #4E9A06; }    
+}
+

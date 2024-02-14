@@ -80,11 +80,9 @@ function renderPokemon (pokemon, pokemonSettings, teamSlot, versionId) {
                 <hr>
                 ${renderEvolutionChain(pokemon)}
                 <hr>
-                &lt;locations&gt;
+                <button onclick="showEncountersPopup(${pokemon.id})">LOCATIONS</button>
                 <hr>
-                &lt;held-items&gt;
-                <hr>
-                &lt;moves?&gt;
+                <button onclick="showHeldItemsPopup(${pokemon.id})">HELD ITEMS</button>
             </div>
             
             <hr>

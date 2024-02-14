@@ -45,6 +45,7 @@ https://veekun.com/dex/downloads
 
 - show item icons (where?)
 - show move learning method icons (where?)
+- show encounter icons
 
 - improve the evolution chain display
 

@@ -3,6 +3,10 @@
  */
 function renderEvolutionChain(pokemon) {
 
+    if (!pokemon.evolutionChainId) {
+        return `<label style="text-align: center;">${pokemon.name.toUpperCase()} HAS NO EVOLUTIONS</label>`;
+    }
+
     const chain = Globals.Database.Evolutions[pokemon.evolutionChainId];
 
     const recursiveRender = e => {
@@ -27,8 +31,6 @@ function renderEvolutionChain(pokemon) {
 }
 
 function renderPokemonEvolution (pokemon, pokemonSettings, triggers) {
-
-    let img = null;
 
     const female = pokemon.flags.hasGenderDifferences && pokemonSettings?.gender === "F" ? "-f" : "";
     const shiny = pokemonSettings?.shiny ? "_s" : "";
@@ -86,23 +88,23 @@ function renderTriggers (triggers) {
 
         return `
             <small>${getTriggerLabel(trigger)}</small>
-            <small>${minimumLevel}</small>
-            <small>${triggerItemName}</small>
-            <small>${heldItemId}</small>
-            <small>${genderId}</small>
-            <small>${minimumAffection}</small>
-            <small>${minimumBeauty}</small>
-            <small>${minimumHappiness}</small>
-            <small>${knownMove}</small>
-            <small>${knownMoveType}</small>
-            <small>${location}</small>
-            <small>${needsOverworldRain}</small>
-            <small>${turnUpsideDown}</small>
-            <small>${partySpecies}</small>
-            <small>${partyType}</small>
-            <small>${timeOfDay}</small>
-            <small>${tradeSpecies}</small>
-            <small>${relativePhysicalStats}</small>
+            <small class="break-word">${minimumLevel}</small>
+            <small class="break-word">${triggerItemName}</small>
+            <small class="break-word">${heldItemId}</small>
+            <small class="break-word">${genderId}</small>
+            <small class="break-word">${minimumAffection}</small>
+            <small class="break-word">${minimumBeauty}</small>
+            <small class="break-word">${minimumHappiness}</small>
+            <small class="break-word">${knownMove}</small>
+            <small class="break-word">${knownMoveType}</small>
+            <small class="break-word">${location}</small>
+            <small class="break-word">${needsOverworldRain}</small>
+            <small class="break-word">${turnUpsideDown}</small>
+            <small class="break-word">${partySpecies}</small>
+            <small class="break-word">${partyType}</small>
+            <small class="break-word">${timeOfDay}</small>
+            <small class="break-word">${tradeSpecies}</small>
+            <small class="break-word">${relativePhysicalStats}</small>
         `;
 
     };
