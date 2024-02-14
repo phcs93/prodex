@@ -106,6 +106,30 @@ div.center-text {
     text-align: center;
 }
 
+div.self-center {
+    align-self: center;
+}
+
+div.self-start {
+    align-self: flex-start;
+}
+
+div.self-end {
+    align-self: flex-end;
+}
+
+div.space-between {
+    justify-content: space-between;
+}
+
+div.space-around {
+    justify-content: space-around;
+}
+
+div.space-evenly {
+    justify-content: space-evenly;
+}
+
 /* ================================================================================ */
 /* inputs */
 /* ================================================================================ */

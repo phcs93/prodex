@@ -43,9 +43,10 @@ https://veekun.com/dex/downloads
 
 # TO-DO
 
-- change "only obtainable" flag to "ignore version" (disable all version dependant filters)
 - show item icons (where?)
 - show move learning method icons (where?)
+
+- improve the evolution chain display
 
 - currently using "short" descriptions for moves, abilities and items, consider using the full dsecription somewhere for better information (Levitate for example, it says only "evades moves", when it actually makes you immune to ground type moves).
 

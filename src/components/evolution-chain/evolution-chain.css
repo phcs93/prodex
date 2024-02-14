@@ -9,7 +9,10 @@ div.evolution-chain div.type {
     align-self: center;
 }
 
-img.arrow { transform: rotate(-90deg); }
+img.arrow {
+    width: 16px;
+    transform: rotate(-90deg);
+}
 
-div.evolutions > div.flex-columns:not(:only-of-type):first-of-type > div > div > img.arrow { transform: rotate(-135deg); }
-div.evolutions > div.flex-columns:not(:only-of-type):last-of-type  > div > div > img.arrow { transform: rotate(-45deg); }
+div.evolutions > div.flex-columns:not(:only-of-type):first-of-type > div > div > div > img.arrow { transform: rotate(-135deg); }
+div.evolutions > div.flex-columns:not(:only-of-type):last-of-type  > div > div > div > img.arrow { transform: rotate(-45deg); }

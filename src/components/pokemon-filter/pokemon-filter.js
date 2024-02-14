@@ -16,7 +16,7 @@ function showPokemonFilterSwal (slot) {
             popup: "animate__animated animate__fadeOut animate__faster"
         },
         html: renderPokemonFilter(Globals.Parameters.VersionId, slot),
-        didOpen: () => document.activeElement.blur()
+        //didOpen: () => document.activeElement.blur()
     });
 
     filterPokemons(Globals.Parameters.VersionId, slot);
