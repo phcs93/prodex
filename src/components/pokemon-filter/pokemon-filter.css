@@ -5,6 +5,7 @@ div.filter-form {
     border-bottom-left-radius: 10px !important;
     border-bottom-right-radius: 0px !important;
     height: 80vh;
+    overflow-y: scroll;
     @media (pointer:none), (pointer:coarse) {
         height: fit-content;
         max-width: 100% !important;
@@ -12,6 +13,9 @@ div.filter-form {
         border-top-right-radius: 10px !important;
         border-bottom-left-radius: 0px !important;
         border-bottom-right-radius: 0px !important;
+    }
+    &::-webkit-scrollbar {
+        display: none;
     }
 }
 

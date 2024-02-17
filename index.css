@@ -16,7 +16,10 @@
 
 body {
     background-color: #090909;
-    backdrop-filter: grayscale(100%);
+    /* backdrop-filter: grayscale(100%); */
+    /* background-image: url(res/background.png); */
+    background-repeat: repeat;
+    background-size: 10%;
     margin: 0px;
     padding: 0px;
 }
@@ -177,6 +180,7 @@ select {
     border: 1px solid black;
     border-radius: 5px;
     padding: 0px 8px;
+    width: 100%;
 }
 
 button {
