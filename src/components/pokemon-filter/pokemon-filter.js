@@ -54,6 +54,10 @@ function renderPokemonFilter(versionId, slot) {
         `;
     });
 
+    // evolution
+    const evolutionItemsOptions = Globals.Database.EvolutionItemsIds.map(i => Globals.Database.Items[i]).orderBy(i => i.name).map(i => `<option value="${i.id}">${i.name}</option>`).join("");
+    const evolutionTriggerOptions = Object.values(Globals.Database.EvolutionTriggers).orderBy(et => et.name).map(et => `<option value="${et.id}">${et.name}</option>`).join("");
+
     return `
 
         <div class="flex-columns grow wrap">
@@ -65,6 +69,11 @@ function renderPokemonFilter(versionId, slot) {
                     <div class="flex-rows">
                         <label for="name-filter">NAME</label>
                         <input type="text" name="name-filter" id="name-filter" oninput="filterPokemons(${versionId}, ${slot});" />
+                    </div>
+
+                    <div class="flex-rows">
+                        <label for="id-filter">ID</label>
+                        <input type="number" name="id-filter" id="id-filter" oninput="filterPokemons(${versionId}, ${slot});" />
                     </div>
 
                     <div class="flex-rows">
@@ -243,7 +252,7 @@ function renderPokemonFilter(versionId, slot) {
                                 <label for="encounter-method-filter">ENCOUNTER METHOD</label>
                                 <select name="encounter-method-filter" id="encounter-method-filter" onchange="filterPokemons(${versionId}, ${slot});">
                                     <option value="">---</option>
-                                    ${encounterMethodOptions}                                        
+                                    ${encounterMethodOptions}
                                 </select>
                             </div>
 
@@ -287,7 +296,23 @@ function renderPokemonFilter(versionId, slot) {
 
                             <div class="flex-rows">
                                 <label for="evolutions-filter">NUMBER OF EVOLUTIONS</label>
-                                <input type="number" name="evolutions-filter" id="evolutions-filter" oninput="filterPokemons(${versionId}, ${slot});" />
+                                <input type="number" name="evolutions-filter" id="evolutions-filter" oninput="filterPokemons(${versionId}, ${slot});" min="0" max="2" />
+                            </div>
+
+                            <div class="flex-rows">
+                                <label for="evolution-item-filter">EVOLUTION ITEM</label>
+                                <select name="evolution-item-filter" id="evolution-item-filter" onchange="filterPokemons(${versionId}, ${slot});">
+                                    <option value="">---</option>
+                                    ${evolutionItemsOptions}
+                                </select>
+                            </div>
+
+                            <div class="flex-rows">
+                                <label for="evolution-trigger-filter">EVOLUTION TRIGGER</label>
+                                <select name="evolution-trigger-filter" id="evolution-trigger-filter" onchange="filterPokemons(${versionId}, ${slot});">
+                                    <option value="">---</option>
+                                    ${evolutionTriggerOptions}
+                                </select>
                             </div>
 
                         </div>
@@ -435,6 +460,7 @@ function filterPokemons (versionId, slot) {
 
     // common filters
     const name = document.getElementById("name-filter").value;
+    const id = parseInt(document.getElementById("id-filter").value);
     const generationId = parseInt(document.getElementById("generation-filter").value);
     const typeId1 = parseInt(document.getElementById("type1-filter").value);
     const typeId2 = parseInt(document.getElementById("type2-filter").value);
@@ -447,7 +473,6 @@ function filterPokemons (versionId, slot) {
     const colorId = parseInt(document.getElementById("color-filter").value);
     const eggGroupId1 = parseInt(document.getElementById("egg-group1-filter").value);
     const eggGroupId2 = parseInt(document.getElementById("egg-group2-filter").value);
-    const evolutions = parseInt(document.getElementById("evolutions-filter").value);
 
     // move filters
     const moveId1 = parseInt(document.getElementById("move1-filter").value);
@@ -469,6 +494,11 @@ function filterPokemons (versionId, slot) {
     const encounterLocationId = parseInt(document.getElementById("encounter-location-filter").value);
     const byBreeding = document.getElementById("by-breeding-filter").checked;
     const byEvolving = document.getElementById("by-evolving-filter").checked;
+
+    // evolution filters
+    const evolutions = parseInt(document.getElementById("evolutions-filter").value);
+    const evolutionItemId = parseInt(document.getElementById("evolution-item-filter").value);
+    const evolutionTriggerId = parseInt(document.getElementById("evolution-trigger-filter").value);
 
     // flags
     const isBaby = document.getElementById("is-baby-filter").checked;
@@ -498,6 +528,13 @@ function filterPokemons (versionId, slot) {
         if (name) {
             if (pokemon.name.toUpperCase().indexOf(name.toUpperCase()) > -1) {
                 matches.push(`NAME INCLUDES "${name.toUpperCase()}"`);
+            } else {
+                show = false;
+            }
+        }
+        if (id) {
+            if (pokemon.id === id) {
+                matches.push(`ID IS "${id}"`);
             } else {
                 show = false;
             }
@@ -580,10 +617,64 @@ function filterPokemons (versionId, slot) {
                 show = false;
             }
         }
-        if (evolutions) {
+
+        // evolution filters
+        if (evolutions || evolutions === 0) {
             const chain = Globals.Database.Evolutions[pokemon.evolutionChainId];
             if (chain && countEvolutionDepth(chain) === evolutions) {
                 matches.push(`EVOLVES "${evolutions}" TIMES (FROM THE START)`);
+            } else {
+                if (evolutions === 0 && !chain) {
+                    matches.push(`HAS NO EVOLUTION CHAIN`);
+                } else {
+                    show = false;
+                }
+            }
+        }
+        if (evolutionItemId) {
+            const chain = Globals.Database.Evolutions[pokemon.evolutionChainId];
+            if (chain) {
+                const hasEvolutionItem = (evolution) => {
+                    if (evolution.triggers.some(t => t.heldItemId === evolutionItemId || t.triggerItemId === evolutionItemId)) {
+                        return true;
+                    } else {
+                        for (const e of evolution.evolutions) {
+                            if (hasEvolutionItem(e)) {
+                                return true;
+                            }
+                        }
+                    }
+                    return false;
+                };
+                if (hasEvolutionItem(chain)) {
+                    matches.push(`EVOLUTION CHAIN NEEDS "${Globals.Database.Items[evolutionItemId].name.toUpperCase()}"`);
+                } else {
+                    show = false;
+                }
+            } else {
+                show = false;
+            }
+        }
+        if (evolutionTriggerId) {
+            const chain = Globals.Database.Evolutions[pokemon.evolutionChainId];
+            if (chain) {
+                const hasEvolutionTrigger = (evolution) => {
+                    if (evolution.triggers.some(t => t.evolutionTriggerId === evolutionTriggerId)) {
+                        return true;
+                    } else {
+                        for (const e of evolution.evolutions) {
+                            if (hasEvolutionTrigger(e)) {
+                                return true;
+                            }
+                        }
+                    }
+                    return false;
+                };
+                if (hasEvolutionTrigger(chain)) {
+                    matches.push(`EVOLUTION CHAIN NEEDS "${Globals.Database.EvolutionTriggers[evolutionTriggerId].name.toUpperCase()}"`);
+                } else {
+                    show = false;
+                }
             } else {
                 show = false;
             }

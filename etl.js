@@ -505,11 +505,13 @@ const execSync = require("node:child_process").execSync;
             const nextSpecies = _species.filter(s => s.evolvesFromSpeciesId === previous.id);
     
             for (const nextSpecie of nextSpecies) {
-                chains.push({
-                    specieId: nextSpecie.id, 
-                    triggers: _pokemonEvolutionTriggerDictionary[nextSpecie.id], 
-                    evolutions: getEvolutions(nextSpecie)
-                });
+                if (_pokemonEvolutionTriggerDictionary[nextSpecie.id]) {
+                    chains.push({
+                        specieId: nextSpecie.id, 
+                        triggers: _pokemonEvolutionTriggerDictionary[nextSpecie.id], 
+                        evolutions: getEvolutions(nextSpecie)
+                    });
+                }
             }
 
             return chains;
@@ -870,10 +872,11 @@ const execSync = require("node:child_process").execSync;
 
     // create database json
     const database = {
-        Pokemons: addPreEvolutionMoves(addEncounterIfCanBeEvolvedOrHatched(fix(pokemonDictionary), evolutionChainDictionary, versionDictionary, versionGroupDictionary), versionGroupDictionary),
-        Evolutions: evolutionChainDictionary,
+        Pokemons: addPreEvolutionMoves(addEncounterIfCanBeEvolvedOrHatched(fixPokemons(pokemonDictionary), evolutionChainDictionary, versionDictionary, versionGroupDictionary), versionGroupDictionary),
+        Evolutions: evolutionChainDictionary, //fixEvolutionChain(evolutionChainDictionary),
         Items: itemDictionary, 
         HeldItemIds: [...new Set(parseCSV("pokemon_items.csv").map(i => parseInt(i[2])))], // just for performance
+        EvolutionItemsIds: [...new Set(parseCSV("pokemon_evolution.csv").reduce((acc, crr) => { acc.push(parseInt(crr[3]) || 0, parseInt(crr[7]) || 0); return acc; }, []))].filter(id => id > 0), // just for performance
         Moves: moveDictionary,
         Locations: locationDictionary,
         Machines: machineDictionary,
@@ -933,8 +936,8 @@ const execSync = require("node:child_process").execSync;
 
 })();
 
-// this function "fixes" some wrong data generated due to the way I've merged forms, species and pokemon data togheter
-function fix (pokemons) {
+// this function "fixes" some wrong data generated due to the way I've merged forms, species and pokemon data together
+function fixPokemons (pokemons) {
 
     // gmax vensaur doesn't have gender differences
     pokemons[10195].flags.hasGenderDifferences = false;
@@ -998,6 +1001,16 @@ function fix (pokemons) {
     delete pokemons[10228];
      
     return pokemons;
+
+}
+
+// this function "fixes" invalid or non-existent evolutions
+function fixEvolutionChain(evolutionChainDictionary){
+
+    // remove melmetal evolution because it only exists on Pokemon GO
+    delete evolutionChainDictionary[428];
+
+    return evolutionChainDictionary;
 
 }
 

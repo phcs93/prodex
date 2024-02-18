@@ -43,6 +43,11 @@ https://veekun.com/dex/downloads
 
 # TO-DO
 
+- disable version specific filters when "obtainable" flag is false
+
+- allow filtering by evolution trigger fields (time of day, affection, etc)
+- allow filtering by evolution flags (has branches, etc)
+
 - show item icons (where?)
 - show move learning method icons (where?)
 - show encounter icons
@@ -54,19 +59,14 @@ https://veekun.com/dex/downloads
 - consider abilities when calculating pokemon weakness (attacking and defending)
 - consider items when calculating pokemon weakness (attacking and defending)
 - consider generation when filtering move type (some normal moves became fairy type)
+
 - encounters for regional forms should be the same as their base form (?)
+
 - detect if pokemon can be obtainble at version by trading ([!https://pokemondb.net/pokebase/233293/what-games-can-i-trade-transfer-my-pokemon-to?show=329604#a329604](too much work))
 
 - figure out a way to use separate .html files (web loader?)
+
 - I could really improve the UX/UI in general but I don't have time for this anymore
-
-## filters
-
-- evolution filters (render evolutions when filtering)
-  - number of evolutions (depth)
-  - number of branches
-  - evolution method (items, trading, etc)
-    - if item, choose which item to filter by
 
 ## charts
 
