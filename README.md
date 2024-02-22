@@ -43,6 +43,8 @@ https://veekun.com/dex/downloads
 
 # TO-DO
 
+- ev/iv calculator on build side
+
 - disable version specific filters when "obtainable" flag is false
 
 - allow filtering by evolution trigger fields (time of day, affection, etc)
