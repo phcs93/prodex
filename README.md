@@ -43,6 +43,8 @@ https://veekun.com/dex/downloads
 
 # TO-DO
 
+- WTH are formats?
+
 - ev/iv calculator on build side
 
 - disable version specific filters when "obtainable" flag is false
@@ -64,7 +66,7 @@ https://veekun.com/dex/downloads
 
 - encounters for regional forms should be the same as their base form (?)
 
-- detect if pokemon can be obtainble at version by trading ([!https://pokemondb.net/pokebase/233293/what-games-can-i-trade-transfer-my-pokemon-to?show=329604#a329604](too much work))
+- detect if pokemon can be obtainble at version by trading ([https://pokemondb.net/pokebase/233293/what-games-can-i-trade-transfer-my-pokemon-to?show=329604#a329604](too much work))
 
 - figure out a way to use separate .html files (web loader?)
 
