@@ -7,9 +7,6 @@ https://phcs93.github.io/prodex/
 
 It features a wide variety of filters and charts to help you find the best match for your team.
 
-This project is a new version of an older project I've made:  
-https://github.com/phcs93/pokefy/
-
 # Credits
 
 All data was obtained from PokeAPI:  
