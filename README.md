@@ -52,10 +52,15 @@ https://mypokemonteam.com/
 
 - nickname on build side
 
+- drag & drop moves in build side
+  - check wish team members can learn
+
 - disable version specific filters when "obtainable" flag is false
 
 - allow filtering by evolution trigger fields (time of day, affection, etc)
 - allow filtering by evolution flags (has branches, etc)
+
+- use move.meta for checklist
 
 - show item icons (where?)
 - show move learning method icons (where?)

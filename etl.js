@@ -216,6 +216,24 @@ const execSync = require("node:child_process").execSync;
         id: parseInt(mt[0]),
         name: format(mt[1])
     }));
+
+    /*
+        0 = id
+        1 = identifier
+    */
+    const ailmentDictionary = parseCSV("move_meta_ailments.csv").toDictionary(a => a[0], a => ({
+        id: parseInt(a[0]),
+        name: format(a[1])
+    }));
+
+    /*
+        0 = id
+        1 = identifier
+    */
+    const moveCategoryDictionary = parseCSV("move_meta_categories.csv").toDictionary(c => c[0], c => ({
+        id: parseInt(c[0]),
+        name: format(c[1])
+    }));    
     
     /*
         0 = id
@@ -295,6 +313,36 @@ const execSync = require("node:child_process").execSync;
     });
 
     /*
+        0 = move_id
+        1 = meta_category_id
+        2 = meta_ailment_id
+        3 = min_hits
+        4 = max_hits
+        5 = min_turns
+        6 = max_turns
+        7 = drain
+        8 = healing
+        9 = crit_rate
+        10 = ailment_chance
+        11 = flinch_chance
+        12 = stat_chance
+    */
+    const _moveMetaDictionary = parseCSV("move_meta.csv").toDictionary(m => m[0], m => ({
+        metaCategoryId: parseInt(m[1]) || 0,
+        metaAilmentId: parseInt(m[2]) || 0,
+        minHits: parseInt(m[3]) || 0,
+        maxHits: parseInt(m[4]) || 0,
+        minTurns: parseInt(m[5]) || 0,
+        maxTurns: parseInt(m[6]) || 0,
+        drain: parseInt(m[7]) || 0,
+        healing: parseInt(m[8]) || 0,
+        critRate: parseInt(m[9]) || 0,
+        ailmentChance: parseInt(m[10]) || 0,
+        flinchChance: parseInt(m[11]) || 0,
+        statChance: parseInt(m[12]) || 0
+    }));
+
+    /*
         0 = id
         1 = identifier
         2 = generation_id
@@ -326,7 +374,8 @@ const execSync = require("node:child_process").execSync;
         effectChance: parseInt(m[11]) || 0,
         contestTypeId: parseInt(m[12]) || 0,
         contestEffectId: parseInt(m[13]) || 0,
-        superContestEffectId: parseInt(m[14]) || 0
+        superContestEffectId: parseInt(m[14]) || 0,
+        meta: _moveMetaDictionary[m[0]]
     }));
 
     /*
@@ -892,6 +941,8 @@ const execSync = require("node:child_process").execSync;
         GrowthRates: growthRateDictionary,
         MoveLearnMethods: moveLearnMethodDictionary,
         MoveTargets: moveTargetDictionary,
+        Ailments: ailmentDictionary,
+        MoveCategories: moveCategoryDictionary,
         EncounterMethods: encounterMethodDictionary,
         EvolutionTriggers: evolutionTriggerDictionary,
         EncounterConditions: encounterConditionDictionary,

@@ -29,7 +29,7 @@ function showMoveSelectorSwal (teamSlot, moveSlot) {
 function renderMoveSelector (pokemonId, versionGroupId, teamSlot, moveSlot) {
 
     return `
-        <div class="flex-rows gap padding">
+        <div class="flex-rows gap padding grow">
             <div class="flex-rows">
                 <label for="move-filter">FILTER</label>
                 <input type="text" name="move-filter" id="move-filter" oninput="filterMoves(${pokemonId}, ${versionGroupId}, ${teamSlot}, ${moveSlot});" />

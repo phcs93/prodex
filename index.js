@@ -114,7 +114,7 @@ function render() {
 
     renderTeam();
 
-    //renderMetrics();
+    renderMetrics();
 
 }
 
