@@ -25,7 +25,7 @@ body {
 }
 
 img {
-    filter: drop-shadow(2px 2px 2px rgba(0,0,0,.4));
+    filter: drop-shadow(2px 2px 2px rgba(0, 0, 0, .4));
 }
 
 hr {
@@ -46,7 +46,9 @@ div.box {
     padding: 16px;
     box-shadow: 0px 0px 2px 2px #000A;
     min-width: 295px;
-    @media (pointer:none), (pointer:coarse) {
+
+    @media (pointer:none),
+    (pointer:coarse) {
         flex-grow: 1;
     }
 }
@@ -146,11 +148,13 @@ form {
 }
 
 small {
-    display: table; /* i don't know why but this fixes everything */
+    display: table;
+    /* i don't know why but this fixes everything */
 }
 
 label {
-    display: table; /* i don't know why but this fixes everything */
+    display: table;
+    /* i don't know why but this fixes everything */
     font-family: "Candara";
     font-size: 14px;
     font-weight: bold;
@@ -194,6 +198,7 @@ button {
     border: 1px solid black;
     border-radius: 5px;
     cursor: pointer;
+
     &:hover {
         background-color: #1E1E1E;
     }
@@ -244,7 +249,7 @@ summary:hover {
     cursor: pointer;
 }
 
-details > div:nth-of-type(1) {
+details>div:nth-of-type(1) {
     margin-top: 16px;
 }
 
@@ -252,7 +257,7 @@ details[open] {
     border-radius: 5px;
 }
 
-details > summary {
+details>summary {
     list-style: none;
 }
 
@@ -276,6 +281,27 @@ details[open] summary:after {
 /* game version */
 /* ================================================================================ */
 
+::-webkit-scrollbar {
+    width: 5px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #2E2E2E;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+/* ================================================================================ */
+/* game version */
+/* ================================================================================ */
+
 /* select#version {
     min-width: 298px;
 } */
@@ -290,7 +316,8 @@ div.display-toggle {
 
 input[name="display-toggle"] {
     display: none;
-    & + label {
+
+    &+label {
         display: inline-block;
         padding: 8px 16px;
         border-radius: 90px;
@@ -299,7 +326,8 @@ input[name="display-toggle"] {
         line-height: 16px;
         text-align: center;
     }
-    &:checked + label {
+
+    &:checked+label {
         background-color: #0E0E0E;
     }
 }
@@ -309,15 +337,18 @@ input[name="display-toggle"] {
 /* ================================================================================ */
 
 /* i don't know any other way to solve this problem */
-div#team > div.box {
+div#team>div.box {
     max-width: 295px;
-    @media (pointer:none), (pointer:coarse) {
+
+    @media (pointer:none),
+    (pointer:coarse) {
         max-width: unset;
     }
 }
 
 button.add-pokemon {
     height: 128px;
+
     &::before {
         content: '+';
         font-size: 32px;
@@ -343,7 +374,7 @@ div.metric {
     justify-content: center;
 }
 
-div.metric > img {
+div.metric>img {
     width: 250px;
     object-fit: scale-down;
 }
@@ -353,20 +384,23 @@ div.metric > img {
 /* ================================================================================ */
 
 .custom-swal-popup {
-    background-color: #060606;    
+    background-color: #060606;
     border-radius: 10px;
     padding: 0px;
     box-shadow: 0px 0px 2px 2px #000A;
     height: 80vh;
     margin-top: 10vh;
-    @media (pointer:none), (pointer:coarse) {              
+
+    @media (pointer:none),
+    (pointer:coarse) {
         width: 100% !important;
         height: 90vh;
         margin-top: 0;
     }
 }
 
-.swal2-confirm, .swal2-cancel {
+.swal2-confirm,
+.swal2-cancel {
     margin-bottom: 20px;
     line-height: 1px;
     height: 48px;
@@ -378,10 +412,6 @@ div.metric > img {
     border-radius: 10px;
     margin: 0px !important;
     padding: 0px !important;
-}
-
-.custom-swal-html::-webkit-scrollbar {
-    display: none;
 }
 
 div:where(.swal2-container) .swal2-html-container {
@@ -406,7 +436,7 @@ div:where(.swal2-container) div:where(.swal2-popup) {
     font-size: inherit;
 }
 
-body.swal2-shown > div#main-container {
+body.swal2-shown>div#main-container {
     filter: blur(5px);
 }
 
@@ -414,13 +444,13 @@ body.swal2-shown > div#main-container {
 /* el-switch */
 /* ================================================================================ */
 
-label.el-switch  {
+label.el-switch {
     display: flex;
     flex-direction: row;
     gap: 16px;
 }
 
-label.el-switch > label {
+label.el-switch>label {
     line-height: 26px;
     height: 26px;
 }
@@ -454,6 +484,7 @@ a.made-by {
     text-align: center;
     line-height: 32px;
     height: 32px;
+
     &::before {
         content: url("res/github-icon.svg");
         vertical-align: middle;
@@ -469,18 +500,21 @@ a.made-by {
 div.buy-me-a-coffee {
     height: 32px;
     align-self: center;
+
     & * {
         border-radius: 5px;
         font-family: "Cookie";
         color: black;
         text-shadow: none !important;
     }
+
     & a {
         height: 32px;
         background-color: #FCB52B !important;
         font-size: 20px;
         min-width: 0px;
     }
+
     & svg {
         height: 20px !important;
     }
@@ -502,13 +536,13 @@ div.buy-me-a-coffee {
 }
 
 @keyframes rotate {
-	to {
-		--angle: 360deg;
-	}
+    to {
+        --angle: 360deg;
+    }
 }
 
 @property --angle {
-  syntax: '<angle>';
-  initial-value: 0deg;
-  inherits: false;
+    syntax: '<angle>';
+    initial-value: 0deg;
+    inherits: false;
 }

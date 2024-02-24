@@ -14,9 +14,6 @@ div.filter-form {
         border-bottom-left-radius: 0px !important;
         border-bottom-right-radius: 0px !important;
     }
-    &::-webkit-scrollbar {
-        display: none;
-    }
 }
 
 div.filtered-pokemon {
@@ -51,7 +48,4 @@ div.filter-matches > hr {
 
 div#pokemon-grid {
     overflow-y: scroll;
-    &::-webkit-scrollbar {
-        display: none;
-    }
 }

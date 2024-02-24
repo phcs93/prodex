@@ -41,10 +41,17 @@ https://veekun.com/dex/downloads
 # TO-DO
 
 - WTH are formats?
+- WTH are strategies?
+- WTH is [pokémon showdown](https://play.pokemonshowdown.com/t)?
 
 - ev/iv calculator on build side
+  - like done [here](https://www.pokeos.com/team-builder/)
+
+- nickname on build side
 
 - disable version specific filters when "obtainable" flag is false
+
+- show generation separator in filtered list
 
 - allow filtering by evolution trigger fields (time of day, affection, etc)
 - allow filtering by evolution flags (has branches, etc)
@@ -54,12 +61,17 @@ https://veekun.com/dex/downloads
 - show encounter icons
 
 - improve the evolution chain display
+  - change pokemon instead of playing the cry when cliking the sprite
+  - improve eevee chain display
 
 - currently using "short" descriptions for moves, abilities and items, consider using the full dsecription somewhere for better information (Levitate for example, it says only "evades moves", when it actually makes you immune to ground type moves).
 
 - consider abilities when calculating pokemon weakness (attacking and defending)
 - consider items when calculating pokemon weakness (attacking and defending)
 - consider generation when filtering move type (some normal moves became fairy type)
+
+- generation specifics
+  - there are some moves that changed type/effect, some pokemons changed stats, etc
 
 - encounters for regional forms should be the same as their base form (?)
 
