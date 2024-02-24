@@ -34,7 +34,7 @@ function renderPokemon (pokemon, pokemonSettings, teamSlot, versionId) {
                         <option value="">---</option>
                         ${Object.values(Globals.Database.Natures).map(n => `<optgroup label="-${Globals.Database.Natures[n.id].decreasedStat} +${Globals.Database.Natures[n.id].increasedStat}"><option value="${n.id}" ${pokemonSettings.nature === n.id ? "selected": ""}>${Globals.Database.Natures[n.id].name}</option></optgroup>`).join("")}
                     </select>
-                    <div class="flex-rows nature-info">${pokemonSettings.nature ? `<label>-${Globals.Database.Natures[pokemonSettings.nature].decreasedStat} +${Globals.Database.Natures[pokemonSettings.nature].increasedStat}</label>` : ""}</div>
+                    <div class="flex-rows nature-info">${pokemonSettings.nature ? `<label><span class="nature-negative">-${Globals.Database.Natures[pokemonSettings.nature].decreasedStat}</span> <span class="nature-positive">+${Globals.Database.Natures[pokemonSettings.nature].increasedStat}</span></label>` : ""}</div>
                 </div>
 
                 <div class="flex-rows grow">
@@ -55,10 +55,9 @@ function renderPokemon (pokemon, pokemonSettings, teamSlot, versionId) {
                     <div class="flex-rows ability-info">${pokemonSettings.item ? `<small>${Globals.Database.Items[pokemonSettings.item].description}</small>` : ""}</div>
                 </div>
 
-                <hr>
+                <label class="divider">MOVES</label>
 
-                <div class="flex-rows grow">
-                    <label>MOVES</label>
+                <div class="flex-rows grow">                    
                     <div class="flex-rows gap">
                         ${pokemonSettings.moves[0] ? renderMove(pokemon.id, pokemonSettings.moves[0], versionGroupId, `showMoveSelectorSwal(${teamSlot}, 1)`) : `<button class="select-move-button" onclick="showMoveSelectorSwal(${teamSlot}, 1)">SELECT MOVE</button>`}
                         ${pokemonSettings.moves[1] ? renderMove(pokemon.id, pokemonSettings.moves[1], versionGroupId, `showMoveSelectorSwal(${teamSlot}, 2)`) : `<button class="select-move-button" onclick="showMoveSelectorSwal(${teamSlot}, 2)">SELECT MOVE</button>`}
@@ -69,20 +68,20 @@ function renderPokemon (pokemon, pokemonSettings, teamSlot, versionId) {
 
             </div>
 
-            <div class="flex-rows gap pokemon-details">
+            <div class="flex-rows gap pokemon-info">
                 ${renderPokemonDetails(pokemon)}
-                <hr>
+                <label class="divider">GENDER RATE</label>
                 ${renderGenderRate(pokemon)}
-                <hr>
+                <label class="divider">STATS</label>
                 ${renderStats(pokemon)}
-                <hr>
+                <label class="divider">TYPE EFFECTIVENESS</label>
                 ${renderTypesEffectiveness(pokemon)}
-                <hr>
+                <label class="divider">EVOLUTIONS</label>
                 ${renderEvolutionChain(pokemon)}
-                <hr>
-                <button onclick="showEncountersPopup(${pokemon.id})">LOCATIONS</button>
-                <hr>
-                <button onclick="showHeldItemsPopup(${pokemon.id})">HELD ITEMS</button>
+                <label class="divider">ENCOUNTERS</label>
+                ${canPokemonBeEncountered(pokemon.id) ? (!isOnlyEvolving(pokemon.id) ? `<button onclick="showEncountersPopup(${pokemon.id})">LOCATIONS</button>` : `<label style="text-align: center; height: auto !important; line-height: normal !important;">EVOLVE ${isOnlyEvolving(pokemon.id).pokemonsIds.map(pid => Globals.Database.Pokemons[pid].name.toUpperCase()).join(", ")}</label>`) : `<label style="text-align: center; height: auto !important; line-height: normal !important;">${pokemon.name.toUpperCase()} CAN'T BE OBTAINED IN ${Globals.Database.Versions[versionId].name.toUpperCase()}</label>`}
+                <label class="divider">HELD ITEMS</label>
+                ${doesPokemonHoldsItems(pokemon.id) ? `<button onclick="showHeldItemsPopup(${pokemon.id})">HELD ITEMS</button>` : `<label style="text-align: center; height: auto !important; line-height: normal !important;">${pokemon.name.toUpperCase()} DOESN'T HOLD ANY ITEMS IN ${Globals.Database.Versions[versionId].name.toUpperCase()}</label>`}
             </div>
             
             <hr>

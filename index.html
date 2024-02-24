@@ -32,9 +32,6 @@
         <link rel="stylesheet" href="src/components/slider/slider.css">
         <script src="src/components/slider/slider.js"></script>
 
-        <link rel="stylesheet" href="src/components/tab-control/tab-control.css">
-        <script src="src/components/tab-control/tab-control.js"></script>
-
         <link rel="stylesheet" href="src/components/pokemon/pokemon.css">
         <script src="src/components/pokemon/pokemon.js"></script>
         <link rel="stylesheet" href="src/components/pokemon-header/pokemon-header.css">
@@ -42,7 +39,7 @@
         <link rel="stylesheet" href="src/components/pokemon-details/pokemon-details.css">
         <script src="src/components/pokemon-details/pokemon-details.js"></script>
         <link rel="stylesheet" href="src/components/gender-rate/gender-rate.css">
-        <script src="src/components/gender-rate/gender-rate.js"></script>    
+        <script src="src/components/gender-rate/gender-rate.js"></script>
         <link rel="stylesheet" href="src/components/stats/stats.css">
         <script src="src/components/stats/stats.js"></script>
         <link rel="stylesheet" href="src/components/types-effectiveness/types-effectiveness.css">
@@ -69,6 +66,9 @@
         <link rel="stylesheet" href="src/components/move-selector/move-selector.css">
         <script src="src/components/move-selector/move-selector.js"></script>
 
+        <link rel="stylesheet" href="src/components/checklist/checklist.css">
+        <script src="src/components/checklist/checklist.js"></script>
+
         <!-- index -->
         <link rel="stylesheet" href="index.css">
         <script src="index.js"></script>
@@ -81,18 +81,18 @@
 
             <!-- <div class="flex-rows">
 
-                <input type="radio" name="tab" class="tab-control-header" id="tab-header-1" />
-                <label for="tab-header-1">tab1</label>
-                <input type="radio" name="tab" class="tab-control-header" id="tab-header-2" /> 
-                <label for="tab-header-2">tab2</label>
-                <input type="radio" name="tab" class="tab-control-header" id="tab-header-3" />
-                <label for="tab-header-3">tab3</label>
+                    <input type="radio" name="tab" class="tab-control-header" id="tab-header-1" />
+                    <label for="tab-header-1">tab1</label>
+                    <input type="radio" name="tab" class="tab-control-header" id="tab-header-2" /> 
+                    <label for="tab-header-2">tab2</label>
+                    <input type="radio" name="tab" class="tab-control-header" id="tab-header-3" />
+                    <label for="tab-header-3">tab3</label>
 
-                <div class="tab-control-content" id="tab1">111</div>
-                <div class="tab-control-content" id="tab2">222</div>
-                <div class="tab-control-content" id="tab3">333</div>
+                    <div class="tab-control-content" id="tab1">111</div>
+                    <div class="tab-control-content" id="tab2">222</div>
+                    <div class="tab-control-content" id="tab3">333</div>
 
-            </div> -->
+                </div> -->
 
             <div class="flex-columns justify-center">
                 <span class="logo">prodex</span>
@@ -105,9 +105,9 @@
                         <label for="version">GAME VERSION</label>
                         <select name="version" id="version"></select>
                     </div>
-                    
+
                     <button class="danger" onclick="reset()">RESET TEAM</button>
-    
+
                 </div>
             </div>
 
@@ -126,7 +126,7 @@
 
             <div class="slider">
 
-                <div id="team" class="flex-columns gap justify-center wrap grow" >
+                <div id="team" class="flex-columns gap justify-center wrap grow">
 
                     <div id="team-slot-1" class="box flex-rows">
 
@@ -156,55 +156,22 @@
 
             </div>
 
-            <!-- <div class="slider"> -->
+            <div id="metrics" class="flex-columns gap justify-center wrap grow box padding">
+                
+            </div>
 
-                <!-- <div id="metrics" class="flex-columns gap justify-center wrap grow">
-
-                    <div id="metric-1" class="metric box">
-                        <img src="res/placeholders/1.png">
-                    </div>
-
-                    <div id="metric-2" class="metric box">
-                        <img src="res/placeholders/2.png">
-                    </div>
-
-                    <div id="metric-3" class="metric box">
-                        <img src="res/placeholders/3.png">
-                    </div>
-
-                    <div id="metric-4" class="metric box">
-                        <img src="res/placeholders/4.png">
-                    </div>
-
-                    <div id="metric-5" class="metric box">
-                        <img src="res/placeholders/5.png">
-                    </div>
-
-                    <div id="metric-6" class="metric box">
-                        <img src="res/placeholders/6.png">
-                    </div>
-
-                    <div id="metric-7" class="metric box">
-                        <img src="res/placeholders/7.png">
-                    </div>
-
-                    <div id="metric-8" class="metric box">
-                        <img src="res/placeholders/8.png">
-                    </div>
-
-                </div> -->
-
-            <!-- </div> -->
-            
-            <a class="made-by" href="https://github.com/phcs93/" target="_blank">                
+            <a class="made-by" href="https://github.com/phcs93/" target="_blank">
                 MADE BY PHCS93
             </a>
 
             <div class="buy-me-a-coffee flex-rows justify-center">
-                <script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="phcs93i" data-color="#FFDD00" data-emoji="" data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#000000" data-font-color="#000000" data-coffee-color="#ffffff"></script>
+                <script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js"
+                    data-name="bmc-button" data-slug="phcs93i" data-color="#FFDD00" data-emoji="" data-font="Cookie"
+                    data-text="Buy me a coffee" data-outline-color="#000000" data-font-color="#000000"
+                    data-coffee-color="#ffffff"></script>
             </div>
 
-        </div>        
+        </div>
 
     </body>
 

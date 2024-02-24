@@ -38,6 +38,9 @@ https://www.wikidex.net/wiki/Ferroverdor
 Pokemon footprints and cries from veekun:  
 https://veekun.com/dex/downloads
 
+Team checklist inspired (basically stolen) from:
+https://mypokemonteam.com/
+
 # TO-DO
 
 - WTH are formats?
@@ -50,8 +53,6 @@ https://veekun.com/dex/downloads
 - nickname on build side
 
 - disable version specific filters when "obtainable" flag is false
-
-- show generation separator in filtered list
 
 - allow filtering by evolution trigger fields (time of day, affection, etc)
 - allow filtering by evolution flags (has branches, etc)

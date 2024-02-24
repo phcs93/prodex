@@ -162,6 +162,25 @@ label {
     line-height: 32px;
 }
 
+label.divider {
+    text-align: center !important;
+    color: #3E3E3E;
+    text-shadow: none;
+    display: flex !important;
+    flex-basis: 100%;
+    align-items: center;
+    line-height: 20px;
+    &::before, &::after {
+        border-top: 1px solid #2E2E2E;
+        content: "";
+        flex-grow: 1;
+        font-size: 0px;
+        line-height: 0px;
+    }
+    &::before { margin-right: 8px; }
+    &::after { margin-left: 8px; }
+}
+
 input {
     font-family: "Segoe UI";
     font-size: 14px;

@@ -28,16 +28,6 @@ function renderHeldItems (pokemonId) {
     const versionId = Globals.Parameters.VersionId;  
     const items = pokemon.items[versionId];
 
-    if (!items) {
-        return `
-            <div class="flex-rows gap padding grow">
-                <div class="held-item flex-rows">
-                    <label style="line-height: 24px; height: 24px;">${pokemon.name.toUpperCase()} DOESN'T HOLD ANY ITEMS IN ${Globals.Database.Versions[versionId].name.toUpperCase()}</label>
-                </div>
-            </div>
-        `;
-    }
-
     const itemsHTML = items.map(i => {
 
         const getRarityColor = (rarity) => {
@@ -69,4 +59,11 @@ function renderHeldItems (pokemonId) {
         </div>
     `;
     
+}
+
+function doesPokemonHoldsItems(pokemonId) {
+    const pokemon = Globals.Database.Pokemons[pokemonId];
+    const versionId = Globals.Parameters.VersionId;  
+    const items = pokemon.items[versionId];
+    return !!items;
 }

@@ -114,6 +114,8 @@ function render() {
 
     renderTeam();
 
+    //renderMetrics();
+
 }
 
 function renderVersions() {
@@ -185,5 +187,11 @@ function renderTeam() {
         }
 
     }
+
+}
+
+function renderMetrics() {
+
+    document.getElementById("metrics").innerHTML = renderChecklist();
 
 }

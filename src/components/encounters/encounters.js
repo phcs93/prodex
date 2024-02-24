@@ -28,16 +28,6 @@ function renderEncounters (pokemonId) {
     const versionId = Globals.Parameters.VersionId;  
     const encounters = pokemon.encounters[versionId];
 
-    if (!encounters) {
-        return `
-            <div class="flex-rows gap padding grow">
-                <div class="encounter flex-rows">
-                    <label style="line-height: 24px; height: 24px;">${pokemon.name.toUpperCase()} CAN'T BE OBTAINED IN ${Globals.Database.Versions[versionId].name.toUpperCase()}</label>
-                </div>
-            </div>
-        `;
-    }
-
     const encountersHTML = encounters.map(e => {
 
         if (e.isEvolve) {
@@ -81,4 +71,18 @@ function renderEncounters (pokemonId) {
         </div>
     `;
     
+}
+
+function canPokemonBeEncountered(pokemonId) {
+    const pokemon = Globals.Database.Pokemons[pokemonId];
+    const versionId = Globals.Parameters.VersionId;  
+    const encounters = pokemon.encounters[versionId];
+    return !!encounters;
+}
+
+function isOnlyEvolving (pokemonId) {
+    const pokemon = Globals.Database.Pokemons[pokemonId];
+    const versionId = Globals.Parameters.VersionId;  
+    const encounters = pokemon.encounters[versionId];
+    return encounters.length === 1 && encounters.every(e => e.isEvolve) ? encounters[0] : null;
 }
