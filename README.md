@@ -38,7 +38,7 @@ https://www.wikidex.net/wiki/Ferroverdor
 Pokemon footprints and cries from veekun:  
 https://veekun.com/dex/downloads
 
-Team checklist inspired (basically stolen) from:
+Team checklist inspired (basically stolen) from:  
 https://mypokemonteam.com/
 
 # TO-DO
