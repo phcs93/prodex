@@ -46,9 +46,7 @@ div.box {
     padding: 16px;
     box-shadow: 0px 0px 2px 2px #000A;
     min-width: 295px;
-
-    @media (pointer:none),
-    (pointer:coarse) {
+    @media (pointer:none), (pointer:coarse) {
         flex-grow: 1;
     }
 }

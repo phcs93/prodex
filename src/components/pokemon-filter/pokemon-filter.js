@@ -979,7 +979,7 @@ function filterPokemons (versionId, slot) {
         }        
         case "type-weakness": {
             getOrderByValue = p => p.typeEfficacy.sum(v => v);
-            formatOrderByValue = p => renderTypesEffectiveness(p);
+            formatOrderByValue = p => renderTypesEffectiveness(p.typeEfficacy);
             break;
         }
         case "encounter-level": {

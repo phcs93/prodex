@@ -1,7 +1,4 @@
-/**
- * @param {Pokemon} pokemon
- */
-function renderTypesEffectiveness(pokemon) {
+function renderTypesEffectiveness(typeEfficacy) {
 
     const typeEnum = Object.values(Globals.Database.Types).reduce((acc, type) => { acc[type.name] = type.id; return acc; }, {});
 
@@ -19,15 +16,15 @@ function renderTypesEffectiveness(pokemon) {
             <div data-type-id="${typeEnum.Poison}"></div>
             <div data-type-id="${typeEnum.Ground}"></div>
         
-            <div data-effectiveness="${pokemon.typeEfficacy[typeEnum.Normal-1]}"></div>
-            <div data-effectiveness="${pokemon.typeEfficacy[typeEnum.Fire-1]}"></div>
-            <div data-effectiveness="${pokemon.typeEfficacy[typeEnum.Water-1]}"></div>
-            <div data-effectiveness="${pokemon.typeEfficacy[typeEnum.Electric-1]}"></div>
-            <div data-effectiveness="${pokemon.typeEfficacy[typeEnum.Grass-1]}"></div>
-            <div data-effectiveness="${pokemon.typeEfficacy[typeEnum.Ice-1]}"></div>
-            <div data-effectiveness="${pokemon.typeEfficacy[typeEnum.Fighting-1]}"></div>
-            <div data-effectiveness="${pokemon.typeEfficacy[typeEnum.Poison-1]}"></div>
-            <div data-effectiveness="${pokemon.typeEfficacy[typeEnum.Ground-1]}"></div>
+            <div data-effectiveness="${typeEfficacy[typeEnum.Normal-1]}"></div>
+            <div data-effectiveness="${typeEfficacy[typeEnum.Fire-1]}"></div>
+            <div data-effectiveness="${typeEfficacy[typeEnum.Water-1]}"></div>
+            <div data-effectiveness="${typeEfficacy[typeEnum.Electric-1]}"></div>
+            <div data-effectiveness="${typeEfficacy[typeEnum.Grass-1]}"></div>
+            <div data-effectiveness="${typeEfficacy[typeEnum.Ice-1]}"></div>
+            <div data-effectiveness="${typeEfficacy[typeEnum.Fighting-1]}"></div>
+            <div data-effectiveness="${typeEfficacy[typeEnum.Poison-1]}"></div>
+            <div data-effectiveness="${typeEfficacy[typeEnum.Ground-1]}"></div>
         
             <div data-type-id="${typeEnum.Flying}"></div>
             <div data-type-id="${typeEnum.Psychic}"></div>
@@ -39,15 +36,15 @@ function renderTypesEffectiveness(pokemon) {
             <div data-type-id="${typeEnum.Steel}"></div>
             <div data-type-id="${typeEnum.Fairy}"></div>
         
-            <div data-effectiveness="${pokemon.typeEfficacy[typeEnum.Flying-1]}"></div>
-            <div data-effectiveness="${pokemon.typeEfficacy[typeEnum.Psychic-1]}"></div>
-            <div data-effectiveness="${pokemon.typeEfficacy[typeEnum.Bug-1]}"></div>
-            <div data-effectiveness="${pokemon.typeEfficacy[typeEnum.Rock-1]}"></div>
-            <div data-effectiveness="${pokemon.typeEfficacy[typeEnum.Ghost-1]}"></div>
-            <div data-effectiveness="${pokemon.typeEfficacy[typeEnum.Dragon-1]}"></div>
-            <div data-effectiveness="${pokemon.typeEfficacy[typeEnum.Dark-1]}"></div>
-            <div data-effectiveness="${pokemon.typeEfficacy[typeEnum.Steel-1]}"></div>
-            <div data-effectiveness="${pokemon.typeEfficacy[typeEnum.Fairy-1]}"></div>
+            <div data-effectiveness="${typeEfficacy[typeEnum.Flying-1]}"></div>
+            <div data-effectiveness="${typeEfficacy[typeEnum.Psychic-1]}"></div>
+            <div data-effectiveness="${typeEfficacy[typeEnum.Bug-1]}"></div>
+            <div data-effectiveness="${typeEfficacy[typeEnum.Rock-1]}"></div>
+            <div data-effectiveness="${typeEfficacy[typeEnum.Ghost-1]}"></div>
+            <div data-effectiveness="${typeEfficacy[typeEnum.Dragon-1]}"></div>
+            <div data-effectiveness="${typeEfficacy[typeEnum.Dark-1]}"></div>
+            <div data-effectiveness="${typeEfficacy[typeEnum.Steel-1]}"></div>
+            <div data-effectiveness="${typeEfficacy[typeEnum.Fairy-1]}"></div>
         
         </div>
         

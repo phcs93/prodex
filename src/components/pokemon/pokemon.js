@@ -75,7 +75,7 @@ function renderPokemon (pokemon, pokemonSettings, teamSlot, versionId) {
                 <label class="divider">STATS</label>
                 ${renderStats(pokemon)}
                 <label class="divider">TYPE EFFECTIVENESS</label>
-                ${renderTypesEffectiveness(pokemon)}
+                ${renderTypesEffectiveness(pokemon.typeEfficacy)}
                 <label class="divider">EVOLUTIONS</label>
                 ${renderEvolutionChain(pokemon)}
                 <label class="divider">ENCOUNTERS</label>
