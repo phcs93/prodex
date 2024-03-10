@@ -152,6 +152,12 @@ https://mypokemonteam.com/
 
 ## crazy ideias
 
+- search pokemon by voice
+
+- build oponent team
+  - preset trainers (elite 4, etc)
+  - simulate battle
+
 - change style based on selected game version
   - css (match in-game menus and font)
   - pokemon sprites
