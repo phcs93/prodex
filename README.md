@@ -45,7 +45,7 @@ https://mypokemonteam.com/
 
 - WTH are formats?
 - WTH are strategies?
-- WTH is [pokémon showdown](https://play.pokemonshowdown.com/t)?
+- WTH is [pokémon showdown](https://play.pokemonshowdown.com/)?
 
 - ev/iv calculator on build side
   - like done [here](https://www.pokeos.com/team-builder/)
