@@ -75,15 +75,18 @@ function renderChecklist() {
     const hasChoiceItem = Globals.Parameters.Team.some(p => choiceItemIds.includes(p.item));
 
     return `
-       <div>ENTRY HAZARD = ${hasEntryHazard}</div>
-       <div>SPINNER/DEFFOGER = ${hasSpinnerDeffoger}</div>
-       <div>RELIABLE RECOVERY = ${hasReliableRecovery}</div>
-       <div>CLERIC = ${hasCleric}</div>
-       <div>STATUS = ${hasStatus}</div>
-       <div>PHAZER = ${hasPhazer}</div>
-       <div>BOOSTING = ${hasBoosting}</div>
-       <div>VOLT-TURN = ${hasVoltTurn}</div>
-       <div>CHOICE ITEM = ${hasChoiceItem}</div>
+        <div class="box">
+            <label class="divider">TEAM CHECKLIST</label>
+            <div data-boolean="${hasEntryHazard}"><label>ENTRY HAZARD</label></div>
+            <div data-boolean="${hasSpinnerDeffoger}"><label>SPINNER/DEFFOGER</label></div>
+            <div data-boolean="${hasReliableRecovery}"><label>RELIABLE RECOVERY</label></div>
+            <div data-boolean="${hasCleric}"><label>CLERIC</label></div>
+            <div data-boolean="${hasStatus}"><label>STATUS</label></div>
+            <div data-boolean="${hasPhazer}"><label>PHAZER</label></div>
+            <div data-boolean="${hasBoosting}"><label>BOOSTING</label></div>
+            <div data-boolean="${hasVoltTurn}"><label>VOLT-TURN</label></div>
+            <div data-boolean="${hasChoiceItem}"><label>CHOICE ITEM</label></div>
+       </div>
     `;
 
 }

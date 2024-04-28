@@ -57,14 +57,6 @@ div.types-effectiveness {
         &[data-effectiveness="2"] { background-color: #4E9A06; &::before { content: "2"; } }
         &[data-effectiveness="4"] { background-color: #73D216; &::before { content: "4"; } }
 
-        
-
     }     
     
-}
-
-div#metrics {
-    & div.types-effectiveness > div[data-effectiveness]::before {
-        content: attr(data-effectiveness) !important;
-    }
 }

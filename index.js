@@ -192,6 +192,6 @@ function renderTeam() {
 
 function renderMetrics() {
 
-    document.getElementById("metrics").innerHTML = [renderChecklist(), renderTeamTypeStatistics()].join("");
+    document.getElementById("metrics").innerHTML = [renderTeamTypeStatistics(), renderChecklist()].join("");
 
 }

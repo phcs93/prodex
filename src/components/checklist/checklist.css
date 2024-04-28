@@ -1,0 +1,13 @@
+div[data-boolean] > label::before {
+    margin-right: 8px;
+}
+
+div[data-boolean="true"] > label::before {
+    color: #4E9A06;
+    content: "✔";
+}
+
+div[data-boolean="false"] > label::before {
+    color: #A40000;
+    content: "✘";
+}

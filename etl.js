@@ -581,14 +581,12 @@ const execSync = require("node:child_process").execSync;
 
     }, {});
 
-    // TODO => consider ability when calculating type efficacy
-    // TODO => consider held item when calculating type efficacy
     /*
         0 = damage_type_id
         1 = target_type_id
         2 = damage_factor
     */
-    const _typeEfficacyDictionary = parseCSV("type_efficacy.csv").reduce((dictionary, type) => {
+    const typeEfficacyDictionary = parseCSV("type_efficacy.csv").reduce((dictionary, type) => {
         if (!dictionary[type[0]]) {
             dictionary[type[0]] = {};
         }
@@ -905,7 +903,9 @@ const execSync = require("node:child_process").execSync;
                 formsSwitchable: specie.formsSwitchable
             },
 
-            typeEfficacy: Object.keys(_typeEfficacyDictionary).map(t => _typeEfficacyDictionary[t][types[0]] * (types[1] ? _typeEfficacyDictionary[t][types[1]] : 1)),
+            // TODO => consider ability when calculating type efficacy (only possible on front end)
+            // TODO => consider held item when calculating type efficacy (only possible on front end)
+            typeEfficacy: Object.keys(typeEfficacyDictionary).map(t => typeEfficacyDictionary[t][types[0]] * (types[1] ? typeEfficacyDictionary[t][types[1]] : 1)),
 
             stats: _pokemonStatsDictionary[pokemon[0]],
             items: _pokemonItemsDictionary[pokemon[0]] ?? {},
@@ -947,7 +947,8 @@ const execSync = require("node:child_process").execSync;
         EvolutionTriggers: evolutionTriggerDictionary,
         EncounterConditions: encounterConditionDictionary,
         Regions: regionDictionary,
-        Types: typeDictionary
+        Types: typeDictionary,
+        TypeEfficacy: typeEfficacyDictionary
     };
 
     // calculate size of each dictionary

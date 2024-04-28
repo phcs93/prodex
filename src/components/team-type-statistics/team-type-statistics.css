@@ -1,0 +1,19 @@
+div#metrics {
+    & div.types-effectiveness > div[data-effectiveness] {
+        &[data-color="good"] {
+            background-color: #4E9A06;
+        }
+        &[data-color="hide"] {
+            background-color: transparent;
+            &::before {
+                content: "" !important;
+            }
+        }
+        &[data-color="bad"] {
+            background-color: #A40000;
+        }
+        &::before {
+            content: attr(data-effectiveness) !important;
+        }
+    }
+}
