@@ -78,7 +78,7 @@ https://mypokemonteam.com/
 
 - encounters for regional forms should be the same as their base form (?)
 
-- detect if pokemon can be obtainble at version by trading [too much work](https://pokemondb.net/pokebase/233293/what-games-can-i-trade-transfer-my-pokemon-to?show=329604#a329604)
+- detect if pokemon can be obtainble at version by trading ([too much work](https://pokemondb.net/pokebase/233293/what-games-can-i-trade-transfer-my-pokemon-to?show=329604#a329604))
 
 - figure out a way to use separate .html files (web loader?)
 
