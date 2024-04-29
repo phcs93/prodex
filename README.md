@@ -82,8 +82,6 @@ https://mypokemonteam.com/
 
 - figure out a way to use separate .html files (web loader?)
 
-- I could really improve the UX/UI in general but I don't have time for this anymore
-
 - search pokemon by voice
 
 - show the map of the region corresponding to the selected version when visualizing pokemon encounter details
@@ -96,6 +94,8 @@ https://mypokemonteam.com/
 - WTH are formats?
 - WTH are strategies?
 - WTH is [pokémon showdown](https://play.pokemonshowdown.com/)?
+
+- I could really improve the UX/UI in general but I don't have time for this anymore
 
 ## charts
 
