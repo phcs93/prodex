@@ -43,49 +43,59 @@ https://mypokemonteam.com/
 
 # TO-DO
 
-- WTH are formats?
-- WTH are strategies?
-- WTH is [pokémon showdown](https://play.pokemonshowdown.com/)?
-
-- ev/iv calculator on build side
-  - like done [here](https://www.pokeos.com/team-builder/)
-
-- nickname on build side
-
-- drag & drop moves in build side
-  - check wish team members can learn
+- currently using "short" descriptions for moves, abilities and items, consider using the full dsecription somewhere for better information (Levitate for example, it says only "evades moves", when it actually makes you immune to ground type moves).
 
 - disable version specific filters when "obtainable" flag is false
+
+- nickname on build view
+
+- ev/iv calculator on build view
+  - like done [here](https://www.pokeos.com/team-builder/)
 
 - allow filtering by evolution trigger fields (time of day, affection, etc)
 - allow filtering by evolution flags (has branches, etc)
 
-- use move.meta for checklist
+- make item selector popup (like moves) and show icons and descriptions
+- make ability selector popup (like moves) and show icons and descriptions
+- make nature selector popup (like moves) and show icons and descriptions
 
-- show item icons (where?)
 - show move learning method icons (where?)
-- show encounter icons
+- show encounter icons (easy)
 
 - improve the evolution chain display
   - change pokemon instead of playing the cry when cliking the sprite
   - improve eevee chain display
 
-- currently using "short" descriptions for moves, abilities and items, consider using the full dsecription somewhere for better information (Levitate for example, it says only "evades moves", when it actually makes you immune to ground type moves).
-
 - consider abilities when calculating pokemon weakness (attacking and defending)
 - consider items when calculating pokemon weakness (attacking and defending)
 - consider generation when filtering move type (some normal moves became fairy type)
+
+- drag & drop moves in build view
+  - check which team members can learn
 
 - generation specifics
   - there are some moves that changed type/effect, some pokemons changed stats, etc
 
 - encounters for regional forms should be the same as their base form (?)
 
-- detect if pokemon can be obtainble at version by trading ([https://pokemondb.net/pokebase/233293/what-games-can-i-trade-transfer-my-pokemon-to?show=329604#a329604](too much work))
+- detect if pokemon can be obtainble at version by trading [too much work](https://pokemondb.net/pokebase/233293/what-games-can-i-trade-transfer-my-pokemon-to?show=329604#a329604)
 
 - figure out a way to use separate .html files (web loader?)
 
 - I could really improve the UX/UI in general but I don't have time for this anymore
+
+- search pokemon by voice
+
+- show the map of the region corresponding to the selected version when visualizing pokemon encounter details
+  - just like this guy did here: https://simplyblgdev.github.io/Pokemon/Kanto
+
+- build oponent team
+  - preset trainers (elite 4, etc)
+  - simulate battle
+
+- WTH are formats?
+- WTH are strategies?
+- WTH is [pokémon showdown](https://play.pokemonshowdown.com/)?
 
 ## charts
 
@@ -149,21 +159,3 @@ https://mypokemonteam.com/
 ## missing footprints
 
 - I think newer generations don't use footprints anymore
-
-## crazy ideias
-
-- search pokemon by voice
-
-- build oponent team
-  - preset trainers (elite 4, etc)
-  - simulate battle
-
-- change style based on selected game version
-  - css (match in-game menus and font)
-  - pokemon sprites
-  - pokemon cries
-  - menu sounds
-  - background
-
-- show the map of the region corresponding to the selected version when visualizing pokemon encounter details
-  - just like this guy did here: https://simplyblgdev.github.io/Pokemon/Kanto
