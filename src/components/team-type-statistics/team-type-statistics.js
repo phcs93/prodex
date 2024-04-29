@@ -43,13 +43,13 @@ function renderTeamTypeStatistics() {
     return `
         <div class="box flex-rows gap">
             <label class="divider">TEAM TYPE DEFENSES</label>
-            <div class="flex-rows gap" style="width: 256px;">
+            <div class="flex-rows gap">
                 <small><span class="info">ⓘ</span> negative means your team is vulnerable against that type</small>
                 <small><span class="info">ⓘ</span> positive means your team is resistant against that type</small>
                 ${renderTypesEffectiveness(teamDefenses, v => v > 0 ? "good" : (v < 0 ? "bad" : "hide"))}
             </div>
             <label class="divider">TEAM TYPE COVERAGE</label>
-            <div class="flex-rows gap" style="width: 256px;">
+            <div class="flex-rows gap">
                 <small><span class="info">ⓘ</span> number of super effective moves your team has against each type</small>
                 ${renderTypesEffectiveness(teamOffences, v => v > 0 ? "good" : "bad")}
             </div>

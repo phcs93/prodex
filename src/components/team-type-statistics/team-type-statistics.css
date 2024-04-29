@@ -17,3 +17,11 @@ div#metrics {
         }
     }
 }
+
+div#metrics>div.box {
+    max-width: 295px;
+    @media (pointer:none),
+    (pointer:coarse) {
+        max-width: unset;
+    }
+}
